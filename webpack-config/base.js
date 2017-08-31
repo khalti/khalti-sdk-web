@@ -2,26 +2,18 @@
 
 const webpack = require("webpack");
 const path  = require("path");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const WebpackNotifierPlugin = require('webpack-notifier');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
-const http_host = process.env.HTTP_HOST;
-const projectRoot = __dirname
+const WIDGET_URL = process.env.WIDGET_URL;
+const BUILD_ENV = process.env.BUILD_ENV;
+const projectRoot = path.dirname(__dirname);
 
 module.exports = {
-  devtool: "source-map",
-  target: 'web',
 	resolve: {
 		modules: [path.join(projectRoot, "src"), path.join(projectRoot, "node_modules")]
 	},
   entry: path.join(projectRoot, 'src/index.js'),
-  output: {
-    path: path.join(projectRoot, 'dist/'),
-    filename: 'khalti-checkout.js',
-    // library: 'KhaltiWidget',
-    libraryTarget: 'var'
-  },
   module: {
     loaders: [
       {test: /\.js/, loader: "babel-loader"}
@@ -29,8 +21,8 @@ module.exports = {
   },
   plugins: [
 		new webpack.DefinePlugin({
-			__HTTP_HOST__: JSON.stringify(`${http_host}`),
-			__NODE_ENV__: JSON.stringify("development")
+      __WIDGET_URL__: JSON.stringify(WIDGET_URL),
+			__BUILD_ENV__: JSON.stringify(BUILD_ENV)
 		}),
 		new WebpackNotifierPlugin({alwaysNotify: true}),
 		new UglifyJSPlugin()

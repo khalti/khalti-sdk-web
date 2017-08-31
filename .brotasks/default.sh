@@ -7,7 +7,7 @@ init () {
 }
 
 env () {
-  nvm use v5.6.0
+  nvm use v5.10.0
 }
 
 $@

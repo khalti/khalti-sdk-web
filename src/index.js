@@ -11,8 +11,6 @@ const forEach = function (data, iteratee) {
 	return Object.keys(data).map(key => iteratee(data[key], key));
 }
 
-const HOST = __HTTP_HOST__ ;
-
 const isInt = function (value) {
   return !isNaN(value) && parseInt(Number(value)) == value && !isNaN(parseInt(value, 10));
 }
@@ -127,7 +125,7 @@ export class KhaltiCheckout {
 		widget.style.left = "0";
 		widget.width = "100%";
 		widget.height = window.innerHeight + "px";
-		widget.setAttribute("src", `${host}/payment/widget/`);
+		widget.setAttribute("src", __WIDGET_URL__);
 		widget.style.zIndex = 999999999;
 		widget.setAttribute("frameborder", 0);
 		widget.setAttribute("allowtransparency", true);
@@ -166,4 +164,4 @@ export class KhaltiCheckout {
 	}
 }
 
-window.KhaltiCheckout = KhaltiCheckout;
+// window.KhaltiCheckout = KhaltiCheckout;
