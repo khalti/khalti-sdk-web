@@ -10,4 +10,8 @@ env () {
   nvm use v5.10.0
 }
 
+prod_env () {
+  export WIDGET_URL=https://khalti.com/payment/widget/
+}
+
 $@
