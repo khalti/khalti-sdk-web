@@ -1,6 +1,6 @@
 {
   "name": "khalti-checkout-browser",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Khalti checkout loader for browser.",
   "main": "lib/index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "prepublish": "npm run build"
   },
   "files": [
-    "lib",
+    "lib"
   ],
   "repository": {
     "type": "git",
@@ -31,11 +31,11 @@
   },
   "homepage": "https://github.com/janakitech/khalti-checkout-browser#readme",
   "dependencies": {
-    "uglifyjs-webpack-plugin": "^0.4.6",
-    "validatex": "^0.3.1",
-    "webpack-notifier": "^1.5.0"
+    "validatex": "^0.3.1"
   },
   "devDependencies": {
+    "webpack-notifier": "^1.5.0",
+    "uglifyjs-webpack-plugin": "^0.4.6",
     "babel-cli": "^6.11.4",
     "babel-core": "^6.11.4",
     "babel-loader": "^6.2.4",

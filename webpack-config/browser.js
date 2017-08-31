@@ -9,7 +9,7 @@ const updates = {
   output: {
     path: path.join(projectRoot, 'dist/'),
     filename: 'khalti-checkout.js',
-    library: 'KhaltiCheckout',
+    library: 'khalti',
     libraryTarget: 'var'
   }
 }
