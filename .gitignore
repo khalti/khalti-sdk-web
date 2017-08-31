@@ -1,3 +1,5 @@
 node_modules/
 .brotasks/suren.sh
 npm-debug.log
+lib/
+dist/

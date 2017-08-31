@@ -1,6 +1,6 @@
 {
   "name": "khalti-checkout-browser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Khalti checkout loader for browser.",
   "main": "lib/index.js",
   "scripts": {
@@ -12,7 +12,6 @@
   },
   "files": [
     "lib",
-    "dist"
   ],
   "repository": {
     "type": "git",
