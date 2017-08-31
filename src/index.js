@@ -14,9 +14,7 @@ const forEach = function (data, iteratee) {
 const HOST = __HTTP_HOST__ ;
 
 const isInt = function (value) {
-  return !isNaN(value) &&
-         parseInt(Number(value)) == value &&
-         !isNaN(parseInt(value, 10));
+  return !isNaN(value) && parseInt(Number(value)) == value && !isNaN(parseInt(value, 10));
 }
 
 const clone = function (data) {
@@ -41,7 +39,6 @@ const configSchema = {
 }
 
 export class KhaltiCheckout {
-	premitive = false;
 	constructor (config) {
 		this._config = config;
 		this._widget = this.attachWidget();
@@ -141,9 +138,6 @@ export class KhaltiCheckout {
 	}
 
 	postAtURL (payload) {
-		// if (!payload.url) throw Error("Please pass url.");
-		// if (!payload.paymentInfo) throw Error("Please pass paymentInfo.");
-
 		let khaltiEbankingFormId = "khalti-ebanking-form";
 		// remove earlier form if exists
 		if (this.ebankingForm) window.document.body.removeChild(this.ebankingForm);
@@ -168,7 +162,6 @@ export class KhaltiCheckout {
 		window.document.body.appendChild(form);
 		this.ebankingForm = form;
 
-		// submit form
 		form.submit();
 	}
 }
