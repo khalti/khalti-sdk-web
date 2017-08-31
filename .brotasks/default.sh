@@ -3,7 +3,11 @@
 project=$(basename `pwd`)
 
 init () {
-  echo "Happy hacking !!!"
+  bro env
+}
+
+env () {
+  nvm use v5.6.0
 }
 
 $@
