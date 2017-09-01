@@ -11,9 +11,4 @@ Khalti checkout loader for browser.
 
 ## Usage
 ```javascript
-import KhaltiCheckout from "khalti-web";
-
-let config = {};
-let checkout = new KhaltiCheckout();
-checkout.show({amount: 100});
 ```

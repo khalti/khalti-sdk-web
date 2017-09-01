@@ -1,12 +1,12 @@
 {
   "name": "khalti-web",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Khalti checkout loader for web.",
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha --compilers js:babel-register spec/*",
     "build:node": "babel src/index.js --out-file lib/index.js",
-    "build:web": "webpack --config webpack-config/web.js",
+    "build:web": "webpack --config webpack.config.js",
     "build": "npm run build:node && npm run build:web",
     "prepublish": "npm run build"
   },
