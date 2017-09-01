@@ -45,6 +45,7 @@ export default class KhaltiCheckout {
 
 	listenToWidget () {
 		window.addEventListener("message", (e) => {
+      if (!e.data.realm) return;
 			const handler = `handle_msg_${e.data.realm}`;
 			this[handler](e.data.payload);
 		}, false);
