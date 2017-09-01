@@ -5,8 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha --compilers js:babel-register spec/*",
-    "build:node": "webpack --config webpack-config/node.js",
-    "build:web": "webpack --config webpack-config/web.js",
+    "build:node": "rollup -c rollup-config/node.js",
+    "build:web": "rollup -c rollup-config/web.js",
     "build": "npm run build:node && npm run build:web",
     "prepublish": "npm run build"
   },
@@ -34,8 +34,6 @@
     "validatex": "^0.3.1"
   },
   "devDependencies": {
-    "webpack-notifier": "^1.5.0",
-    "uglifyjs-webpack-plugin": "^0.4.6",
     "babel-cli": "^6.11.4",
     "babel-core": "^6.11.4",
     "babel-loader": "^6.2.4",
@@ -44,6 +42,10 @@
     "babel-register": "^6.11.5",
     "chai": "^3.5.0",
     "mocha": "^2.5.3",
-    "webpack": "^3.5.5"
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-commonjs": "^8.2.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-replace": "^1.1.1",
+    "rollup-plugin-uglify": "^2.0.1"
   }
 }

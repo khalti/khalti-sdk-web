@@ -36,7 +36,7 @@ const configSchema = {
 	merchantData: [required(false), isObject()]
 }
 
-export class KhaltiCheckout {
+export default class KhaltiCheckout {
 	constructor (config) {
 		this._config = config;
 		this._widget = this.attachWidget();
@@ -163,5 +163,3 @@ export class KhaltiCheckout {
 		form.submit();
 	}
 }
-
-// window.KhaltiCheckout = KhaltiCheckout;
