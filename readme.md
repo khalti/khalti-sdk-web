@@ -3,10 +3,10 @@ Khalti checkout loader for browser.
 
 ## Installation
 ### Yarn
-`yarn add khalti-checkout-browser`
+`yarn add khalti-web
 
 ### npm
-`npm install --save khalti-checkout-browser`
+`npm install --save khalti-web
 
 
 ## Usage
