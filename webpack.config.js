@@ -7,13 +7,19 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const WIDGET_URL = process.env.WIDGET_URL;
 const BUILD_ENV = process.env.BUILD_ENV;
-const projectRoot = path.dirname(__dirname);
+const projectRoot = __dirname;
 
 module.exports = {
 	resolve: {
 		modules: [path.join(projectRoot, "src"), path.join(projectRoot, "node_modules")]
 	},
   entry: path.join(projectRoot, 'src/index.js'),
+  output: {
+    path: path.join(projectRoot, 'dist/'),
+    filename: 'khalti-checkout.js',
+    library: 'khalti',
+    libraryTarget: 'var'
+  },
   module: {
     loaders: [
       {test: /\.js/, loader: "babel-loader"}

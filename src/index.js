@@ -163,5 +163,3 @@ export class KhaltiCheckout {
 		form.submit();
 	}
 }
-
-// window.KhaltiCheckout = KhaltiCheckout;
