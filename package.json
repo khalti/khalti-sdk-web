@@ -1,13 +1,13 @@
 {
-  "name": "khalti-checkout-browser",
-  "version": "1.0.2",
-  "description": "Khalti checkout loader for browser.",
+  "name": "khalti-web",
+  "version": "1.0.0",
+  "description": "Khalti checkout loader for web.",
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha --compilers js:babel-register spec/*",
     "build:node": "webpack --config webpack-config/node.js",
-    "build:browser": "webpack --config webpack-config/browser.js",
-    "build": "npm run build:node && npm run build:browser",
+    "build:web": "webpack --config webpack-config/web.js",
+    "build": "npm run build:node && npm run build:web",
     "prepublish": "npm run build"
   },
   "files": [
@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/janakitech/khalti-checkout-browser.git"
+    "url": "git+https://github.com/janakitech/khalti-web.git"
   },
   "keywords": [
     "khalti",
@@ -27,9 +27,9 @@
   "author": "ludbek",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/janakitech/khalti-checkout-browser/issues"
+    "url": "https://github.com/janakitech/khalti-web/issues"
   },
-  "homepage": "https://github.com/janakitech/khalti-checkout-browser#readme",
+  "homepage": "https://github.com/janakitech/khalti-web#readme",
   "dependencies": {
     "validatex": "^0.3.1"
   },
