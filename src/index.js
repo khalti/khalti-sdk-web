@@ -27,7 +27,6 @@ const eventHandlerSchema = {
 
 const configSchema = {
 	publicKey: required(true),
-	returnUrl: required(true),
 	productUrl: required(true),
 	productIdentity: required(true),
 	productName: required(true),
