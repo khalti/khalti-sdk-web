@@ -11,7 +11,7 @@ Khalti checkout loader for browser.
 
 ## Usage
 ```javascript
-import KhaltiCheckout from "khalti-checkout";
+import KhaltiCheckout from "khalti-web";
 
 let config = {
   "publicKey": "test_public_key_dc74e0fd57cb46cd93832aee0a507256",
@@ -37,3 +37,5 @@ btn.onclick = function () {
 	checkout.show({amount: 1000});
 }
 ```
+
+Please visit [documentation site](docs.khalti.com) for details.
