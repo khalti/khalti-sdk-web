@@ -38,4 +38,4 @@ btn.onclick = function () {
 }
 ```
 
-Please visit [documentation site](docs.khalti.com) for details.
+Please visit [documentation site](http://docs.khalti.com) for details.

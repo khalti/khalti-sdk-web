@@ -1,6 +1,6 @@
 {
   "name": "khalti-web",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Khalti checkout loader for web.",
   "main": "lib/index.js",
   "scripts": {
