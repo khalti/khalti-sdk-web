@@ -1,5 +1,6 @@
 node_modules/
 .brotasks/suren.sh
+.brotasks/rajsubit.sh
 npm-debug.log
 lib/
 dist/
