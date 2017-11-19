@@ -20,9 +20,14 @@ const clone = function (data) {
 	return JSON.parse(JSON.stringify(data));
 }
 
+const randomNumber = function () {
+  return parseInt(Math.random() * 100, 10);
+}
+
 const eventHandlerSchema = {
 	onSuccess: [required(true), isFunction()],
-	onError: [required(false), isFunction()]
+  onError: [required(false), isFunction()],
+	onClose: [required(false), isFunction()]
 }
 
 const configSchema = {
@@ -109,6 +114,8 @@ export default class KhaltiCheckout {
 
 	handle_msg_hide () {
 		this.hide();
+    let closeHandler = this._config.eventHandler.onClose;
+    closeHandler && closeHandler();
 	}
 
 	hide () {
@@ -118,7 +125,7 @@ export default class KhaltiCheckout {
 
 	attachWidget () {
 		var widget = window.document.createElement("iframe");
-		widget.setAttribute("id", "khalti-widget");
+		widget.setAttribute("id", "khalti-widget-" + randomNumber());
 		widget.style.position = "fixed";
 		widget.style.display = "none";
 		widget.style.top = "0";
@@ -136,7 +143,7 @@ export default class KhaltiCheckout {
 	}
 
 	postAtURL (payload) {
-		let khaltiEbankingFormId = "khalti-ebanking-form";
+		let khaltiEbankingFormId = "khalti-ebanking-form-" + randomNumber();
 		// remove earlier form if exists
 		if (this.ebankingForm) window.document.body.removeChild(this.ebankingForm);
 
