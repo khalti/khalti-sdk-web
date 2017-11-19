@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/khalti/khalti-web-sdk.git"
+    "url": "git+https://github.com/khalti/khalti-sdk-web.git"
   },
   "keywords": [
     "khalti",
@@ -27,9 +27,9 @@
   "author": "ludbek",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/khalti/khalti-web-sdk/issues"
+    "url": "https://github.com/khalti/khalti-sdk-web/issues"
   },
-  "homepage": "https://github.com/khalti/khalti-web-sdk",
+  "homepage": "https://github.com/khalti/khalti-sdk-web",
   "dependencies": {
     "validatex": "^0.3.1"
   },
