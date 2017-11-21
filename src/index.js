@@ -20,10 +20,6 @@ const clone = function (data) {
 	return JSON.parse(JSON.stringify(data));
 }
 
-const randomNumber = function () {
-  return parseInt(Math.random() * 100, 10);
-}
-
 const eventHandlerSchema = {
 	onSuccess: [required(true), isFunction()],
   onError: [required(false), isFunction()],
@@ -42,7 +38,7 @@ const configSchema = {
 
 export default class KhaltiCheckout {
 	constructor (config) {
-    this._widgetId = "khalti-widget-" + randomNumber();
+    this._widgetId = "khalti-widget-" + Date.now();
 		this._config = config;
 		this._widget = this.attachWidget();
 		this.listenToWidget();
@@ -153,7 +149,7 @@ export default class KhaltiCheckout {
 	}
 
 	postAtURL (payload) {
-		let khaltiEbankingFormId = "khalti-ebanking-form-" + randomNumber();
+		let khaltiEbankingFormId = "khalti-ebanking-form-" + Date.now();
 		// remove earlier form if exists
 		if (this.ebankingForm) window.document.body.removeChild(this.ebankingForm);
 
