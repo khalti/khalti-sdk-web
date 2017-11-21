@@ -42,6 +42,7 @@ const configSchema = {
 
 export default class KhaltiCheckout {
 	constructor (config) {
+    this._widgetId = "khalti-widget-" + randomNumber();
 		this._config = config;
 		this._widget = this.attachWidget();
 		this.listenToWidget();
@@ -50,13 +51,22 @@ export default class KhaltiCheckout {
 	listenToWidget () {
 		window.addEventListener("message", (e) => {
       if (!e.data.realm) return;
-			const handler = `handle_msg_${e.data.realm}`;
-			this[handler](e.data.payload);
+      if (e.data.realm === 'widgetInit') {
+        this.widgetInit(e.data.payload);
+      }
+      else if (!e.data.payload || (e.data.payload.widget_id !== this._widgetId)) {
+        return;
+      }
+      else {
+  			let handler = `handle_msg_${e.data.realm}`;
+  			this[handler](e.data.payload);
+      }
 		}, false);
 	}
 
 	msgWidget(realm, payload) {
 		payload = clone(payload);
+    payload.widgetId = this._widgetId;
 		this._widget.contentWindow.postMessage({realm, payload}, "*");
 	}
 
@@ -125,7 +135,7 @@ export default class KhaltiCheckout {
 
 	attachWidget () {
 		var widget = window.document.createElement("iframe");
-		widget.setAttribute("id", "khalti-widget-" + randomNumber());
+		widget.setAttribute("id", this._widgetId);
 		widget.style.position = "fixed";
 		widget.style.display = "none";
 		widget.style.top = "0";
