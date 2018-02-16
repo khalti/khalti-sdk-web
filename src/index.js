@@ -22,12 +22,12 @@ const clone = function (data) {
 
 const eventHandlerSchema = {
 	onSuccess: [required(true), isFunction()],
-	onError: [required(false), isFunction()]
+  onError: [required(false), isFunction()],
+	onClose: [required(false), isFunction()]
 }
 
 const configSchema = {
 	publicKey: required(true),
-	returnUrl: required(true),
 	productUrl: required(true),
 	productIdentity: required(true),
 	productName: required(true),
@@ -36,8 +36,9 @@ const configSchema = {
 	merchantData: [required(false), isObject()]
 }
 
-export class KhaltiCheckout {
+export default class KhaltiCheckout {
 	constructor (config) {
+    this._widgetId = "khalti-widget-" + Date.now();
 		this._config = config;
 		this._widget = this.attachWidget();
 		this.listenToWidget();
@@ -45,13 +46,23 @@ export class KhaltiCheckout {
 
 	listenToWidget () {
 		window.addEventListener("message", (e) => {
-			const handler = `handle_msg_${e.data.realm}`;
-			this[handler](e.data.payload);
+      if (!e.data.realm) return;
+      if (e.data.realm === 'widgetInit') {
+        this.widgetInit(e.data.payload);
+      }
+      else if (!e.data.payload || (e.data.payload.widget_id !== this._widgetId)) {
+        return;
+      }
+      else {
+  			let handler = `handle_msg_${e.data.realm}`;
+  			this[handler](e.data.payload);
+      }
 		}, false);
 	}
 
 	msgWidget(realm, payload) {
 		payload = clone(payload);
+    payload.widgetId = this._widgetId;
 		this._widget.contentWindow.postMessage({realm, payload}, "*");
 	}
 
@@ -100,6 +111,7 @@ export class KhaltiCheckout {
 
 	show (updates) {
 		this._config.source = "web";
+    this._widget.setAttribute("src", __WIDGET_URL__);
 		Object.assign(this._config, updates);
 		this.validateConfig();
 		this.disableParentScrollbar();
@@ -109,6 +121,8 @@ export class KhaltiCheckout {
 
 	handle_msg_hide () {
 		this.hide();
+    let closeHandler = this._config.eventHandler.onClose;
+    closeHandler && closeHandler();
 	}
 
 	hide () {
@@ -118,14 +132,14 @@ export class KhaltiCheckout {
 
 	attachWidget () {
 		var widget = window.document.createElement("iframe");
-		widget.setAttribute("id", "khalti-widget");
+		widget.setAttribute("id", this._widgetId);
 		widget.style.position = "fixed";
 		widget.style.display = "none";
 		widget.style.top = "0";
 		widget.style.left = "0";
 		widget.width = "100%";
 		widget.height = window.innerHeight + "px";
-		widget.setAttribute("src", __WIDGET_URL__);
+		// widget.setAttribute("src", __WIDGET_URL__);
 		widget.style.zIndex = 999999999;
 		widget.setAttribute("frameborder", 0);
 		widget.setAttribute("allowtransparency", true);
@@ -136,7 +150,7 @@ export class KhaltiCheckout {
 	}
 
 	postAtURL (payload) {
-		let khaltiEbankingFormId = "khalti-ebanking-form";
+		let khaltiEbankingFormId = "khalti-ebanking-form-" + Date.now();
 		// remove earlier form if exists
 		if (this.ebankingForm) window.document.body.removeChild(this.ebankingForm);
 
