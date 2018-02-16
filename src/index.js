@@ -111,6 +111,7 @@ export default class KhaltiCheckout {
 
 	show (updates) {
 		this._config.source = "web";
+    this._widget.setAttribute("src", __WIDGET_URL__);
 		Object.assign(this._config, updates);
 		this.validateConfig();
 		this.disableParentScrollbar();
@@ -138,7 +139,7 @@ export default class KhaltiCheckout {
 		widget.style.left = "0";
 		widget.width = "100%";
 		widget.height = window.innerHeight + "px";
-		widget.setAttribute("src", __WIDGET_URL__);
+		// widget.setAttribute("src", __WIDGET_URL__);
 		widget.style.zIndex = 999999999;
 		widget.setAttribute("frameborder", 0);
 		widget.setAttribute("allowtransparency", true);
