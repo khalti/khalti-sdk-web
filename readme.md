@@ -11,4 +11,4 @@ Khalti checkout loader for browser.
 
 ## Usage
 
-Please visit [documentation site](http://docs.khalti.com/checkout/web/) for details.
+Please check the [docs](http://docs.khalti.com/checkout/web/) for details.
