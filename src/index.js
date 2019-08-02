@@ -1,6 +1,7 @@
 import {required, validate, isFunction, isObject} from "validatex";
 
-const WIDGET_URL = "https://khalti.com/payment/widget/";
+const WIDGET_URL = __WIDGET_URL__ || "https://khalti.com/payment/widget/";
+
 const filter = function (obj, predicate) {
 	return Object.keys(obj).map(key => obj[key]).filter(predicate);
 }
@@ -111,8 +112,13 @@ export default class KhaltiCheckout {
 	}
 
 	show (updates) {
+<<<<<<< HEAD
 		this._config.source = "web";
     this._widget.setAttribute("src", __WIDGET_URL__ || WIDGET_URL);
+=======
+	        this._config.source = "web";
+                this._widget.setAttribute("src", WIDGET_URL);
+>>>>>>> 962757fbaf37fda388d26b0ddf832e6e895a70a4
 		Object.assign(this._config, updates);
 		this.validateConfig();
 		this.disableParentScrollbar();
