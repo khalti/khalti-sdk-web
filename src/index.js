@@ -112,13 +112,8 @@ export default class KhaltiCheckout {
 	}
 
 	show (updates) {
-<<<<<<< HEAD
 		this._config.source = "web";
-    this._widget.setAttribute("src", __WIDGET_URL__ || WIDGET_URL);
-=======
-	        this._config.source = "web";
-                this._widget.setAttribute("src", WIDGET_URL);
->>>>>>> 962757fbaf37fda388d26b0ddf832e6e895a70a4
+		this._widget.setAttribute("src", WIDGET_URL);
 		Object.assign(this._config, updates);
 		this.validateConfig();
 		this.disableParentScrollbar();
