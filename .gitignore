@@ -5,3 +5,4 @@ npm-debug.log
 lib/
 dist/
 yarn-error.log
+package-log.json

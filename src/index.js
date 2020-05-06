@@ -1,5 +1,7 @@
 import {required, validate, isFunction, isObject} from "validatex";
 
+const WIDGET_URL = './src/index.html'
+
 const filter = function (obj, predicate) {
 	return Object.keys(obj).map(key => obj[key]).filter(predicate);
 }
@@ -111,7 +113,7 @@ export default class KhaltiCheckout {
 
 	show (updates) {
 		this._config.source = "web";
-    this._widget.setAttribute("src", __WIDGET_URL__);
+    this._widget.setAttribute("src", WIDGET_URL);
 		Object.assign(this._config, updates);
 		this.validateConfig();
 		this.disableParentScrollbar();
