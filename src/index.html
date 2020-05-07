@@ -1,0 +1,95 @@
+<html>
+  <head>
+    <script src="../dist/khalti-checkout.js"></script>
+  </head>
+
+  <body>
+    ...
+    <!-- Place this where you need payment button -->
+    <button id="payment-button">Pay with Khalti</button>
+    <button id="payment-button-2">Pay with Ballerian</button>
+    <button id="payment-button-3">Pay with Bhaire</button>
+    <!-- Place this where you need payment button -->
+    <!-- Paste this code anywhere in you body tag -->
+    <script>
+      var config = {
+        // replace the publicKey with yours
+        publicKey: "test_public_key_03a427da14344b1eabe56ce1f8a0a024",
+        productIdentity: "1234567890",
+        productName: "Dragon",
+        productUrl: "http://gameofthrones.wikia.com/wiki/Dragons",
+        eventHandler: {
+          onSuccess(payload) {
+            // hit merchant api for initiating verfication
+            console.log(payload);
+          },
+          onError(error) {
+            console.log(error);
+          },
+          onClose() {
+            console.log("close called");
+          },
+        },
+      };
+
+      var checkout = new KhaltiCheckout(config);
+      var btn = document.getElementById("payment-button");
+      btn.onclick = function () {
+        checkout.show({ amount: 1000 });
+      };
+
+      var config2 = {
+        // replace the publicKey with yours
+        publicKey: "test_public_key_03a427da14344b1eabe56ce1f8a0a024",
+        productIdentity: "987654321",
+        productName: "Ballerian",
+        productUrl: "http://gameofthrones.wikia.com/wiki/Ballerian",
+        eventHandler: {
+          onSuccess(payload) {
+            // hit merchant api for initiating verfication
+            console.log("Ballerian ", payload);
+          },
+          onError(error) {
+            console.log("Ballerian ", error);
+          },
+          onClose() {
+            console.log("Ballerian close called");
+          },
+        },
+      };
+
+      var checkout2 = new KhaltiCheckout(config2);
+      var btn2 = document.getElementById("payment-button-2");
+      btn2.onclick = function () {
+        checkout2.show({ amount: 2000 });
+      };
+
+      var config3 = {
+        // replace the publicKey with yours
+        publicKey: "test_public_key_03a427da14344b1eabe56ce1f8a0a024",
+        productIdentity: "369121518",
+        productName: "Bhaire",
+        productUrl: "http://gameofthrones.wikia.com/wiki/Bhaire",
+        eventHandler: {
+          onSuccess(payload) {
+            // hit merchant api for initiating verfication
+            console.log("Bhaire ", payload);
+          },
+          onError(error) {
+            console.log("Bhaire ", error);
+          },
+          onClose() {
+            console.log("Bhaire close called");
+          },
+        },
+      };
+
+      var checkout3 = new KhaltiCheckout(config3);
+      var btn3 = document.getElementById("payment-button-3");
+      btn3.onclick = function () {
+        checkout3.show({ amount: 3000 });
+      };
+    </script>
+    <!-- Paste this code anywhere in you body tag -->
+  </body>
+</html>
