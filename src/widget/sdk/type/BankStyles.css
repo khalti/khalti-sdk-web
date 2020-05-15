@@ -1,0 +1,67 @@
+.productImage {
+	position: relative;
+	float: left;
+	width: 100%;
+	height: 100%;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.ServiceImage {
+	height: 75px !important;
+	width: auto !important;
+}
+.ServiceName {
+	margin-top: 12px;
+	color: #000;
+}
+:global(.ui):global(.label).Cashback {
+	font-size: 11px;
+	background-color: #ebe5f0;
+	font-weight: normal;
+	color: #5d2e8e;
+	margin-top: 2px;
+	border-radius: 100px;
+}
+.NoCashback {
+	font-size: 10px;
+	color: transparent;
+}
+
+@media only screen and (max-width: 767px) {
+	.ServiceImage {
+		height: 40px !important;
+		width: auto !important;
+	}
+	.Cashback {
+		font-size: 8px;
+	}
+}
+.fullWide {
+	width: 100% !important;
+}
+
+.BorderedItem {
+	border: 1px solid #000;
+}
+
+.IconWrapperLeft {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.contact {
+	padding-right: 20px;
+	color: #5d2e8e !important;
+}
+
+:global(.IconWrapper) .IconContent {
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	margin: 10px 5px;
+	/*box-shadow: 0px 0px 0px 1px #f2f2f2;*/
+}

@@ -9,7 +9,7 @@
     "build:web": "rollup -c rollup-config/web.js",
     "build:widget": "webpack --config webpack-config/widget.js --mode production",
     "prebuild:widget": "cp semantic-ui/theme.config node_modules/semantic-ui-less/",
-    "start": "webpack-dev-server --hot --config webpack-config/widget.js --mode development --open",
+    "start": "webpack-dev-server --hot --disable-host-check --config webpack-config/widget.js --mode development --open",
     "watch:widget": "webpack --config webpack-config/widget.js --mode development --watch",
     "build": "npm run build:node && npm run build:web && npm run prebuild:widget && npm run build:widget",
     "prepublish": "npm run build"
@@ -35,6 +35,7 @@
   },
   "homepage": "https://github.com/khalti/khalti-sdk-web",
   "dependencies": {
+    "axios": "^0.19.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "validatex": "^0.3.1"
@@ -55,6 +56,7 @@
     "less": "^3.11.1",
     "less-loader": "^6.0.0",
     "mocha": "^2.5.3",
+    "rollup": "^2.8.2",
     "rollup-plugin-babel": "^3.0.7",
     "rollup-plugin-commonjs": "^8.4.1",
     "rollup-plugin-node-resolve": "^3.4.0",
