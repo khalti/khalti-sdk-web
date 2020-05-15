@@ -8,19 +8,6 @@ import {
   ebanking_list,
 } from "../api/APIS";
 
-const listener = () => {
-  console.log("adding list");
-  window.addEventListener("storage", function (event) {
-    console.log("event tirggred");
-    if (event.key == "confirmation-data") {
-      data = JSON.parse(event.newValue);
-      console.log(data, "daadasfasd");
-      let merchant = window.parent.msgWidget("walletPaymentVerification", data);
-      // this is the final response with looks json shown below
-      window.localStorage.removeItem("confirmation-data");
-    }
-  });
-};
 
 const EBanking = ({
   public_key,
@@ -50,6 +37,19 @@ const EBanking = ({
     search();
   };
 
+  const receiveMessage = (event) => {
+    if (event.origin !== "http://localhost:8000")
+      return;
+    console.log('message received');
+    let data = JSON.parse(event.data)
+    console.log(data);
+  }
+
+  useEffect(() => {
+    window.addEventListener("message", receiveMessage, false);
+    () => {window.removeEventListenter("message");}
+  })
+
   useEffect(() => {
     const getBanks = async () => {
       setLoading(true);
@@ -65,20 +65,13 @@ const EBanking = ({
     getBanks();
   }, []);
 
-  useEffect(() => {
-    listener();
-    () => {
-      window.removeEventListener("storage");
-    };
-  }, []);
-
-  const initiatePay = async () => {
+  const initiatePay = async (event) => {
     event.preventDefault();
     if (mobile && mobile.toString().length == 10) {
       setErrMobile(false);
       if (bank_selected.idx) {
         try {
-          window.open(
+          var myWindow = window.open(
             `${ebanking_initiation_api}?${queryToString({
               public_key,
               product_identity,
@@ -88,8 +81,7 @@ const EBanking = ({
               bank: bank_selected.idx,
               mobile,
               product_url,
-            })}`,
-            "_blank"
+            })}`
           );
         } catch (err) {
           console.log(err, "--err");
