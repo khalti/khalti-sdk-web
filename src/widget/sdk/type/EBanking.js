@@ -8,13 +8,13 @@ import {
   ebanking_list,
 } from "../api/APIS";
 
-
 const EBanking = ({
   public_key,
   product_identity,
   product_name,
   amount,
   product_url,
+  hideSDK,
 }) => {
   const [bank_list, setBankList] = useState(null);
   const [bank_selected, setBankSelected] = useState(null);
@@ -38,17 +38,20 @@ const EBanking = ({
   };
 
   const receiveMessage = (event) => {
-    if (event.origin !== "http://localhost:8000")
-      return;
-    console.log('message received');
-    let data = JSON.parse(event.data)
-    console.log(data);
-  }
+    if (event.origin !== "http://localhost:8000") return;
+    let data = JSON.parse(event.data);
+    console.log(data, "- ebanking message received");
+    if (data && data.idx) {
+      hideSDK();
+    }
+  };
 
   useEffect(() => {
     window.addEventListener("message", receiveMessage, false);
-    () => {window.removeEventListenter("message");}
-  })
+    () => {
+      window.removeEventListenter("message");
+    };
+  });
 
   useEffect(() => {
     const getBanks = async () => {

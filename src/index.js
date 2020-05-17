@@ -128,6 +128,7 @@ export default class KhaltiCheckout {
     this.validateConfig();
     this.disableParentScrollbar();
     this._widget.style.display = "block";
+    this._widget.contentWindow.postMessage("testing");
     this.widgetInit();
   }
 

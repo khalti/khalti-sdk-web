@@ -1,15 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import "../../semantic-ui/semantic.less";
-import { tranparent } from "./widget.css";
-
 import SDK from "./sdk";
 
-const Widget = () => {
+const receiveMessage = (event) => {
+  console.log("erce", event);
+  let data = JSON.parse(event.data);
+  console.log(data, "- ebanking message received");
+};
+
+window.addEventListener("message", receiveMessage, false);
+
+const Widget = (props) => {
+  console.log(props, "--------------- props");
   const [show, setShow] = useState(true);
   const hideSDK = () => {
     setShow(false);
   };
+
+  // useEffect(() => {
+
+  //   () => {
+  //     window.removeEventListenter("message");
+  //   };
+  // }, []);
+  console.log(window, "Widget");
   return (
     <React.Fragment>
       {show && (
@@ -24,6 +39,11 @@ const Widget = () => {
       )}
     </React.Fragment>
   );
+};
+
+// listen to merchant
+window.onmessage = (e) => {
+  console.log("message", e);
 };
 
 ReactDOM.render(<Widget />, document.getElementById("index"));

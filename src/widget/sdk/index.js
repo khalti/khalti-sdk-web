@@ -156,6 +156,7 @@ const SDK = ({
                         product_name={product_name}
                         amount={amount}
                         product_url={product_url}
+                        hideSDK={hideSDK}
                       />
                     }
                   </div>
