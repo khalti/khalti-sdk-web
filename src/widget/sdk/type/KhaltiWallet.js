@@ -11,7 +11,7 @@ const KhaltiWallet = ({
 }) => {
   const [otp_code, setOTPCode] = useState(false);
   const [mobile, setMobileNumber] = useState(null);
-  const [errMobile, setErrMobile] = useState(false);
+  const [errMobile, setErrMobile] = useState(null);
   const [token, setToken] = useState(null);
   const [transaction_pin, setPin] = useState(null);
   const [errTranPin, setErrTranPin] = useState(false);
@@ -35,7 +35,7 @@ const KhaltiWallet = ({
     event.preventDefault();
     if (mobile && mobile.toString().length == 10 && transaction_pin) {
       setErrTranPin(false);
-      setErrMobile(false);
+      setErrMobile("Please enter a valid mobile number.");
       try {
         const { data } = await axios.post(initiation_api, {
           public_key,
@@ -49,9 +49,15 @@ const KhaltiWallet = ({
         if (data && data.token) {
           setToken(data.token);
           setOTPCode(true);
+          setErrMobile(null);
         }
       } catch (err) {
-        console.log(err, "--err");
+        if (err.response) {
+          let { data } = err.response;
+          if (data) {
+            setErrMobile("Please enter valid mobile number and pin.");
+          }
+        }
       }
     } else {
       if (!transaction_pin) {
@@ -60,12 +66,12 @@ const KhaltiWallet = ({
         setErrTranPin(false);
       }
       if (!mobile) {
-        setErrMobile(true);
+        setErrMobile("Please enter a valid mobile number.");
       } else {
         if (mobile && mobile.toString().length != 10) {
-          setErrMobile(true);
+          setErrMobile("Please enter a valid mobile number.");
         } else {
-          setErrMobile(false);
+          setErrMobile(null);
         }
       }
     }
@@ -84,11 +90,24 @@ const KhaltiWallet = ({
         if (data && data.idx) {
           setToken(null);
           setOTPCode(false);
-          hideSDK();
+          window.parent.postMessage(
+            { realm: "walletPaymentVerification", payload: data },
+            "*"
+          );
+          setErrConCode(false);
         }
-        console.log(data, "--------------- final payment data details");
       } catch (err) {
-        console.log(err, "--err");
+        if (err.response) {
+          let { data } = err.response;
+          if (data.confirmation_code || data.detail) {
+            setErrConCode(true);
+          } else {
+            window.parent.postMessage(
+              { realm: "widgetError", payload: data },
+              "*"
+            );
+          }
+        }
       }
     } else {
       setErrConCode(true);
@@ -118,7 +137,7 @@ const KhaltiWallet = ({
                 />
                 {errMobile && (
                   <div class="ui negative message">
-                    <p>Please enter a valid mobile number.</p>
+                    <p>{errMobile}</p>
                   </div>
                 )}
               </div>
@@ -158,7 +177,7 @@ const KhaltiWallet = ({
               />
               {errConCode && (
                 <div class="ui negative message">
-                  <p>Please enter your confirmation code.</p>
+                  <p>Please enter your correct confirmation code.</p>
                 </div>
               )}
             </div>

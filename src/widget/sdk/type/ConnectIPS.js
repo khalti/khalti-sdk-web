@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ebanking_initiation_api } from "../api/APIS";
+import { ebanking_initiation_api, queryToString } from "../api/APIS";
 import axios from "axios";
 const ConnectIPS = ({
   public_key,
@@ -21,20 +21,19 @@ const ConnectIPS = ({
       setErrMobile(false);
 
       try {
-        const { data } = await axios.get(ebanking_initiation_api, {
-          params: {
+        var myWindow = window.open(
+          `${ebanking_initiation_api}?${queryToString({
             public_key,
             product_identity,
+            product_name,
+            amount,
             payment_type: "connectips",
             bank: "connectips",
             source: "web",
-            product_name,
-            amount,
             mobile,
             product_url,
-          },
-        });
-        console.log(data, "----------- data");
+          })}`
+        );
       } catch (err) {
         console.log(err, "--err");
       }

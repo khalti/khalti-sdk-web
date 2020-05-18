@@ -23,7 +23,7 @@ const SDK = ({
   };
 
   const hideModal = () => {
-    hideSDK()
+    window.parent.postMessage({ realm: "hide" }, "*");
     setModalState(false);
   };
   useEffect(() => {

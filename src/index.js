@@ -56,10 +56,19 @@ export default class KhaltiCheckout {
     window.addEventListener(
       "message",
       (e) => {
-        console.log('message received by merchant', e);
+        console.log("message received by merchant", e);
         if (!e.data.realm) return;
         if (e.data.realm === "widgetInit") {
           this.widgetInit(e.data.payload);
+        } else if (e.data.realm === "walletPaymentVerification") {
+          let handler = `handle_msg_${e.data.realm}`;
+          this[handler](e.data.payload);
+        } else if (e.data.realm === "widgetError") {
+          let handler = `handle_msg_${e.data.realm}`;
+          this[handler](e.data.payload);
+        } else if (e.data.realm === "hide") {
+          let handler = `handle_msg_${e.data.realm}`;
+          this[handler]();
         } else if (
           !e.data.payload ||
           e.data.payload.widget_id !== this._widgetId
@@ -76,7 +85,7 @@ export default class KhaltiCheckout {
 
   msgWidget(realm, payload) {
     payload = clone(payload);
-    console.log(payload, this._widget.contentWindow, 'msgWidget');
+    console.log(payload, this._widget.contentWindow, "msgWidget");
     payload.widgetId = this._widgetId;
     this._widget.contentWindow.postMessage({ realm, payload }, "*");
   }
@@ -88,7 +97,6 @@ export default class KhaltiCheckout {
   widgetInit() {
     let paymentInfo = clone(this._config);
     delete paymentInfo.eventHandler;
-     // setTimeout(() => {   this.msgWidget("paymentInfo", paymentInfo); }, 1000);
     this.msgWidget("paymentInfo", paymentInfo);
   }
 
@@ -105,11 +113,13 @@ export default class KhaltiCheckout {
   }
 
   handle_msg_walletPaymentVerification(paymentInfo) {
+    console.log("success triggered");
     this._config.eventHandler.onSuccess(paymentInfo);
     this.hide();
   }
 
   handle_msg_widgetError(error) {
+    console.log("error triggered", error);
     let errorHandler = this._config.eventHandler.onError;
     errorHandler && errorHandler(error);
   }
@@ -131,7 +141,7 @@ export default class KhaltiCheckout {
     this.validateConfig();
     this.disableParentScrollbar();
     this._widget.style.display = "block";
-    this._widget.contentWindow.postMessage("testing", '*');
+    this._widget.contentWindow.postMessage("testing", "*");
     this.widgetInit();
   }
 
@@ -166,31 +176,31 @@ export default class KhaltiCheckout {
     return widget;
   }
 
-  postAtURL(payload) {
-    let khaltiEbankingFormId = "khalti-ebanking-form-" + Date.now();
-    // remove earlier form if exists
-    if (this.ebankingForm) window.document.body.removeChild(this.ebankingForm);
+  // postAtURL(payload) {
+  //   let khaltiEbankingFormId = "khalti-ebanking-form-" + Date.now();
+  //   // remove earlier form if exists
+  //   if (this.ebankingForm) window.document.body.removeChild(this.ebankingForm);
 
-    // create new form
-    var form = window.document.createElement("form");
-    form.setAttribute("id", khaltiEbankingFormId);
-    form.setAttribute("action", payload.url);
-    form.setAttribute("target", "_blank");
-    form.setAttribute("method", "POST");
-    form.style.display = "none";
+  //   // create new form
+  //   var form = window.document.createElement("form");
+  //   form.setAttribute("id", khaltiEbankingFormId);
+  //   form.setAttribute("action", payload.url);
+  //   form.setAttribute("target", "_blank");
+  //   form.setAttribute("method", "POST");
+  //   form.style.display = "none";
 
-    // attach inputs to form
-    forEach(payload.paymentInfo, (value, key) => {
-      let input = window.document.createElement("input");
-      input.setAttribute("name", key);
-      input.value = value;
-      form.appendChild(input);
-    });
+  //   // attach inputs to form
+  //   forEach(payload.paymentInfo, (value, key) => {
+  //     let input = window.document.createElement("input");
+  //     input.setAttribute("name", key);
+  //     input.value = value;
+  //     form.appendChild(input);
+  //   });
 
-    // attach form to body
-    window.document.body.appendChild(form);
-    this.ebankingForm = form;
+  //   // attach form to body
+  //   window.document.body.appendChild(form);
+  //   this.ebankingForm = form;
 
-    form.submit();
-  }
+  //   form.submit();
+  // }
 }

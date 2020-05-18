@@ -1,3 +1,4 @@
+export const host_ip_address = "http://localhost:8000";
 const host = "http://localhost:8000/api/v2/";
 export const initiation_api = host + "payment/initiate/";
 export const confirmation_api = host + "payment/confirm/";

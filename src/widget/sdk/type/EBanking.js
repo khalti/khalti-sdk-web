@@ -6,6 +6,7 @@ import {
   ebanking_initiation_api,
   queryToString,
   ebanking_list,
+  host_ip_address,
 } from "../api/APIS";
 
 const EBanking = ({
@@ -14,7 +15,6 @@ const EBanking = ({
   product_name,
   amount,
   product_url,
-  hideSDK,
 }) => {
   const [bank_list, setBankList] = useState(null);
   const [bank_selected, setBankSelected] = useState(null);
@@ -36,23 +36,6 @@ const EBanking = ({
     };
     search();
   };
-
-  const receiveMessage = (event) => {
-    console.log('message received by widget', event.data, event.origin);
-    if (event.origin !== "http://localhost:8000") return;
-    let data = JSON.parse(event.data);
-    console.log(data, "- ebanking message received");
-    if (data && data.idx) {
-      hideSDK();
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("message", receiveMessage, false);
-    () => {
-      window.removeEventListenter("message");
-    };
-  }, []);
 
   useEffect(() => {
     const getBanks = async () => {

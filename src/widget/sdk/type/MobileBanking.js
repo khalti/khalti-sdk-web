@@ -3,7 +3,11 @@ import axios from "axios";
 
 import * as styles from "./BankStyles.css";
 
-import { mobile_banking_list, ebanking_initiation_api } from "../api/APIS";
+import {
+  mobile_banking_list,
+  queryToString,
+  ebanking_initiation_api,
+} from "../api/APIS";
 const MobileBanking = ({
   public_key,
   product_identity,
@@ -57,8 +61,8 @@ const MobileBanking = ({
       setErrMobile(false);
       if (bank_selected.idx) {
         try {
-          const { data } = await axios.get(ebanking_initiation_api, {
-            params: {
+          var myWindow = window.open(
+            `${ebanking_initiation_api}?${queryToString({
               public_key,
               product_identity,
               product_name,
@@ -68,13 +72,8 @@ const MobileBanking = ({
               bank: bank_selected.idx,
               mobile,
               product_url,
-            },
-          });
-          console.log(data, "----------- data");
-          if (data && data.token) {
-            setToken(data.token);
-            setOTPCode(true);
-          }
+            })}`
+          );
         } catch (err) {
           console.log(err, "--err");
         }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { ebanking_initiation_api } from "../api/APIS";
+import { ebanking_initiation_api, queryToString } from "../api/APIS";
 import axios from "axios";
 
 const SCTCard = ({
@@ -21,22 +21,20 @@ const SCTCard = ({
     0;
     if (mobile && mobile.toString().length == 10) {
       setErrMobile(false);
-
       try {
-        const { data } = await axios.get(ebanking_initiation_api, {
-          params: {
+        var myWindow = window.open(
+          `${ebanking_initiation_api}?${queryToString({
             public_key,
             product_identity,
             product_name,
-            bank: "npay",
+            amount,
             payment_type: "sct",
             source: "web",
-            amount,
+            bank: "npay",
             mobile,
             product_url,
-          },
-        });
-        console.log(data, "----------- data");
+          })}`
+        );
       } catch (err) {
         console.log(err, "--err");
       }

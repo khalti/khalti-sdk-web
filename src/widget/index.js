@@ -3,26 +3,53 @@ import ReactDOM from "react-dom";
 import "../../semantic-ui/semantic.less";
 import SDK from "./sdk";
 
+import { host_ip_address } from "./sdk/api/APIS";
+
 const Widget = (props) => {
-  console.log(props, "--------------- props");
-  const [show, setShow] = useState(true);
-  const hideSDK = () => {
-    console.log('closeing');
-    window.parent.postMessage('test', '*')
-    setShow(false);
+  const [passed_props, setProps] = useState(null);
+
+  const hideSDK = () => {};
+  const receiveMessage = (event) => {
+    if (
+      event &&
+      event.data &&
+      event.data.payload &&
+      event.data.payload.amount &&
+      event.data.payload.productIdentity
+    ) {
+      const data = event.data.payload;
+      setProps({
+        public_key: data.publicKey,
+        product_identity: data.productIdentity,
+        product_name: data.productName,
+        amount: data.amount,
+        product_url: data.productUrl,
+      });
+    }
+
+    if (event.origin !== host_ip_address) return;
+    let data = JSON.parse(event.data);
+    if (data && data.idx) {
+      window.parent.postMessage(
+        { realm: "walletPaymentVerification", payload: data },
+        "*"
+      );
+    } else {
+      window.parent.postMessage({ realm: "widgetError", payload: data }, "*");
+    }
   };
+
+  useEffect(() => {
+    window.addEventListener("message", receiveMessage, false);
+    () => {
+      window.removeEventListenter("message");
+    };
+  }, []);
 
   return (
     <React.Fragment>
-      {show && (
-        <SDK
-          public_key="test_public_key_671f0dbb8e3c4fde8903c95f74df87bd"
-          product_identity={"idx_pid_1245"}
-          product_name={"test_product"}
-          amount={2000}
-          product_url={"http://www.khalti.com/product/idx_pid_1245"}
-          hideSDK={hideSDK}
-        />
+      {passed_props && Object.keys(passed_props).length && (
+        <SDK {...passed_props} />
       )}
     </React.Fragment>
   );
