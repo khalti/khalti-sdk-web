@@ -21,7 +21,9 @@ const SDK = ({
   const getActiveTab = (obj) => {
     setActiveTab(obj);
   };
+
   const hideModal = () => {
+    hideSDK()
     setModalState(false);
   };
   useEffect(() => {

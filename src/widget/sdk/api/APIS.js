@@ -3,7 +3,7 @@ export const initiation_api = host + "payment/initiate/";
 export const confirmation_api = host + "payment/confirm/";
 export const verification_api = host + "payment/verify/";
 
-export const ebanking_initiation_api = host + "ebanking/initiate";
+export const ebanking_initiation_api = host + "ebanking/initiate/";
 
 export const mobile_banking_list =
   "http://localhost:8000/api/bank/?has_mobile_banking=true";

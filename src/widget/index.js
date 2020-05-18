@@ -3,33 +3,20 @@ import ReactDOM from "react-dom";
 import "../../semantic-ui/semantic.less";
 import SDK from "./sdk";
 
-const receiveMessage = (event) => {
-  console.log("erce", event);
-  let data = JSON.parse(event.data);
-  console.log(data, "- ebanking message received");
-};
-
-window.addEventListener("message", receiveMessage, false);
-
 const Widget = (props) => {
   console.log(props, "--------------- props");
   const [show, setShow] = useState(true);
   const hideSDK = () => {
+    console.log('closeing');
+    window.parent.postMessage('test', '*')
     setShow(false);
   };
 
-  // useEffect(() => {
-
-  //   () => {
-  //     window.removeEventListenter("message");
-  //   };
-  // }, []);
-  console.log(window, "Widget");
   return (
     <React.Fragment>
       {show && (
         <SDK
-          public_key="test_public_key_02f71893c56b48849716b01465a14cfe"
+          public_key="test_public_key_671f0dbb8e3c4fde8903c95f74df87bd"
           product_identity={"idx_pid_1245"}
           product_name={"test_product"}
           amount={2000}
@@ -39,11 +26,6 @@ const Widget = (props) => {
       )}
     </React.Fragment>
   );
-};
-
-// listen to merchant
-window.onmessage = (e) => {
-  console.log("message", e);
 };
 
 ReactDOM.render(<Widget />, document.getElementById("index"));

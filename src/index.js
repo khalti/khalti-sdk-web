@@ -56,6 +56,7 @@ export default class KhaltiCheckout {
     window.addEventListener(
       "message",
       (e) => {
+        console.log('message received by merchant', e);
         if (!e.data.realm) return;
         if (e.data.realm === "widgetInit") {
           this.widgetInit(e.data.payload);
@@ -75,6 +76,7 @@ export default class KhaltiCheckout {
 
   msgWidget(realm, payload) {
     payload = clone(payload);
+    console.log(payload, this._widget.contentWindow, 'msgWidget');
     payload.widgetId = this._widgetId;
     this._widget.contentWindow.postMessage({ realm, payload }, "*");
   }
@@ -86,6 +88,7 @@ export default class KhaltiCheckout {
   widgetInit() {
     let paymentInfo = clone(this._config);
     delete paymentInfo.eventHandler;
+     // setTimeout(() => {   this.msgWidget("paymentInfo", paymentInfo); }, 1000);
     this.msgWidget("paymentInfo", paymentInfo);
   }
 
@@ -123,12 +126,12 @@ export default class KhaltiCheckout {
 
   show(updates) {
     this._config.source = "web";
-    this._widget.setAttribute("src", WIDGET_URL);
+    // this._widget.setAttribute("src", WIDGET_URL);
     Object.assign(this._config, updates);
     this.validateConfig();
     this.disableParentScrollbar();
     this._widget.style.display = "block";
-    this._widget.contentWindow.postMessage("testing");
+    this._widget.contentWindow.postMessage("testing", '*');
     this.widgetInit();
   }
 
@@ -153,6 +156,7 @@ export default class KhaltiCheckout {
     widget.width = "100%";
     widget.height = window.innerHeight + "px";
     // widget.setAttribute("src", __WIDGET_URL__);
+    widget.setAttribute("src", WIDGET_URL);
     widget.style.zIndex = 999999999;
     widget.setAttribute("frameborder", 0);
     widget.setAttribute("allowtransparency", true);

@@ -38,6 +38,7 @@ const EBanking = ({
   };
 
   const receiveMessage = (event) => {
+    console.log('message received by widget', event.data, event.origin);
     if (event.origin !== "http://localhost:8000") return;
     let data = JSON.parse(event.data);
     console.log(data, "- ebanking message received");
@@ -51,7 +52,7 @@ const EBanking = ({
     () => {
       window.removeEventListenter("message");
     };
-  });
+  }, []);
 
   useEffect(() => {
     const getBanks = async () => {
