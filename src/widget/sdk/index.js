@@ -13,19 +13,17 @@ const SDK = ({
   product_name,
   amount,
   product_url,
-  hideSDK,
+  hideModal,
+  payment_preference,
 }) => {
-  const [activeTab, setActiveTab] = useState({ tab: "first" });
+  const [activeTab, setActiveTab] = useState({ tab: payment_preference[0] });
+  console.log(activeTab, "------------ active tab");
   const [modalState, setModalState] = useState(true);
   const [loading, setLoading] = useState(true);
   const getActiveTab = (obj) => {
     setActiveTab(obj);
   };
 
-  const hideModal = () => {
-    window.parent.postMessage({ realm: "hide" }, "*");
-    setModalState(false);
-  };
   useEffect(() => {
     setLoading(false);
   }, []);
@@ -34,7 +32,7 @@ const SDK = ({
       {modalState && (
         <div
           style={{
-            position: "absolute",
+            position: "fixed",
             top: "0%",
             left: "0%",
             background: "rgba(0,0,0,0.75)",
@@ -58,59 +56,64 @@ const SDK = ({
                     className="ui pointing secondary menu"
                     style={{ overflowX: "auto", overflowY: "hidden" }}
                   >
-                    <a
-                      className={
-                        activeTab.tab == "first" ? "item active" : "item"
-                      }
-                      data-tab="first"
-                      onClick={() => getActiveTab({ tab: "first" })}
-                    >
-                      <img src="assets/icons/mywallet.svg  " height="14px" />
-                      Khalti Wallet
-                    </a>
-                    <a
-                      className={
-                        activeTab.tab == "second" ? "item active" : "item"
-                      }
-                      data-tab="second"
-                      onClick={() => getActiveTab({ tab: "second" })}
-                    >
-                      <img src="assets/icons/ebanking.svg  " height="14px" />
-                      eBanking
-                    </a>
-                    <a
-                      className={
-                        activeTab.tab == "third" ? "item active" : "item"
-                      }
-                      data-tab="third"
-                      onClick={() => getActiveTab({ tab: "third" })}
-                    >
-                      <img
-                        src="assets/icons/mobile-banking.svg  "
-                        height="14px"
-                      />
-                      Mobile Banking
-                    </a>
-                    <a
-                      className={
-                        activeTab.tab == "fourth" ? "item active" : "item"
-                      }
-                      data-tab="fourth"
-                      onClick={() => getActiveTab({ tab: "fourth" })}
-                    >
-                      <img src="assets/icons/connectIPS.svg  " height="14px" />
-                      Connect IPS
-                    </a>
-                    <a
-                      className={
-                        activeTab.tab == "fifth" ? "item active" : "item"
-                      }
-                      data-tab="fifth"
-                      onClick={() => getActiveTab({ tab: "fifth" })}
-                    >
-                      <img src="assets/icons/sct-card.svg  " height="14px" />
-                      SCT Card
-                    </a>
+                    {payment_preference.map((item, index) => {
+                      return (
+                        <a
+                          className={
+                            activeTab.tab == item ? "item active" : "item"
+                          }
+                          style={{ padding: "18px" }}
+                          data-tab={item}
+                          onClick={() => getActiveTab({ tab: item })}
+                        >
+                          {item == "KHALTI" && (
+                            <React.Fragment>
+                              <img
+                                src="assets/icons/mywallet.svg  "
+                                height="14px"
+                              />
+                              Khalti Wallet
+                            </React.Fragment>
+                          )}
+                          {item == "MOBILE_BANKING" && (
+                            <React.Fragment>
+                              <img
+                                src="assets/icons/mobile-banking.svg  "
+                                height="14px"
+                              />
+                              Mobile Banking
+                            </React.Fragment>
+                          )}
+                          {item == "EBANKING" && (
+                            <React.Fragment>
+                              <img
+                                src="assets/icons/ebanking.svg  "
+                                height="14px"
+                              />
+                              eBanking
+                            </React.Fragment>
+                          )}
+                          {item == "CONNECT_IPS" && (
+                            <React.Fragment>
+                              <img
+                                src="assets/icons/connectIPS.svg  "
+                                height="14px"
+                              />
+                              Connect IPS
+                            </React.Fragment>
+                          )}
+                          {item == "SCT" && (
+                            <React.Fragment>
+                              <img
+                                src="assets/icons/sct-card.svg  "
+                                height="14px"
+                              />
+                              SCT Card
+                            </React.Fragment>
+                          )}
+                        </a>
+                      );
+                    })}
                   </div>
                 </div>
                 <div
@@ -125,13 +128,13 @@ const SDK = ({
                 >
                   <img src="assets/icons/close.svg  " height="14px" />
                 </div>
-                <div className="content">
+                <div className="">
                   {activeTab && activeTab.tab && (
                     <div
                       className={
-                        activeTab.tab == "first" ? "ui tab active" : "ui tab"
+                        activeTab.tab == "KHALTI" ? "ui tab active" : "ui tab"
                       }
-                      data-tab="first"
+                      data-tab="KHALTI"
                     >
                       {
                         <KhaltiWallet
@@ -140,16 +143,15 @@ const SDK = ({
                           product_name={product_name}
                           amount={amount}
                           product_url={product_url}
-                          hideSDK={hideSDK}
                         />
                       }
                     </div>
                   )}
                   <div
                     className={
-                      activeTab.tab == "second" ? "ui tab active" : "ui tab"
+                      activeTab.tab == "EBANKING" ? "ui tab active" : "ui tab"
                     }
-                    data-tab="second"
+                    data-tab="EBANKING"
                   >
                     {
                       <EBanking
@@ -158,13 +160,14 @@ const SDK = ({
                         product_name={product_name}
                         amount={amount}
                         product_url={product_url}
-                        hideSDK={hideSDK}
                       />
                     }
                   </div>
                   <div
                     className={
-                      activeTab.tab == "third" ? "ui tab active" : "ui tab"
+                      activeTab.tab == "MOBILE_BANKING"
+                        ? "ui tab active"
+                        : "ui tab"
                     }
                   >
                     {
@@ -179,9 +182,11 @@ const SDK = ({
                   </div>
                   <div
                     className={
-                      activeTab.tab == "fourth" ? "ui tab active" : "ui tab"
+                      activeTab.tab == "CONNECT_IPS"
+                        ? "ui tab active"
+                        : "ui tab"
                     }
-                    data-tab="fourth"
+                    data-tab="CONNECT_IPS"
                   >
                     {
                       <ConnectIPS
@@ -195,9 +200,9 @@ const SDK = ({
                   </div>
                   <div
                     className={
-                      activeTab.tab == "fifth" ? "ui tab active" : "ui tab"
+                      activeTab.tab == "SCT" ? "ui tab active" : "ui tab"
                     }
-                    data-tab="fifth"
+                    data-tab="SCT"
                   >
                     {
                       <SCTCard

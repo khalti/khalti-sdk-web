@@ -83,7 +83,7 @@ const MobileBanking = ({
     }
   };
   return (
-    <div className="ui padded segment pd-top-30">
+    <div className="ui basic segment pd-top-30" style={{ padding: "20px" }}>
       <div className="ui grid">
         <form className="ui form column sixteen wide">
           <div className="field">
@@ -136,7 +136,7 @@ const MobileBanking = ({
           </div>
         </div>
       )}
-      <div className="ui grid" style={{ height: "400px", overflowY: "auto" }}>
+      <div className="ui grid" style={{ height: "300px", overflowY: "auto" }}>
         {bank_list &&
           bank_list.map((item) => (
             <div

@@ -83,88 +83,97 @@ const EBanking = ({
     setBankSelected(item);
   };
   return (
-    <div className="ui padded segment pd-top-30">
-      <div className="ui grid">
-        <form className="ui form column sixteen wide">
-          <div className="field">
-            <div className="ui icon input" onChange={handleSearch}>
-              <input className="prompt" type="text" placeholder="Search ... " />
-              <i className="search icon"></i>
+    <div>
+      <div
+        className={"ui basic segment " + styles.noborderbox + " pd-top-30"}
+        style={{ padding: "20px" }}
+      >
+        <div className="ui grid">
+          <form className="ui form column sixteen wide">
+            <div className="field">
+              <div className="ui icon input" onChange={handleSearch}>
+                <input
+                  className="prompt"
+                  type="text"
+                  placeholder="Search ... "
+                />
+                <i className="search icon"></i>
+              </div>
             </div>
-          </div>
-        </form>
-      </div>
-      {bank_selected && (
-        <div style={{ padding: "40px 0px" }}>
-          <div className="ui list">
-            <div className="item">
-              <img className="ui avatar image" src={bank_selected.logo} />
-              <div className="content">
-                <div className="header" style={{ background: "#fff" }}>
-                  {bank_selected.name}
+          </form>
+        </div>
+        {bank_selected && (
+          <div style={{ padding: "40px 0px" }}>
+            <div className="ui list">
+              <div className="item">
+                <img className="ui avatar image" src={bank_selected.logo} />
+                <div className="content">
+                  <div className="header" style={{ background: "#fff" }}>
+                    {bank_selected.name}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="ui grid">
-            <div className="eight wide computer sixteen wide mobile column">
-              <form className="ui form ">
-                <div className="field">
-                  <input
-                    type="number"
-                    name="mobile"
-                    placeholder="Mobile Number"
-                    onChange={changeMobile}
-                  />
-                  {errMobile && (
-                    <div class="ui negative message">
-                      <p>Please enter a valid mobile number.</p>
-                    </div>
+            <div className="ui grid">
+              <div className="eight wide computer sixteen wide mobile column">
+                <form className="ui form ">
+                  <div className="field">
+                    <input
+                      type="number"
+                      name="mobile"
+                      placeholder="Mobile Number"
+                      onChange={changeMobile}
+                    />
+                    {errMobile && (
+                      <div class="ui negative message">
+                        <p>Please enter a valid mobile number.</p>
+                      </div>
+                    )}
+                  </div>
+                  {amount && (
+                    <button
+                      className="ui button primary"
+                      type="submit"
+                      onClick={initiatePay}
+                    >
+                      Pay Rs. {amount / 100} /-
+                    </button>
                   )}
-                </div>
-                {amount && (
-                  <button
-                    className="ui button primary"
-                    type="submit"
-                    onClick={initiatePay}
-                  >
-                    Pay Rs. {amount / 100} /-
-                  </button>
-                )}
-              </form>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-      <div className="ui grid" style={{ height: "400px", overflowY: "auto" }}>
-        {bank_list &&
-          bank_list.map((item) => (
-            <div
-              className="four wide computer eight wide mobile column"
-              onClick={() => bankSelect(item)}
-            >
+        )}
+        <div className="ui grid" style={{ height: "300px", overflowY: "auto" }}>
+          {bank_list &&
+            bank_list.map((item) => (
               <div
-                className={`${styles.IconContent}  ServiceListIcon pointer ${styles.fullWide}`}
-                style={{ display: "block" }}
+                className="four wide computer eight wide mobile column"
+                onClick={() => bankSelect(item)}
               >
                 <div
-                  style={{
-                    backgroundImage: "url(" + item.logo + ")",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center",
-                    backgroundSize: "contain",
-                    height: "120px",
-                  }}
-                ></div>
-                <div className={styles.ServiceName + " text-center"}>
-                  {item.name}
+                  className={`${styles.IconContent}  ServiceListIcon pointer ${styles.fullWide}`}
+                  style={{ display: "block" }}
+                >
+                  <div
+                    style={{
+                      backgroundImage: "url(" + item.logo + ")",
+                      backgroundRepeat: "no-repeat",
+                      backgroundPosition: "center",
+                      backgroundSize: "contain",
+                      height: "120px",
+                    }}
+                  ></div>
+                  <div className={styles.ServiceName + " text-center"}>
+                    {item.name}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        {bank_list && bank_list.length == 0 && (
-          <div> Sorry no bank could be found.</div>
-        )}
+            ))}
+          {bank_list && bank_list.length == 0 && (
+            <div> Sorry no bank could be found.</div>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -7,8 +7,9 @@ import { host_ip_address } from "./sdk/api/APIS";
 
 const Widget = (props) => {
   const [passed_props, setProps] = useState(null);
-
-  const hideSDK = () => {};
+  const hideModal = () => {
+    window.parent.postMessage({ realm: "hide" }, "*");
+  };
   const receiveMessage = (event) => {
     if (
       event &&
@@ -18,12 +19,20 @@ const Widget = (props) => {
       event.data.payload.productIdentity
     ) {
       const data = event.data.payload;
+      console.log(data, "-------------- data consoled.");
       setProps({
         public_key: data.publicKey,
         product_identity: data.productIdentity,
         product_name: data.productName,
         amount: data.amount,
         product_url: data.productUrl,
+        payment_preference: data.paymentPreference || [
+          "KHALTI",
+          "EBANKING",
+          "MOBILE_BANKING",
+          "CONNECT_IPS",
+          "SCT",
+        ],
       });
     }
 
@@ -49,7 +58,7 @@ const Widget = (props) => {
   return (
     <React.Fragment>
       {passed_props && Object.keys(passed_props).length && (
-        <SDK {...passed_props} />
+        <SDK {...passed_props} hideModal={hideModal} />
       )}
     </React.Fragment>
   );

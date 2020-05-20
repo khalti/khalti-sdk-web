@@ -1,4 +1,4 @@
-import { required, validate, isFunction, isObject } from "validatex";
+import { required, validate, isFunction, isObject, isArray } from "validatex";
 
 const WIDGET_URL = "./src/index.html";
 
@@ -42,6 +42,7 @@ const configSchema = {
   eventHandler: required(true),
   amount: required(true),
   merchantData: [required(false), isObject()],
+  paymentPreference: [required(false), isArray()],
 };
 
 export default class KhaltiCheckout {
@@ -59,6 +60,7 @@ export default class KhaltiCheckout {
         console.log("message received by merchant", e);
         if (!e.data.realm) return;
         if (e.data.realm === "widgetInit") {
+          console.log(13);
           this.widgetInit(e.data.payload);
         } else if (e.data.realm === "walletPaymentVerification") {
           let handler = `handle_msg_${e.data.realm}`;
@@ -67,12 +69,13 @@ export default class KhaltiCheckout {
           let handler = `handle_msg_${e.data.realm}`;
           this[handler](e.data.payload);
         } else if (e.data.realm === "hide") {
-          let handler = `handle_msg_${e.data.realm}`;
-          this[handler]();
+          this.hide();
+          return;
         } else if (
           !e.data.payload ||
           e.data.payload.widget_id !== this._widgetId
         ) {
+          console.log(34);
           return;
         } else {
           let handler = `handle_msg_${e.data.realm}`;
