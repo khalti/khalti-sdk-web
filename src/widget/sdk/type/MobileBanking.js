@@ -136,7 +136,7 @@ const MobileBanking = ({
           </div>
         </div>
       )}
-      <div className="ui grid" style={{ height: "300px", overflowY: "auto" }}>
+      <div className={"ui grid " + styles.fullheight}>
         {bank_list &&
           bank_list.map((item) => (
             <div

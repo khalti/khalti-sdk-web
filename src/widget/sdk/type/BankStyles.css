@@ -66,6 +66,15 @@
   /*box-shadow: 0px 0px 0px 1px #f2f2f2;*/
 }
 
-.noborderbox {
-  overflow-y: unset;
+@media only screen and (max-width: 767px) {
+  .fullheight {
+    max-height: 1000px;
+    overflow-y: auto;
+  }
+}
+@media only screen and (min-width: 767px) {
+  .fullheight {
+    height: 300px;
+    overflow-y: auto;
+  }
 }
