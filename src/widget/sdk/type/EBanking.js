@@ -82,28 +82,14 @@ const EBanking = ({
   const bankSelect = (item) => {
     setBankSelected(item);
   };
+  const removeBankSelect = (item) => {
+    setBankSelected(null);
+  };
   return (
     <div>
-      <div
-        className={"ui basic segment " + styles.noborderbox + " pd-top-30"}
-        style={{ padding: "20px" }}
-      >
-        <div className="ui grid">
-          <form className="ui form column sixteen wide">
-            <div className="field">
-              <div className="ui icon input" onChange={handleSearch}>
-                <input
-                  className="prompt"
-                  type="text"
-                  placeholder="Search ... "
-                />
-                <i className="search icon"></i>
-              </div>
-            </div>
-          </form>
-        </div>
-        {bank_selected && (
-          <div style={{ padding: "40px 0px" }}>
+      {bank_selected && (
+        <div className={styles.bankSelect}>
+          <div className="ui basic segment">
             <div className="ui list">
               <div className="item">
                 <img className="ui avatar image" src={bank_selected.logo} />
@@ -139,40 +125,65 @@ const EBanking = ({
                       Pay Rs. {amount / 100} /-
                     </button>
                   )}
+                  <button class="ui button" onClick={removeBankSelect}>
+                    Clear
+                  </button>
                 </form>
               </div>
             </div>
           </div>
-        )}
-        <div className={"ui grid " + styles.fullheight}>
-          {bank_list &&
-            bank_list.map((item) => (
+        </div>
+      )}
+      <div
+        className={"ui basic segment " + styles.noborderbox + " pd-top-30"}
+        style={{ padding: "20px" }}
+      >
+        <div className="ui grid">
+          <div className="four wide computer sixteen wide mobile column">
+            <b>Select your bank</b>
+          </div>
+          <form className="ui form twelve wide computer sixteen wide mobile column">
+            <div className="field">
               <div
-                className="four wide computer eight wide mobile column"
-                onClick={() => bankSelect(item)}
+                class="ui transparent icon input"
+                onChange={handleSearch}
+                style={{ borderBottom: "1px solid #5d2e8e" }}
               >
+                <input type="text" placeholder="Search..." />
+                <i class="search icon"></i>
+              </div>
+            </div>
+            {bank_list && bank_list.length == 0 && (
+              <div> Sorry no bank could be found.</div>
+            )}
+          </form>
+        </div>
+        <div class={styles.fullheight}>
+          <div className={"ui grid "}>
+            {bank_list &&
+              bank_list.map((item) => (
                 <div
-                  className={`${styles.IconContent}  ServiceListIcon pointer ${styles.fullWide}`}
-                  style={{ display: "block" }}
+                  className="four wide computer eight wide mobile column"
+                  onClick={() => bankSelect(item)}
                 >
                   <div
-                    style={{
-                      backgroundImage: "url(" + item.logo + ")",
-                      backgroundRepeat: "no-repeat",
-                      backgroundPosition: "center",
-                      backgroundSize: "contain",
-                      height: "120px",
-                    }}
-                  ></div>
-                  <div className={styles.ServiceName + " text-center"}>
-                    {item.name}
+                    className={`${styles.IconContent}  ServiceListIcon pointer ${styles.fullWide}`}
+                    style={{ display: "block" }}
+                  >
+                    <div
+                      style={{
+                        backgroundImage: "url(" + item.logo + ")",
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center",
+                        backgroundSize: "contain",
+                        height: "84px",
+                      }}
+                    ></div>
+                    <div className={styles.ServiceName}>{item.name}</div>
                   </div>
                 </div>
-              </div>
-            ))}
-          {bank_list && bank_list.length == 0 && (
-            <div> Sorry no bank could be found.</div>
-          )}
+              ))}
+          </div>
         </div>
       </div>
     </div>

@@ -82,89 +82,109 @@ const MobileBanking = ({
       setErrMobile(true);
     }
   };
+  const removeBankSelect = (item) => {
+    setBankSelected(null);
+  };
   return (
-    <div className="ui basic segment pd-top-30" style={{ padding: "20px" }}>
-      <div className="ui grid">
-        <form className="ui form column sixteen wide">
-          <div className="field">
-            <div className="ui icon input" onChange={handleSearch}>
-              <input className="prompt" type="text" placeholder="Search ... " />
-              <i className="search icon"></i>
-            </div>
-          </div>
-        </form>
-      </div>
+    <div>
       {bank_selected && (
-        <div style={{ padding: "40px 0px" }}>
-          <div className="ui list">
-            <div className="item">
-              <img className="ui avatar image" src={bank_selected.logo} />
-              <div className="content">
-                <div className="header" style={{ background: "#fff" }}>
-                  {bank_selected.name}
+        <div className={styles.bankSelect}>
+          <div className="ui basic segment">
+            <div className="ui list">
+              <div className="item">
+                <img className="ui avatar image" src={bank_selected.logo} />
+                <div className="content">
+                  <div className="header" style={{ background: "#fff" }}>
+                    {bank_selected.name}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="ui grid">
-            <div className="eight wide computer sixteen wide mobile column">
-              <form className="ui form ">
-                <div className="field">
-                  <input
-                    type="number"
-                    name="mobile"
-                    placeholder="Mobile Number"
-                    onChange={changeMobile}
-                  />
-                  {errMobile && (
-                    <div class="ui negative message">
-                      <p>Please enter a valid mobile number.</p>
-                    </div>
+            <div className="ui grid">
+              <div className="eight wide computer sixteen wide mobile column">
+                <form className="ui form ">
+                  <div className="field">
+                    <input
+                      type="number"
+                      name="mobile"
+                      placeholder="Mobile Number"
+                      onChange={changeMobile}
+                    />
+                    {errMobile && (
+                      <div class="ui negative message">
+                        <p>Please enter a valid mobile number.</p>
+                      </div>
+                    )}
+                  </div>
+                  {amount && (
+                    <button
+                      className="ui button primary"
+                      type="submit"
+                      onClick={initiatePay}
+                    >
+                      Pay Rs. {amount / 100} /-
+                    </button>
                   )}
-                </div>
-                {amount && (
-                  <button
-                    className="ui button primary"
-                    type="submit"
-                    onClick={initiatePay}
-                  >
-                    Pay Rs. {amount / 100} /-
+                  <button class="ui button" onClick={removeBankSelect}>
+                    Clear
                   </button>
-                )}
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       )}
-      <div className={"ui grid " + styles.fullheight}>
-        {bank_list &&
-          bank_list.map((item) => (
-            <div
-              className="four wide computer eight wide mobile column"
-              onClick={() => bankSelect(item)}
-            >
+      <div
+        className={"ui basic segment " + styles.noborderbox + " pd-top-30"}
+        style={{ padding: "20px" }}
+      >
+        <div className="ui grid">
+          <div className="four wide computer sixteen wide mobile column">
+            <b>Select your bank</b>
+          </div>
+          <form className="ui form twelve wide computer sixteen wide mobile column">
+            <div className="field">
               <div
-                className={`${styles.IconContent}  ServiceListIcon pointer ${styles.fullWide}`}
-                style={{ display: "block" }}
+                class="ui transparent icon input"
+                onChange={handleSearch}
+                style={{ borderBottom: "1px solid #5d2e8e" }}
               >
-                <div
-                  style={{
-                    backgroundImage: "url(" + item.logo + ")",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center",
-                    backgroundSize: "contain",
-                    height: "120px",
-                  }}
-                ></div>
-                <div className={styles.ServiceName + " text-center"}>
-                  {item.name}
-                </div>
+                <input type="text" placeholder="Search..." />
+                <i class="search icon"></i>
               </div>
             </div>
-          ))}
-        {bank_list && bank_list.length == 0 && (
-          <div> Sorry no bank could be found.</div>
-        )}
+            {bank_list && bank_list.length == 0 && (
+              <div> Sorry no bank could be found.</div>
+            )}
+          </form>
+        </div>
+        <div class={styles.fullheight}>
+          <div className={"ui grid "}>
+            {bank_list &&
+              bank_list.map((item) => (
+                <div
+                  className="four wide computer eight wide mobile column"
+                  onClick={() => bankSelect(item)}
+                >
+                  <div
+                    className={`${styles.IconContent}  ServiceListIcon pointer ${styles.fullWide}`}
+                    style={{ display: "block" }}
+                  >
+                    <div
+                      style={{
+                        backgroundImage: "url(" + item.logo + ")",
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center",
+                        backgroundSize: "contain",
+                        height: "84px",
+                      }}
+                    ></div>
+                    <div className={styles.ServiceName}>{item.name}</div>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
       </div>
     </div>
   );

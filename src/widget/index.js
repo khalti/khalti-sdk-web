@@ -19,7 +19,6 @@ const Widget = (props) => {
       event.data.payload.productIdentity
     ) {
       const data = event.data.payload;
-      console.log(data, "-------------- data consoled.");
       setProps({
         public_key: data.publicKey,
         product_identity: data.productIdentity,

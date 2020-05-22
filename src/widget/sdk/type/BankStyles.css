@@ -14,6 +14,7 @@
 .ServiceName {
   margin-top: 12px;
   color: #000;
+  text-align: center;
 }
 :global(.ui):global(.label).Cashback {
   font-size: 11px;
@@ -66,15 +67,46 @@
   /*box-shadow: 0px 0px 0px 1px #f2f2f2;*/
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (min-width: 768px) {
   .fullheight {
-    max-height: 1000px;
+    padding-top: 18px;
+    margin-top: 8px;
+    height: 320px;
+    overflow-x: hidden;
     overflow-y: auto;
   }
 }
-@media only screen and (min-width: 767px) {
+@media only screen and (max-width: 768px) {
   .fullheight {
-    height: 300px;
+    padding-top: 18px;
+    margin-top: 8px;
+    height: 1000px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .tabHeight {
+    margin-top: 8px;
+    height: 380px;
+    overflow-x: hidden;
     overflow-y: auto;
   }
+}
+@media only screen and (max-width: 768px) {
+  .tabHeight {
+    margin-top: 8px;
+    height: 1000px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+.bankSelect {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  background-color: #fff;
+  width: 100%;
 }
