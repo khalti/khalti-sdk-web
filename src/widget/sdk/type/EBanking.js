@@ -147,7 +147,10 @@ const EBanking = ({
               <div
                 class="ui transparent icon input"
                 onChange={handleSearch}
-                style={{ borderBottom: "1px solid #5d2e8e" }}
+                style={{
+                  borderBottom: "1px solid #5d2e8e",
+                  paddingBottom: "5px",
+                }}
               >
                 <input type="text" placeholder="Search..." />
                 <i class="search icon"></i>

@@ -42,21 +42,7 @@ const SDK = ({
   return (
     <React.Fragment>
       {
-        <div
-          style={{
-            position: "fixed",
-            top: "0%",
-            left: "0%",
-            background: "rgba(0,0,0,0.75)",
-            width: "100%",
-            height: "100%",
-          }}
-        >
-          {public_key && public_key.includes("test") && (
-            <div>
-              <span className={styles.testlabel}>TEST</span>
-            </div>
-          )}
+        <div className={styles.iframeWidget}>
           {loading && (
             <div className="ui active dimmer">
               <div className="ui text loader">Loading</div>
@@ -65,7 +51,18 @@ const SDK = ({
 
           {!loading && (
             <div className={styles.modalScreen}>
-              <div className="ui">
+              <div className="ui ">
+                {public_key && public_key.includes("test") && (
+                  <span
+                    class="ui orange ribbon label"
+                    style={{
+                      position: "absolute",
+                      left: "-16px",
+                    }}
+                  >
+                    TEST
+                  </span>
+                )}
                 <div
                   style={{
                     fontSize: "20px",
@@ -76,7 +73,7 @@ const SDK = ({
                 >
                   Choose your payment method
                 </div>
-                <div style={{ padding: "20px" }}>
+                <div style={{ padding: " 20px" }}>
                   <div className={styles.parentBar}>
                     <div
                       className={
@@ -89,7 +86,12 @@ const SDK = ({
                             className={
                               activeTab.tab == item ? "item active " : "item"
                             }
-                            style={{ padding: "18px" }}
+                            style={{
+                              paddingLeft: "0px",
+                              paddingTop: "18px",
+                              paddingBottom: "18px",
+                              paddingRight: "18px",
+                            }}
                             data-tab={item}
                             onClick={() => getActiveTab({ tab: item })}
                           >
