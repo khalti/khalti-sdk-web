@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { initiation_api, confirmation_api } from "../api/APIS";
+
+import * as styles from "./BankStyles.css";
 const KhaltiWallet = ({
   public_key,
   product_identity,
@@ -114,8 +116,8 @@ const KhaltiWallet = ({
     }
   };
   return (
-    <div style={{ padding: "20px" }}>
-      <div className="ui grid basic segment pd-top-30">
+    <div className={styles.tabHeight}>
+      <div className="ui grid" style={{ paddingLeft: "30px" }}>
         <div className="eight wide computer sixteen wide mobile column">
           <div
             style={{
@@ -202,6 +204,16 @@ const KhaltiWallet = ({
               </button>
             )}
           </form>
+          <div className="ui horizontal divider">Forgot your Khalti PIN?</div>
+          <div style={{ textAlign: "center" }}>
+            <a
+              target="_blank"
+              href="https://khalti.com/#/account/transaction_pin"
+              style={{ textDecoration: "none", color: "#5d2e8e" }}
+            >
+              Set KHALTI pin
+            </a>
+          </div>
         </div>
       </div>
     </div>

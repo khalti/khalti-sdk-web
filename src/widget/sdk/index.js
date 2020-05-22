@@ -7,6 +7,19 @@ import SCTCard from "./type/SCTCard";
 
 import * as styles from "../css/index.css";
 
+import {
+  EBANKING,
+  EBANKING_VALUE,
+  MOBILE_BANKING,
+  MOBILE_BANKING_VALUE,
+  KHALTI,
+  KHALTI_VALUE,
+  CONNECT_IPS,
+  CONNECT_IPS_VALUE,
+  SCT,
+  SCT_VALUE,
+} from "./constants/literal";
+
 const SDK = ({
   public_key,
   product_identity,
@@ -17,8 +30,7 @@ const SDK = ({
   payment_preference,
 }) => {
   const [activeTab, setActiveTab] = useState({ tab: payment_preference[0] });
-  console.log(activeTab, "------------ active tab");
-  const [modalState, setModalState] = useState(true);
+
   const [loading, setLoading] = useState(true);
   const getActiveTab = (obj) => {
     setActiveTab(obj);
@@ -29,7 +41,7 @@ const SDK = ({
   }, []);
   return (
     <React.Fragment>
-      {modalState && (
+      {
         <div
           style={{
             position: "fixed",
@@ -40,80 +52,96 @@ const SDK = ({
             height: "100%",
           }}
         >
+          {public_key && public_key.includes("test") && (
+            <div>
+              <span className={styles.testlabel}>TEST</span>
+            </div>
+          )}
           {loading && (
             <div className="ui active dimmer">
               <div className="ui text loader">Loading</div>
             </div>
           )}
+
           {!loading && (
-            <div
-              style={{ backgroundColor: "#fff" }}
-              className={styles.modalScreen}
-            >
+            <div className={styles.modalScreen}>
               <div className="ui">
+                <div
+                  style={{
+                    fontSize: "20px",
+                    textAlign: "center",
+                    color: "#5d2e8e",
+                    margin: "22px 0px 0px 0px",
+                  }}
+                >
+                  Choose your payment method
+                </div>
                 <div style={{ padding: "20px" }}>
-                  <div
-                    className="ui pointing secondary menu"
-                    style={{ overflowX: "auto", overflowY: "hidden" }}
-                  >
-                    {payment_preference.map((item, index) => {
-                      return (
-                        <a
-                          className={
-                            activeTab.tab == item ? "item active" : "item"
-                          }
-                          style={{ padding: "18px" }}
-                          data-tab={item}
-                          onClick={() => getActiveTab({ tab: item })}
-                        >
-                          {item == "KHALTI" && (
-                            <React.Fragment>
-                              <img
-                                src="assets/icons/mywallet.svg  "
-                                height="14px"
-                              />
-                              Khalti Wallet
-                            </React.Fragment>
-                          )}
-                          {item == "MOBILE_BANKING" && (
-                            <React.Fragment>
-                              <img
-                                src="assets/icons/mobile-banking.svg  "
-                                height="14px"
-                              />
-                              Mobile Banking
-                            </React.Fragment>
-                          )}
-                          {item == "EBANKING" && (
-                            <React.Fragment>
-                              <img
-                                src="assets/icons/ebanking.svg  "
-                                height="14px"
-                              />
-                              eBanking
-                            </React.Fragment>
-                          )}
-                          {item == "CONNECT_IPS" && (
-                            <React.Fragment>
-                              <img
-                                src="assets/icons/connectIPS.svg  "
-                                height="14px"
-                              />
-                              Connect IPS
-                            </React.Fragment>
-                          )}
-                          {item == "SCT" && (
-                            <React.Fragment>
-                              <img
-                                src="assets/icons/sct-card.svg  "
-                                height="14px"
-                              />
-                              SCT Card
-                            </React.Fragment>
-                          )}
-                        </a>
-                      );
-                    })}
+                  <div className={styles.parentBar}>
+                    <div
+                      className={
+                        "ui pointing secondary menu " + styles.onHoverBar
+                      }
+                    >
+                      {payment_preference.map((item, index) => {
+                        return (
+                          <a
+                            className={
+                              activeTab.tab == item ? "item active " : "item"
+                            }
+                            style={{ padding: "18px" }}
+                            data-tab={item}
+                            onClick={() => getActiveTab({ tab: item })}
+                          >
+                            {item == KHALTI && (
+                              <React.Fragment>
+                                <img
+                                  src="assets/icons/mywallet.svg  "
+                                  height="14px"
+                                />
+                                {KHALTI_VALUE}
+                              </React.Fragment>
+                            )}
+                            {item == MOBILE_BANKING && (
+                              <React.Fragment>
+                                <img
+                                  src="assets/icons/mobile-banking.svg  "
+                                  height="14px"
+                                />
+                                {MOBILE_BANKING_VALUE}
+                              </React.Fragment>
+                            )}
+                            {item == EBANKING && (
+                              <React.Fragment>
+                                <img
+                                  src="assets/icons/ebanking.svg  "
+                                  height="14px"
+                                />
+                                {EBANKING_VALUE}
+                              </React.Fragment>
+                            )}
+                            {item == CONNECT_IPS && (
+                              <React.Fragment>
+                                <img
+                                  src="assets/icons/connectIPS.svg  "
+                                  height="14px"
+                                />
+                                {CONNECT_IPS_VALUE}
+                              </React.Fragment>
+                            )}
+                            {item == SCT && (
+                              <React.Fragment>
+                                <img
+                                  src="assets/icons/sct-card.svg  "
+                                  height="14px"
+                                />
+                                {SCT_VALUE}
+                              </React.Fragment>
+                            )}
+                          </a>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
                 <div
@@ -132,9 +160,8 @@ const SDK = ({
                   {activeTab && activeTab.tab && (
                     <div
                       className={
-                        activeTab.tab == "KHALTI" ? "ui tab active" : "ui tab"
+                        activeTab.tab == KHALTI ? "ui tab active" : "ui tab"
                       }
-                      data-tab="KHALTI"
                     >
                       {
                         <KhaltiWallet
@@ -149,9 +176,8 @@ const SDK = ({
                   )}
                   <div
                     className={
-                      activeTab.tab == "EBANKING" ? "ui tab active" : "ui tab"
+                      activeTab.tab == EBANKING ? "ui tab active" : "ui tab"
                     }
-                    data-tab="EBANKING"
                   >
                     {
                       <EBanking
@@ -165,7 +191,7 @@ const SDK = ({
                   </div>
                   <div
                     className={
-                      activeTab.tab == "MOBILE_BANKING"
+                      activeTab.tab == MOBILE_BANKING
                         ? "ui tab active"
                         : "ui tab"
                     }
@@ -182,11 +208,8 @@ const SDK = ({
                   </div>
                   <div
                     className={
-                      activeTab.tab == "CONNECT_IPS"
-                        ? "ui tab active"
-                        : "ui tab"
+                      activeTab.tab == CONNECT_IPS ? "ui tab active" : "ui tab"
                     }
-                    data-tab="CONNECT_IPS"
                   >
                     {
                       <ConnectIPS
@@ -200,9 +223,8 @@ const SDK = ({
                   </div>
                   <div
                     className={
-                      activeTab.tab == "SCT" ? "ui tab active" : "ui tab"
+                      activeTab.tab == SCT ? "ui tab active" : "ui tab"
                     }
-                    data-tab="SCT"
                   >
                     {
                       <SCTCard
@@ -219,7 +241,7 @@ const SDK = ({
             </div>
           )}
         </div>
-      )}
+      }
     </React.Fragment>
   );
 };

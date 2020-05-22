@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import { ebanking_initiation_api, queryToString } from "../api/APIS";
-import axios from "axios";
 
 const SCTCard = ({
   public_key,

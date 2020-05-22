@@ -1,6 +1,18 @@
-@media only screen and (max-width: 767px) {
+@media only screen and (min-width: 768px) {
   .modalScreen {
-    position: absolute;
+    position: fixed;
+    border-radius: 8px;
+    border: 1px solid #e3e3e3;
+    top: 20%;
+    left: 25%;
+    width: 50%;
+    height: 55%;
+    background: #fff;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .modalScreen {
+    position: fixed;
     top: 0%;
     left: 0%;
     width: 100%;
@@ -8,17 +20,44 @@
     background: #fff;
   }
 }
-@media only screen and (min-width: 767px) {
-  .modalScreen {
+@media only screen and (min-width: 769px) {
+  .testlabel {
     position: absolute;
-    border-radius: 8px;
-    border: 1px solid #e3e3e3;
-
-    top: 20%;
-    left: 25%;
-    width: 50%;
-    height: 50%;
-    background: #fff;
+    right: 0;
+    padding: 8px;
+    color: #fff;
+    border: 1px solid white;
+    margin: 8px 8px 0px 0px;
+  }
+}
+@media only screen and (max-width: 769px) {
+  .testlabel {
+    position: absolute;
+    top: 22px;
+    left: 0;
+    padding: 8px;
+    z-index: 10;
+    color: #5d2e8e;
+    border: 1px solid #5d2e8e;
+    margin: 8px 8px 0px 0px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .onHoverBar {
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    padding-bottom: 17px; /* Increase/decrease this value for cross-browser compatibility */
+  }
+  .onHoverBar::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar space */
+    height: 0;
+    background: transparent; /* Optional: just make scrollbar invisible */
+  }
+  /* Optional: show position indicator in red */
+  .onHoverBar {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
   }
 }
 
