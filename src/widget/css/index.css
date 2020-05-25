@@ -7,6 +7,8 @@
     left: 25%;
     width: 50%;
     height: 55%;
+    padding: 0;
+    margin: 0;
     background: #fff;
   }
 }
@@ -42,23 +44,22 @@
     margin: 8px 8px 0px 0px;
   }
 }
-@media only screen and (max-width: 768px) {
-  .onHoverBar {
-    width: 100%;
-    height: 100%;
-    overflow-x: auto;
-    padding-bottom: 17px; /* Increase/decrease this value for cross-browser compatibility */
-  }
-  .onHoverBar::-webkit-scrollbar {
-    width: 0; /* Remove scrollbar space */
-    height: 0;
-    background: transparent; /* Optional: just make scrollbar invisible */
-  }
-  /* Optional: show position indicator in red */
-  .onHoverBar {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE 10+ */
-  }
+
+.onHoverBar {
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  padding-bottom: 17px; /* Increase/decrease this value for cross-browser compatibility */
+}
+.onHoverBar::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  height: 0;
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+.onHoverBar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -71,4 +72,13 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.iframeWidget {
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
 }

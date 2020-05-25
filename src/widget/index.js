@@ -5,7 +5,15 @@ import SDK from "./sdk";
 
 import { host_ip_address } from "./sdk/api/APIS";
 
-const Widget = (props) => {
+import {
+  EBANKING,
+  MOBILE_BANKING,
+  KHALTI,
+  CONNECT_IPS,
+  SCT,
+} from "./sdk/constants/literal";
+
+const Widget = () => {
   const [passed_props, setProps] = useState(null);
   const hideModal = () => {
     window.parent.postMessage({ realm: "hide" }, "*");
@@ -26,11 +34,11 @@ const Widget = (props) => {
         amount: data.amount,
         product_url: data.productUrl,
         payment_preference: data.paymentPreference || [
-          "KHALTI",
-          "EBANKING",
-          "MOBILE_BANKING",
-          "CONNECT_IPS",
-          "SCT",
+          EBANKING,
+          MOBILE_BANKING,
+          KHALTI,
+          CONNECT_IPS,
+          SCT,
         ],
       });
     }
