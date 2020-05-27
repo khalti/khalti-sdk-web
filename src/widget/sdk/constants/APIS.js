@@ -3,7 +3,7 @@ if (!process.env.DEBUG) {
   console.log = function(){};
 }
 
-let SERVER = 'https://www.khalti.com/'
+let SERVER = 'https://a.khalti.com/'
 
 if (process.env.NODE_ENV === 'development' ) {
   SERVER = 'http://localhost:8000/'

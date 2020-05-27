@@ -183,7 +183,7 @@ const MobileBanking = ({
                         height: "38px",
                       }}
                     ></div>
-                    <div className={styles.ServiceName}>{item.name}</div>
+                    <div className={styles.ServiceName}>{item.short_name}</div>
                   </div>
                 </div>
               ))}

@@ -34,9 +34,9 @@ const Widget = () => {
         amount: data.amount,
         product_url: data.productUrl,
         payment_preference: data.paymentPreference || [
+          KHALTI,
           EBANKING,
           MOBILE_BANKING,
-          KHALTI,
           CONNECT_IPS,
           SCT,
         ],
