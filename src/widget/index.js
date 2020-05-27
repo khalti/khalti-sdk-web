@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "../../semantic-ui/semantic.less";
 import SDK from "./sdk";
 
-import { host_ip_address } from "./sdk/api/APIS";
+import { host_ip_address } from "./sdk/constants/APIS";
 
 import {
   EBANKING,

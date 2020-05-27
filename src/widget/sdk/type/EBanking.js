@@ -7,7 +7,7 @@ import {
   queryToString,
   ebanking_list,
   host_ip_address,
-} from "../api/APIS";
+} from "../constants/APIS";
 
 const EBanking = ({
   public_key,
@@ -140,7 +140,7 @@ const EBanking = ({
       >
         <div className="ui grid">
           <div className="four wide computer sixteen wide mobile column">
-            <b>Select your bank</b>
+            <b>Select your Bank</b>
           </div>
           <form className="ui form twelve wide computer sixteen wide mobile column">
             <div className="field">
@@ -150,9 +150,10 @@ const EBanking = ({
                 style={{
                   borderBottom: "1px solid #5d2e8e",
                   paddingBottom: "5px",
+                  fontSize: '15px'
                 }}
               >
-                <input type="text" placeholder="Search..." />
+                <input type="text" placeholder="Search Bank" />
                 <i class="search icon"></i>
               </div>
             </div>

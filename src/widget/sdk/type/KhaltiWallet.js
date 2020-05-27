@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { initiation_api, confirmation_api } from "../api/APIS";
+import { initiation_api, confirmation_api } from "../constants/APIS";
 
 import * as styles from "./BankStyles.css";
 const KhaltiWallet = ({
@@ -117,15 +117,16 @@ const KhaltiWallet = ({
   };
   return (
     <div className={styles.tabHeight}>
-      <div className="ui grid" style={{ paddingLeft: "30px" }}>
+      <div className="ui grid">
         <div className="eight wide computer sixteen wide mobile column">
+          <div className="ui padded basic segment">
           <div
             style={{
               backgroundImage:
                 "url(https://d7vw40z4bofef.cloudfront.net/static/sdk_logo/khalti.png)",
               backgroundRepeat: "no-repeat",
               backgroundSize: "contain",
-              height: "160px",
+              height: "100px",
             }}
           ></div>
           <form className="ui form">
@@ -204,16 +205,17 @@ const KhaltiWallet = ({
               </button>
             )}
           </form>
-          <div className="ui horizontal divider">Forgot your Khalti PIN?</div>
+          <div className="ui horizontal divider" style={{textTransform: 'unset', color: '#787878', fontWeight: 'normal'}}>Forgot your Khalti PIN?</div>
           <div style={{ textAlign: "center" }}>
             <a
               target="_blank"
               href="https://khalti.com/#/account/transaction_pin"
-              style={{ textDecoration: "none", color: "#5d2e8e" }}
+              style={{ textDecoration: "none", color: "#5d2e8e", textTransform: 'uppercase', letterSpacing: '0.06em' }}
             >
               Set KHALTI pin
             </a>
           </div>
+        </div>
         </div>
       </div>
     </div>

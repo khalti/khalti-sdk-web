@@ -7,7 +7,9 @@ let updates = {
   plugins: [
     new webpack.EnvironmentPlugin({
     NODE_ENV: 'development',
-    DEBUG: false
+    DEBUG: true
     })
   ]
 };
+
+module.exports = Object.assign(base, updates);

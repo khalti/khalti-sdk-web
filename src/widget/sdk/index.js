@@ -151,7 +151,7 @@ const SDK = ({
                     position: "absolute ",
                     top: 0,
                     right: 0,
-                    padding: "8px",
+                    padding: "10px",
                     cursor: "pointer",
                   }}
                   onClick={hideModal}

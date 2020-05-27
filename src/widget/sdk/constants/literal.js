@@ -4,7 +4,7 @@ export const CONNECT_IPS = "CONNECT_IPS";
 export const SCT = "SCT";
 export const KHALTI = "KHALTI";
 
-export const EBANKING_VALUE = "eBanking";
+export const EBANKING_VALUE = "e-Banking";
 export const MOBILE_BANKING_VALUE = "Mobile banking";
 export const CONNECT_IPS_VALUE = "Connect IPS";
 export const SCT_VALUE = "SCT Card";

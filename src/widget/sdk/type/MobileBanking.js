@@ -7,7 +7,7 @@ import {
   mobile_banking_list,
   queryToString,
   ebanking_initiation_api,
-} from "../api/APIS";
+} from "../constants/APIS";
 const MobileBanking = ({
   public_key,
   product_identity,
@@ -140,7 +140,7 @@ const MobileBanking = ({
       >
         <div className="ui grid">
           <div className="four wide computer sixteen wide mobile column">
-            <b>Select your bank</b>
+            <b>Select your Bank</b>
           </div>
           <form className="ui form twelve wide computer sixteen wide mobile column">
             <div className="field">
@@ -150,6 +150,7 @@ const MobileBanking = ({
                 style={{
                   borderBottom: "1px solid #5d2e8e",
                   paddingBottom: "5px",
+                  fontSize: '15px'
                 }}
               >
                 <input type="text" placeholder="Search..." />
