@@ -99,7 +99,7 @@ const SDK = ({
                               <React.Fragment>
                                 <img
                                   src="assets/icons/mywallet.svg  "
-                                  height="14px"
+                                  style={{ height: "16px" }}
                                 />
                                 {KHALTI_VALUE}
                               </React.Fragment>
@@ -108,7 +108,7 @@ const SDK = ({
                               <React.Fragment>
                                 <img
                                   src="assets/icons/mobile-banking.svg  "
-                                  height="14px"
+                                  style={{ height: "16px" }}
                                 />
                                 {MOBILE_BANKING_VALUE}
                               </React.Fragment>
@@ -117,7 +117,7 @@ const SDK = ({
                               <React.Fragment>
                                 <img
                                   src="assets/icons/ebanking.svg  "
-                                  height="14px"
+                                  style={{ height: "16px" }}
                                 />
                                 {EBANKING_VALUE}
                               </React.Fragment>
@@ -126,7 +126,7 @@ const SDK = ({
                               <React.Fragment>
                                 <img
                                   src="assets/icons/connectIPS.svg  "
-                                  height="14px"
+                                  style={{ height: "16px" }}
                                 />
                                 {CONNECT_IPS_VALUE}
                               </React.Fragment>
@@ -135,7 +135,7 @@ const SDK = ({
                               <React.Fragment>
                                 <img
                                   src="assets/icons/sct-card.svg  "
-                                  height="14px"
+                                  style={{ height: "16px" }}
                                 />
                                 {SCT_VALUE}
                               </React.Fragment>
