@@ -150,7 +150,7 @@ const MobileBanking = ({
                 style={{
                   borderBottom: "1px solid #5d2e8e",
                   paddingBottom: "5px",
-                  fontSize: '15px'
+                  fontSize: "15px",
                 }}
               >
                 <input type="text" placeholder="Search..." />
@@ -180,7 +180,7 @@ const MobileBanking = ({
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "center",
                         backgroundSize: "contain",
-                        height: "84px",
+                        height: "38px",
                       }}
                     ></div>
                     <div className={styles.ServiceName}>{item.name}</div>
