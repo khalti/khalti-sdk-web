@@ -9,8 +9,8 @@
     "build:web": "rollup -c rollup-config/web.js",
     "build:widget": "webpack --config webpack-config/widget.js --mode production",
     "prebuild:widget": "cp semantic-ui/theme.config node_modules/semantic-ui-less/",
-    "start": "webpack-dev-server --hot --disable-host-check --config webpack-config/widget.js --mode development --open",
-    "watch:widget": "webpack --config webpack-config/widget.js --mode development --watch",
+    "start": "webpack-dev-server --hot --disable-host-check --config webpack-config/dev-widget.js --open",
+    "watch:widget": "webpack --config webpack-config/dev-widget.js --watch",
     "build": "npm run build:node && npm run build:web && npm run prebuild:widget && npm run build:widget",
     "prepublish": "npm run build"
   },

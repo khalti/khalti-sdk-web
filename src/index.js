@@ -207,3 +207,5 @@ export default class KhaltiCheckout {
   //   form.submit();
   // }
 }
+
+export {KhaltiCheckout}

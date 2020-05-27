@@ -1,7 +1,10 @@
+"use strict";
+
 const path = require("path");
 const projectRoot = path.dirname(__dirname);
 
 module.exports = {
+  mode: 'production',
   entry: path.join(projectRoot, "src/widget/index.js"),
   output: {
     filename: "widget.js",
