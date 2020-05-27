@@ -1,7 +1,7 @@
 {
-  "name": "khalti-checkout-web",
-  "version": "2.0.0-beta.1",
-  "description": "Khalti checkout loader for web.",
+  "name": "khalti-checkout-web(BETA)",
+  "version": "2.0.0-beta.2",
+  "description": "Khalti checkout loader for web. (BETA)",
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha --compilers js:babel-register spec/*",
