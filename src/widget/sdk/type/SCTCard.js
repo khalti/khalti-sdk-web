@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { ebanking_initiation_api, queryToString } from "../constants/APIS";
+import * as styles from "./BankStyles.css";
 
 const SCTCard = ({
   public_key,
@@ -42,43 +43,45 @@ const SCTCard = ({
     }
   };
   return (
-    <div style={{ padding: "20px" }}>
-      <div className="ui grid basic segment  pd-top-30">
+    <div className={styles.tabHeight}>
+      <div className="ui grid">
         <div className="eight wide computer sixteen wide mobile column">
-          <div
-            style={{
-              backgroundImage:
-                "url(https://d7vw40z4bofef.cloudfront.net/static/sdk_logo/sct.png)",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "contain",
-              height: "160px",
-            }}
-          ></div>
-          <form className="ui form">
-            <div className="field">
-              <input
-                type="number"
-                name="mobile"
-                placeholder=" Mobile Number"
-                onChange={changeMobile}
-              />
-              {errMobile && (
-                <div class="ui negative message">
-                  <p>Please enter a valid mobile number.</p>
-                </div>
-              )}
-            </div>
+          <div className="ui padded basic segment">
+            <div
+              style={{
+                backgroundImage:
+                  "url(https://d7vw40z4bofef.cloudfront.net/static/sdk_logo/sct.png)",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "contain",
+                height: "160px",
+              }}
+            ></div>
+            <form className="ui form">
+              <div className="field">
+                <input
+                  type="number"
+                  name="mobile"
+                  placeholder=" Mobile Number"
+                  onChange={changeMobile}
+                />
+                {errMobile && (
+                  <div class="ui negative message">
+                    <p>Please enter a valid mobile number.</p>
+                  </div>
+                )}
+              </div>
 
-            {amount && (
-              <button
-                className="ui button primary"
-                type="submit"
-                onClick={initiatePay}
-              >
-                Pay Rs. {amount / 100} /-
-              </button>
-            )}
-          </form>
+              {amount && (
+                <button
+                  className="ui button primary"
+                  type="submit"
+                  onClick={initiatePay}
+                >
+                  Pay Rs. {amount / 100} /-
+                </button>
+              )}
+            </form>
+          </div>
         </div>
       </div>
     </div>

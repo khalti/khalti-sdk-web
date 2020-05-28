@@ -80,8 +80,7 @@
   .fullheight {
     padding-top: 18px;
     margin-top: 8px;
-    height: 1000px;
-    overflow-y: auto;
+    overflow-y: hidden;
     overflow-x: hidden;
   }
 }
@@ -96,10 +95,8 @@
 }
 @media only screen and (max-width: 768px) {
   .tabHeight {
-    margin-top: 8px;
-    height: 1000px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    position: relative;
+    padding-bottom: 125px;
   }
 }
 .bankSelect {
@@ -110,4 +107,27 @@
   background-color: #fff;
   width: 100%;
   box-shadow: inset 0 20px 20px -20px rgba(236, 236, 236, 0.8);
+}
+
+@media only screen and (min-width: 768px) {
+  .bankSelect {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    background-color: #fff;
+    width: 100%;
+    box-shadow: inset 0 20px 20px -20px rgba(236, 236, 236, 0.8);
+  }
+}
+@media only screen and (max-width: 768px) {
+  .bankSelect {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    background-color: #fff;
+    width: 100%;
+    box-shadow: inset 0 20px 20px -20px rgba(236, 236, 236, 0.8);
+  }
 }

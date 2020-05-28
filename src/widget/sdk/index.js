@@ -158,86 +158,90 @@ const SDK = ({
                 >
                   <img src="assets/icons/close.svg  " height="14px" />
                 </div>
-                <div className="">
+                <div className={styles.bottomPadding}>
                   {activeTab && activeTab.tab && (
-                    <div
-                      className={
-                        activeTab.tab == KHALTI ? "ui tab active" : "ui tab"
-                      }
-                    >
-                      {
-                        <KhaltiWallet
-                          public_key={public_key}
-                          product_identity={product_identity}
-                          product_name={product_name}
-                          amount={amount}
-                          product_url={product_url}
-                        />
-                      }
-                    </div>
+                    <React.Fragment>
+                      <div
+                        className={
+                          activeTab.tab == KHALTI ? "ui tab active" : "ui tab"
+                        }
+                      >
+                        {
+                          <KhaltiWallet
+                            public_key={public_key}
+                            product_identity={product_identity}
+                            product_name={product_name}
+                            amount={amount}
+                            product_url={product_url}
+                          />
+                        }
+                      </div>
+                      <div
+                        className={
+                          activeTab.tab == EBANKING ? "ui tab active" : "ui tab"
+                        }
+                      >
+                        {
+                          <EBanking
+                            public_key={public_key}
+                            product_identity={product_identity}
+                            product_name={product_name}
+                            amount={amount}
+                            product_url={product_url}
+                          />
+                        }
+                      </div>
+                      <div
+                        className={
+                          activeTab.tab == MOBILE_BANKING
+                            ? "ui tab active"
+                            : "ui tab"
+                        }
+                      >
+                        {
+                          <MobileBanking
+                            public_key={public_key}
+                            product_identity={product_identity}
+                            product_name={product_name}
+                            amount={amount}
+                            product_url={product_url}
+                          />
+                        }
+                      </div>
+                      <div
+                        className={
+                          activeTab.tab == CONNECT_IPS
+                            ? "ui tab active"
+                            : "ui tab"
+                        }
+                      >
+                        {
+                          <ConnectIPS
+                            public_key={public_key}
+                            product_identity={product_identity}
+                            product_name={product_name}
+                            amount={amount}
+                            product_url={product_url}
+                          />
+                        }
+                      </div>
+                      <div
+                        className={
+                          activeTab.tab == SCT ? "ui tab active" : "ui tab"
+                        }
+                      >
+                        {
+                          <SCTCard
+                            public_key={public_key}
+                            product_identity={product_identity}
+                            product_name={product_name}
+                            amount={amount}
+                            product_url={product_url}
+                          />
+                        }
+                      </div>
+                    </React.Fragment>
                   )}
-                  <div
-                    className={
-                      activeTab.tab == EBANKING ? "ui tab active" : "ui tab"
-                    }
-                  >
-                    {
-                      <EBanking
-                        public_key={public_key}
-                        product_identity={product_identity}
-                        product_name={product_name}
-                        amount={amount}
-                        product_url={product_url}
-                      />
-                    }
-                  </div>
-                  <div
-                    className={
-                      activeTab.tab == MOBILE_BANKING
-                        ? "ui tab active"
-                        : "ui tab"
-                    }
-                  >
-                    {
-                      <MobileBanking
-                        public_key={public_key}
-                        product_identity={product_identity}
-                        product_name={product_name}
-                        amount={amount}
-                        product_url={product_url}
-                      />
-                    }
-                  </div>
-                  <div
-                    className={
-                      activeTab.tab == CONNECT_IPS ? "ui tab active" : "ui tab"
-                    }
-                  >
-                    {
-                      <ConnectIPS
-                        public_key={public_key}
-                        product_identity={product_identity}
-                        product_name={product_name}
-                        amount={amount}
-                        product_url={product_url}
-                      />
-                    }
-                  </div>
-                  <div
-                    className={
-                      activeTab.tab == SCT ? "ui tab active" : "ui tab"
-                    }
-                  >
-                    {
-                      <SCTCard
-                        public_key={public_key}
-                        product_identity={product_identity}
-                        product_name={product_name}
-                        amount={amount}
-                        product_url={product_url}
-                      />
-                    }
-                  </div>
                 </div>
               </div>
             </div>
@@ -248,3 +252,6 @@ const SDK = ({
   );
 };
 export default SDK;
+/* 
+                  
+*/

@@ -6,7 +6,6 @@ import {
   ebanking_initiation_api,
   queryToString,
   ebanking_list,
-  host_ip_address,
 } from "../constants/APIS";
 
 const EBanking = ({
@@ -16,7 +15,7 @@ const EBanking = ({
   amount,
   product_url,
 }) => {
-  const [bank_list, setBankList] = useState(null);
+  const [bank_list, setBankList] = useState();
   const [bank_selected, setBankSelected] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -31,7 +30,6 @@ const EBanking = ({
       const { data } = await axios.get(ebanking_list, {
         params: { page_size: 30, search: event.target.value },
       });
-
       setBankList([...data.records]);
     };
     search();

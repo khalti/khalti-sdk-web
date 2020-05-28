@@ -14,12 +14,16 @@
 }
 @media only screen and (max-width: 768px) {
   .modalScreen {
-    position: fixed;
+    position: absolute;
     top: 0%;
     left: 0%;
     width: 100%;
-    height: 100%;
     background: #fff;
+  }
+}
+@media only screen and (max-width: 769px) {
+  .bottomPadding {
+    padding-bottom: 40px;
   }
 }
 @media only screen and (min-width: 769px) {
@@ -28,20 +32,19 @@
     right: 0;
     padding: 8px;
     color: #fff;
-    border: 1px solid white;
     margin: 8px 8px 0px 0px;
   }
 }
 @media only screen and (max-width: 769px) {
   .testlabel {
-    position: absolute;
+    /* position: absolute;
     top: 22px;
     left: 0;
     padding: 8px;
     z-index: 10;
     color: #5d2e8e;
+    margin: 8px 8px 0px 0px; */
     border: 1px solid #5d2e8e;
-    margin: 8px 8px 0px 0px;
   }
 }
 
@@ -76,10 +79,8 @@
   }
   ::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 0 0 6px #5c2d91;
+  }
 }
-}
-
-
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -92,16 +93,26 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
-
-.iframeWidget {
-  position: fixed;
-  top: 0%;
-  left: 0%;
-  background: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  height: 100%;
+@media only screen and (min-width: 768px) {
+  .iframeWidget {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+  }
 }
-
+@media only screen and (max-width: 768px) {
+  .iframeWidget {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    background: #ffffff;
+    width: 100%;
+    height: 100%;
+  }
+}
 
 :global(.ui.secondary.pointing.menu) :global(.active.item) {
   color: #5c2d91 !important;
