@@ -168,7 +168,6 @@ export default class KhaltiCheckout {
     widget.style.left = "0";
     widget.width = "100%";
     widget.height = window.innerHeight + "px";
-    // widget.setAttribute("src", __WIDGET_URL__);
     widget.setAttribute("src", WIDGET_URL);
     widget.style.zIndex = 999999999;
     widget.setAttribute("frameborder", 0);
@@ -178,34 +177,4 @@ export default class KhaltiCheckout {
 
     return widget;
   }
-
-  // postAtURL(payload) {
-  //   let khaltiEbankingFormId = "khalti-ebanking-form-" + Date.now();
-  //   // remove earlier form if exists
-  //   if (this.ebankingForm) window.document.body.removeChild(this.ebankingForm);
-
-  //   // create new form
-  //   var form = window.document.createElement("form");
-  //   form.setAttribute("id", khaltiEbankingFormId);
-  //   form.setAttribute("action", payload.url);
-  //   form.setAttribute("target", "_blank");
-  //   form.setAttribute("method", "POST");
-  //   form.style.display = "none";
-
-  //   // attach inputs to form
-  //   forEach(payload.paymentInfo, (value, key) => {
-  //     let input = window.document.createElement("input");
-  //     input.setAttribute("name", key);
-  //     input.value = value;
-  //     form.appendChild(input);
-  //   });
-
-  //   // attach form to body
-  //   window.document.body.appendChild(form);
-  //   this.ebankingForm = form;
-
-  //   form.submit();
-  // }
 }
-
-export {KhaltiCheckout}
