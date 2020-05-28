@@ -1,5 +1,5 @@
 ## Introduction
-Khalti checkout beta loader for browser. <strong>UNSTABLE</strong>
+Khalti checkout beta loader for browser. <strong>UNSTABLE BETA</strong>
 
 ## Installation
 ### Yarn
