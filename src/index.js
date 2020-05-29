@@ -1,6 +1,10 @@
 import { required, validate, isFunction, isObject, isArray } from "validatex";
 
-const WIDGET_URL = "./src/index.html";
+let WIDGET_URL = "./src/index.html";
+
+if (process.env.NODE_ENV === 'development') {
+  WIDGET_URL = "https://unpkg.com/browse/khalti-checkout-web@latest/dist/widget.js"
+}
 
 const filter = function (obj, predicate) {
   return Object.keys(obj)
@@ -45,7 +49,7 @@ const configSchema = {
   paymentPreference: [required(false), isArray()],
 };
 
-export default class KhaltiCheckout {
+class KhaltiCheckout {
   constructor(config) {
     this._widgetId = "khalti-widget-" + Date.now();
     this._config = config;
@@ -178,3 +182,5 @@ export default class KhaltiCheckout {
     return widget;
   }
 }
+
+module.exports.default = module.exports = KhaltiCheckout
