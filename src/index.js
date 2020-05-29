@@ -49,7 +49,7 @@ const configSchema = {
   paymentPreference: [required(false), isArray()],
 };
 
-class KhaltiCheckout {
+export default class KhaltiCheckout {
   constructor(config) {
     this._widgetId = "khalti-widget-" + Date.now();
     this._config = config;
@@ -182,5 +182,3 @@ class KhaltiCheckout {
     return widget;
   }
 }
-
-module.exports.default = module.exports = KhaltiCheckout

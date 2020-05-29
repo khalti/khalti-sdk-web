@@ -1,6 +1,6 @@
 {
   "name": "khalti-checkout-web",
-  "version": "2.0.0-beta.2.5",
+  "version": "2.0.0-beta.2.6",
   "description": "Khalti checkout loader for web. (BETA)",
   "main": "lib/index.js",
   "module": "dist/khalti-checkout.js",
