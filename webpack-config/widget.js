@@ -1,14 +1,17 @@
 "use strict";
 
 const path = require("path");
+const webpack = require("webpack");
 const projectRoot = path.dirname(__dirname);
+const CDN_URL = process.env.CDN_URL
+const CDN_HOST = CDN_URL || "https://cdn.jsdelivr.net/npm/khalti-checkout-web@latest/public"
 
 module.exports = {
   mode: 'production',
   entry: path.join(projectRoot, "src/widget/index.js"),
   output: {
     filename: "widget.js",
-    path: path.join(projectRoot, "public"),
+    path: path.join(projectRoot, "dist"),
   },
   module: {
     rules: [
@@ -63,6 +66,6 @@ module.exports = {
 
   plugins: [
     new webpack.EnvironmentPlugin({
-      CDN_HOST: 'https://cdn.jsdelivr.net/npm/khalti-checkout-web@latest/public'
+      CDN_HOST: CDN_HOST
     })
   ]

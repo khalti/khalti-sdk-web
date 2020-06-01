@@ -9,7 +9,7 @@ const CDN_HOST = CDN_URL || "https://cdn.jsdelivr.net/npm/khalti-checkout-web@la
 export default {
   input: 'src/index.js',
   output: {
-    file: 'public/khalti-checkout.es.js',
+    file: 'dist/khalti-checkout.es.js',
     format: 'es'
   },
   plugins: [
