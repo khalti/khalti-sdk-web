@@ -7,6 +7,8 @@ import uglify from 'rollup-plugin-uglify';
 const CDN_URL = process.env.CDN_URL
 const CDN_HOST = CDN_URL || "https://cdn.jsdelivr.net/npm/khalti-checkout-web@latest/public"
 
+console.log(CDN_HOST);
+
 export default {
   input: 'src/index.js',
   output: {

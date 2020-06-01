@@ -6,6 +6,8 @@ const projectRoot = path.dirname(__dirname);
 const CDN_URL = process.env.CDN_URL
 const CDN_HOST = CDN_URL || "https://cdn.jsdelivr.net/npm/khalti-checkout-web@latest/public"
 
+console.log(CDN_HOST);
+
 module.exports = {
   mode: 'production',
   entry: path.join(projectRoot, "src/widget/index.js"),
@@ -61,11 +63,10 @@ module.exports = {
         },
       },
     ],
-  }
-};
-
+  },
   plugins: [
     new webpack.EnvironmentPlugin({
       CDN_HOST: CDN_HOST
     })
   ]
+};

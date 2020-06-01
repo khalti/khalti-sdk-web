@@ -57,10 +57,8 @@ export default class KhaltiCheckout {
     window.addEventListener(
       "message",
       (e) => {
-        console.log("message received by merchant", e);
         if (!e.data.realm) return;
         if (e.data.realm === "widgetInit") {
-          console.log(13);
           this.widgetInit(e.data.payload);
         } else if (e.data.realm === "walletPaymentVerification") {
           let handler = `handle_msg_${e.data.realm}`;
@@ -75,7 +73,6 @@ export default class KhaltiCheckout {
           !e.data.payload ||
           e.data.payload.widget_id !== this._widgetId
         ) {
-          console.log(34);
           return;
         } else {
           let handler = `handle_msg_${e.data.realm}`;
@@ -88,7 +85,6 @@ export default class KhaltiCheckout {
 
   msgWidget(realm, payload) {
     payload = clone(payload);
-    console.log(payload, this._widget.contentWindow, "msgWidget");
     payload.widgetId = this._widgetId;
     this._widget.contentWindow.postMessage({ realm, payload }, "*");
   }
@@ -116,13 +112,11 @@ export default class KhaltiCheckout {
   }
 
   handle_msg_walletPaymentVerification(paymentInfo) {
-    console.log("success triggered");
     this._config.eventHandler.onSuccess(paymentInfo);
     this.hide();
   }
 
   handle_msg_widgetError(error) {
-    console.log("error triggered", error);
     let errorHandler = this._config.eventHandler.onError;
     errorHandler && errorHandler(error);
   }
