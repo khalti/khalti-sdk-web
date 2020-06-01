@@ -14,6 +14,7 @@ import {
 } from "./sdk/constants/literal";
 
 const Widget = () => {
+  console.log('Widget RENDER');
   const [passed_props, setProps] = useState(null);
   const hideModal = () => {
     window.parent.postMessage({ realm: "hide" }, "*");

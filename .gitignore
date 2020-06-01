@@ -6,3 +6,4 @@ lib/
 dist/
 yarn-error.log
 package-log.json
+public/

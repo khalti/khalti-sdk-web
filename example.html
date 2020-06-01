@@ -1,14 +1,17 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- <script src="./dist/khalti-checkout.js"></script> -->
-    <script src="https://unpkg.com/khalti-checkout-web@2.0.0-beta.2.5/dist/khalti-checkout.js"></script>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   </head>
 
   <body>
     <button id="payment-button">Pay with Khalti</button>
+    <!-- <script src="/lib/khalti-checkout.cjs.js"></script> -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/khalti-checkout-web@latest/public/khalti-checkout.iffe.js"></script>
+    <!-- <script type='module'> -->
     <script>
-      var config = {
+      // import KhaltiCheckout from "/lib/khalti-checkout.es.js"
+      let config = {
         // replace the publicKey with yours
         publicKey: "test_public_key_02f71893c56b48849716b01465a14cfe",
         productIdentity: "1234567890",
@@ -26,13 +29,12 @@
             console.log("close called");
           },
         },
-        // paymentPreference: [
-        //   "MOBILE_BANKING",
-        //   "KHALTI",
-        //   "EBANKING",
-        //   "CONNECT_IPS",
-        //   "SCT",
-        // ],
+        paymentPreference: [
+          "MOBILE_BANKING",
+          "EBANKING",
+          "CONNECT_IPS",
+          "SCT",
+        ],
       };
 
       var checkout = new KhaltiCheckout(config);

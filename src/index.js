@@ -1,10 +1,6 @@
 import { required, validate, isFunction, isObject, isArray } from "validatex";
 
-let WIDGET_URL = "./src/index.html";
-
-if (process.env.NODE_ENV === 'development') {
-  WIDGET_URL = "https://unpkg.com/browse/khalti-checkout-web@latest/dist/widget.js"
-}
+const WIDGET_URL = __CDN_HOST__ + '/index.html'
 
 const filter = function (obj, predicate) {
   return Object.keys(obj)

@@ -6,6 +6,7 @@ import ConnectIPS from "./type/ConnectIPS";
 import SCTCard from "./type/SCTCard";
 
 import * as styles from "../css/index.css";
+import {CLOSE_ICON} from '../../assets/constants'
 
 import {
   EBANKING,
@@ -156,7 +157,7 @@ const SDK = ({
                   }}
                   onClick={hideModal}
                 >
-                  <img src="assets/icons/close.svg  " height="14px" />
+                  <img src={CLOSE_ICON} height="14px" />
                 </div>
                 <div className={styles.bottomPadding}>
                   {activeTab && activeTab.tab && (
@@ -252,6 +253,6 @@ const SDK = ({
   );
 };
 export default SDK;
-/* 
-                  
+/*
+
 */

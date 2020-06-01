@@ -1,23 +1,21 @@
 {
   "name": "khalti-checkout-web",
-  "version": "2.0.0-beta.2.6",
+  "version": "2.0.0-beta.3.3",
   "description": "Khalti checkout loader for web. (BETA)",
-  "main": "lib/index.js",
-  "module": "dist/khalti-checkout.js",
+  "main": "public/khalti-checkout.cjs.js",
   "scripts": {
+    "watch:widget": "webpack --config webpack-config/dev-widget.js --watch",
     "test": "mocha --compilers js:babel-register spec/*",
     "build:node": "rollup -c rollup-config/node.js",
     "build:web": "rollup -c rollup-config/web.js",
+    "build:es": "rollup -c rollup-config/es.js",
+    "prebuild": "cp semantic-ui/theme.config node_modules/semantic-ui-less/ && cp src/index.html public/ && cp -r src/assets/icons public/",
     "build:widget": "webpack --config webpack-config/widget.js --mode production",
-    "prebuild:widget": "cp semantic-ui/theme.config node_modules/semantic-ui-less/",
     "start": "webpack-dev-server --hot --disable-host-check --config webpack-config/dev-widget.js --open",
-    "watch:widget": "webpack --config webpack-config/dev-widget.js --watch",
-    "build": "npm run build:node && npm run build:web && npm run prebuild:widget && npm run build:widget",
-    "prepublish": "npm run build"
+    "build": "npm run build:node && npm run build:web && npm run prebuild && npm run build:widget"
   },
   "files": [
-    "lib",
-    "dist"
+    "public"
   ],
   "repository": {
     "type": "git",
@@ -63,7 +61,6 @@
     "rollup-plugin-commonjs": "^8.4.1",
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-replace": "^1.2.1",
-    "rollup-plugin-terser": "^6.1.0",
     "rollup-plugin-uglify": "^2.0.1",
     "semantic-ui-less": "^2.4.1",
     "style-loader": "^1.2.1",

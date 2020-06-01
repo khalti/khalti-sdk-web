@@ -7,6 +7,7 @@ let updates = {
   plugins: [
     new webpack.EnvironmentPlugin({
     NODE_ENV: 'development',
+    CDN_HOST: 'localhost:8080',
     DEBUG: true
     })
   ]

@@ -8,9 +8,7 @@ module.exports = {
   entry: path.join(projectRoot, "src/widget/index.js"),
   output: {
     filename: "widget.js",
-    path: path.join(projectRoot, "dist"),
-    libraryTarget: "umd",
-    library: "widget",
+    path: path.join(projectRoot, "public"),
   },
   module: {
     rules: [
@@ -55,10 +53,16 @@ module.exports = {
         test: /\.(png|svg|jpg|gif|eot|ttf|woff|woff2)$/,
         loader: "file-loader",
         options: {
-          publicPath: "/dist",
+          name: '[name].[ext]',
           // publicPath: path.join(projectRoot, "dist"),
         },
       },
     ],
-  },
+  }
 };
+
+  plugins: [
+    new webpack.EnvironmentPlugin({
+      CDN_HOST: 'https://cdn.jsdelivr.net/npm/khalti-checkout-web@latest/public'
+    })
+  ]
