@@ -60,7 +60,7 @@ module.exports = {
         loader: "file-loader",
         options: {
           name: '[name].[ext]',
-          // publicPath: path.join(projectRoot, "dist"),
+          publicPath: CDN_HOST,
         },
       },
     ],

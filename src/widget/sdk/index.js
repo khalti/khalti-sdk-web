@@ -64,7 +64,7 @@ const SDK = ({
                       left: "-16px",
                     }}
                   >
-                    TEST
+                    TEST MODE
                   </span>
                 )}
                 <div
