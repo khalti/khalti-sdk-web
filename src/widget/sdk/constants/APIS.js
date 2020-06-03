@@ -2,7 +2,8 @@ if (!process.env.DEBUG) {
   console.log = function () {};
 }
 
-let SERVER = "https://a.khalti.com/";
+const KHALTI_SERVER = process.env.KHALTI_SERVER
+let SERVER = KHALTI_SERVER;
 
 if (process.env.NODE_ENV === "development") {
   SERVER = "http://localhost:8000/";

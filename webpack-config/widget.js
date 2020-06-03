@@ -4,7 +4,8 @@ const path = require("path");
 const webpack = require("webpack");
 const projectRoot = path.dirname(__dirname);
 
-const CDN_HOST = process.env.CDN_HOST
+const CDN_HOST = process.env.CDN_HOST;
+const KHALTI_SERVER = process.env.KHALTI_SERVER;
 if (!CDN_HOST) {
   console.error('No CDN_HOST PROVIDED');
 }
@@ -67,7 +68,8 @@ module.exports = {
   },
   plugins: [
     new webpack.EnvironmentPlugin({
-      CDN_HOST: CDN_HOST
+      CDN_HOST: CDN_HOST,
+      KHALTI_SERVER: KHALTI_SERVER
     })
   ]
 };
