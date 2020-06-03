@@ -3,10 +3,11 @@
 const path = require("path");
 const webpack = require("webpack");
 const projectRoot = path.dirname(__dirname);
-const CDN_URL = process.env.CDN_URL
-const CDN_HOST = CDN_URL || "https://cdn.jsdelivr.net/npm/khalti-checkout-web@latest/public"
 
-console.log(CDN_HOST);
+const CDN_HOST = process.env.CDN_HOST
+if (!CDN_HOST) {
+  console.error('No CDN_HOST PROVIDED');
+}
 
 module.exports = {
   mode: 'production',

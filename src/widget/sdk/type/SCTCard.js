@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { ebanking_initiation_api, queryToString } from "../constants/APIS";
+import {SCT_BANNER} from '../../../assets/constants';
 import * as styles from "./BankStyles.css";
 
 const SCTCard = ({
@@ -50,7 +51,7 @@ const SCTCard = ({
             <div
               style={{
                 backgroundImage:
-                  "url(https://d7vw40z4bofef.cloudfront.net/static/sdk_logo/sct.png)",
+                  `url(${SCT_BANNER})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "contain",
                 height: "160px",

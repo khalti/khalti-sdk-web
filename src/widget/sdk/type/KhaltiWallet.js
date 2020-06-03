@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { initiation_api, confirmation_api } from "../constants/APIS";
+import {KHALTI_BANNER} from '../../../assets/constants';
 
 import * as styles from "./BankStyles.css";
 const KhaltiWallet = ({
@@ -123,7 +124,7 @@ const KhaltiWallet = ({
             <div
               style={{
                 backgroundImage:
-                  "url(https://d7vw40z4bofef.cloudfront.net/static/sdk_logo/khalti.png)",
+                  `url(${KHALTI_BANNER})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "contain",
                 height: "100px",

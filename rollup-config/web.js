@@ -4,10 +4,11 @@ import commonjs from 'rollup-plugin-commonjs';
 import replace from 'rollup-plugin-replace';
 import uglify from 'rollup-plugin-uglify';
 
-const CDN_URL = process.env.CDN_URL
-const CDN_HOST = CDN_URL || "https://cdn.jsdelivr.net/npm/khalti-checkout-web@latest/public"
+const CDN_HOST = process.env.CDN_HOST
 
-console.log(CDN_HOST);
+if (!CDN_HOST) {
+  console.error('No CDN_HOST provided');
+}
 
 export default {
   input: 'src/index.js',

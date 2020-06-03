@@ -6,7 +6,10 @@ import ConnectIPS from "./type/ConnectIPS";
 import SCTCard from "./type/SCTCard";
 
 import * as styles from "../css/index.css";
-import {CLOSE_ICON} from '../../assets/constants'
+import {
+  CLOSE_ICON, CONNECT_IPS_ICON, EBANKING_ICON,
+  MYWALLET_ICON, SCT_CARD_ICON, MBANKING_ICON
+} from '../../assets/constants'
 
 import {
   EBANKING,
@@ -99,7 +102,7 @@ const SDK = ({
                             {item == KHALTI && (
                               <React.Fragment>
                                 <img
-                                  src="assets/icons/mywallet.svg  "
+                                  src={MYWALLET_ICON}
                                   style={{ height: "16px" }}
                                 />
                                 {KHALTI_VALUE}
@@ -108,7 +111,7 @@ const SDK = ({
                             {item == MOBILE_BANKING && (
                               <React.Fragment>
                                 <img
-                                  src="assets/icons/mobile-banking.svg  "
+                                  src={MBANKING_ICON}
                                   style={{ height: "16px" }}
                                 />
                                 {MOBILE_BANKING_VALUE}
@@ -117,7 +120,7 @@ const SDK = ({
                             {item == EBANKING && (
                               <React.Fragment>
                                 <img
-                                  src="assets/icons/ebanking.svg  "
+                                  src={EBANKING_ICON}
                                   style={{ height: "16px" }}
                                 />
                                 {EBANKING_VALUE}
@@ -126,7 +129,7 @@ const SDK = ({
                             {item == CONNECT_IPS && (
                               <React.Fragment>
                                 <img
-                                  src="assets/icons/connectIPS.svg  "
+                                  src={CONNECT_IPS_ICON}
                                   style={{ height: "16px" }}
                                 />
                                 {CONNECT_IPS_VALUE}
@@ -135,7 +138,7 @@ const SDK = ({
                             {item == SCT && (
                               <React.Fragment>
                                 <img
-                                  src="assets/icons/sct-card.svg  "
+                                  src={SCT_CARD_ICON}
                                   style={{ height: "16px" }}
                                 />
                                 {SCT_VALUE}

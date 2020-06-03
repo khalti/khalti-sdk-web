@@ -1,6 +1,14 @@
 import { required, validate, isFunction, isObject, isArray } from "validatex";
 
-const WIDGET_URL = __CDN_HOST__ + '/index.html'
+export const EBANKING = "EBANKING";
+export const MOBILE_BANKING = "MOBILE_BANKING";
+export const CONNECT_IPS = "CONNECT_IPS";
+export const SCT = "SCT";
+export const KHALTI = "KHALTI";
+
+const CDN_HOST = __CDN_HOST__;
+
+const ZHTML = `<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="content-type" content="text/html; charset=utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1" /> <meta http-equiv="X-UA-Compatible" content="ie=edge" /> <title>Khalti Checkout</title> </head> <body style="background: transparent;"> <div id="index"></div> <script type="text/javascript" src="${CDN_HOST}/widget.js"></script> </body> </html>`
 
 const filter = function (obj, predicate) {
   return Object.keys(obj)
@@ -162,7 +170,7 @@ export default class KhaltiCheckout {
     widget.style.left = "0";
     widget.width = "100%";
     widget.height = window.innerHeight + "px";
-    widget.setAttribute("src", WIDGET_URL);
+    widget.setAttribute("srcdoc", ZHTML);
     widget.style.zIndex = 999999999;
     widget.setAttribute("frameborder", 0);
     widget.setAttribute("allowtransparency", true);

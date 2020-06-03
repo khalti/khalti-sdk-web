@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ebanking_initiation_api, queryToString } from "../constants/APIS";
+import {CONNECT_IPS_BANNER} from '../../../assets/constants';
 
 import * as styles from "./BankStyles.css";
 
@@ -52,7 +53,7 @@ const ConnectIPS = ({
             <div
               style={{
                 backgroundImage:
-                  "url(https://d7vw40z4bofef.cloudfront.net/static/sdk_logo/connectips.png)",
+                  `url(${CONNECT_IPS_BANNER})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "contain",
                 height: "160px",
