@@ -1,10 +1,13 @@
 import { required, validate, isFunction, isObject, isArray } from "validatex";
 
-export const EBANKING = "EBANKING";
-export const MOBILE_BANKING = "MOBILE_BANKING";
-export const CONNECT_IPS = "CONNECT_IPS";
-export const SCT = "SCT";
-export const KHALTI = "KHALTI";
+const paymentType = {
+  EBANKING: "EBANKING",
+  MOBILE_BANKING: "MOBILE_BANKING",
+  CONNECT_IPS: "CONNECT_IPS",
+  SCT: "SCT",
+  KHALTI: "KHALTI"
+}
+
 
 const CDN_HOST = __CDN_HOST__;
 
@@ -59,6 +62,7 @@ export default class KhaltiCheckout {
     this._config = config;
     this._widget = this.attachWidget();
     this.listenToWidget();
+    this.paymentType = paymentType;
   }
 
   listenToWidget() {

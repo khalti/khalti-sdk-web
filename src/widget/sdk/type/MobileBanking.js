@@ -153,7 +153,7 @@ const MobileBanking = ({
                   fontSize: "15px",
                 }}
               >
-                <input type="text" placeholder="Search..." />
+                <input type="text" placeholder="Search Bank" />
                 <i class="search icon"></i>
               </div>
             </div>

@@ -1,7 +1,5 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
 function unwrapExports (x) {
 	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
 }
@@ -254,11 +252,13 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var EBANKING = "EBANKING";
-var MOBILE_BANKING = "MOBILE_BANKING";
-var CONNECT_IPS = "CONNECT_IPS";
-var SCT = "SCT";
-var KHALTI = "KHALTI";
+var paymentType = {
+  EBANKING: "EBANKING",
+  MOBILE_BANKING: "MOBILE_BANKING",
+  CONNECT_IPS: "CONNECT_IPS",
+  SCT: "SCT",
+  KHALTI: "KHALTI"
+};
 
 var CDN_HOST = "https://cdn.khalti.com/staging/manoj";
 
@@ -294,6 +294,7 @@ var KhaltiCheckout = function () {
     this._config = config;
     this._widget = this.attachWidget();
     this.listenToWidget();
+    this.paymentType = paymentType;
   }
 
   _createClass(KhaltiCheckout, [{
@@ -428,9 +429,4 @@ var KhaltiCheckout = function () {
   return KhaltiCheckout;
 }();
 
-exports.CONNECT_IPS = CONNECT_IPS;
-exports.EBANKING = EBANKING;
-exports.KHALTI = KHALTI;
-exports.MOBILE_BANKING = MOBILE_BANKING;
-exports.SCT = SCT;
-exports.default = KhaltiCheckout;
+module.exports = KhaltiCheckout;

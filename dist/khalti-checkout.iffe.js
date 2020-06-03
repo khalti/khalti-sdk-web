@@ -1,4 +1,4 @@
-var KhaltiCheckout = (function (exports) {
+var KhaltiCheckout = (function () {
 	'use strict';
 
 	function unwrapExports (x) {
@@ -259,11 +259,13 @@ var KhaltiCheckout = (function (exports) {
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var EBANKING = "EBANKING";
-	var MOBILE_BANKING = "MOBILE_BANKING";
-	var CONNECT_IPS = "CONNECT_IPS";
-	var SCT = "SCT";
-	var KHALTI = "KHALTI";
+	var paymentType = {
+	  EBANKING: "EBANKING",
+	  MOBILE_BANKING: "MOBILE_BANKING",
+	  CONNECT_IPS: "CONNECT_IPS",
+	  SCT: "SCT",
+	  KHALTI: "KHALTI"
+	};
 
 	var CDN_HOST = "https://cdn.khalti.com/staging/manoj";
 
@@ -299,6 +301,7 @@ var KhaltiCheckout = (function (exports) {
 	    this._config = config;
 	    this._widget = this.attachWidget();
 	    this.listenToWidget();
+	    this.paymentType = paymentType;
 	  }
 
 	  _createClass(KhaltiCheckout, [{
@@ -433,13 +436,6 @@ var KhaltiCheckout = (function (exports) {
 	  return KhaltiCheckout;
 	}();
 
-	exports.CONNECT_IPS = CONNECT_IPS;
-	exports.EBANKING = EBANKING;
-	exports.KHALTI = KHALTI;
-	exports.MOBILE_BANKING = MOBILE_BANKING;
-	exports.SCT = SCT;
-	exports.default = KhaltiCheckout;
+	return KhaltiCheckout;
 
-	return exports;
-
-}({}));
+}());
