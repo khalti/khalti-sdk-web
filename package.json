@@ -1,8 +1,8 @@
 {
   "name": "khalti-checkout-web",
-  "version": "2.0.0-beta.3.5",
+  "version": "2.0.0-beta.3.6",
   "description": "Khalti checkout loader for web. (BETA)",
-  "main": "public/khalti-checkout.cjs.js",
+  "main": "dist/khalti-checkout.cjs.js",
   "scripts": {
     "test": "mocha --compilers js:babel-register spec/*",
     "build:node": "rollup -c rollup-config/node.js",
@@ -15,7 +15,7 @@
     "build": "source ./.env && npm run build:widget && npm run build:node && npm run build:web"
   },
   "files": [
-    "public"
+    "dist"
   ],
   "repository": {
     "type": "git",
