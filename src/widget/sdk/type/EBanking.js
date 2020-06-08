@@ -131,7 +131,7 @@ const EBanking = ({
         style={{ padding: "20px" }}
       >
         <div className="ui grid centered">
-          <div className="four wide computer sixteen wide mobile column">
+          <div className="three wide computer sixteen wide mobile column">
             <b>Select your Bank</b>
           </div>
           <form className="ui form ten wide computer sixteen wide mobile column">
