@@ -138,11 +138,11 @@ const MobileBanking = ({
         className={"ui basic segment " + styles.noborderbox + " pd-top-30"}
         style={{ padding: "20px" }}
       >
-        <div className="ui grid">
+        <div className="ui grid centered">
           <div className="four wide computer sixteen wide mobile column">
             <b>Select your Bank</b>
           </div>
-          <form className="ui form twelve wide computer sixteen wide mobile column">
+          <form className="ui form ten wide computer sixteen wide mobile column">
             <div className="field">
               <div
                 class="ui transparent icon input"
