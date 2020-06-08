@@ -4,8 +4,6 @@ if (!process.env.DEBUG) {
 
 const KHALTI_SERVER = process.env.KHALTI_SERVER
 
-console.log(KHALTI_SERVER, 'khalti ser');
-
 export const host_ip_address = KHALTI_SERVER;
 export const initiation_api = KHALTI_SERVER + "/api/v2/payment/initiate/";
 export const confirmation_api = KHALTI_SERVER + "/api/v2/payment/confirm/";

@@ -8,12 +8,12 @@
     "build:node": "rollup -c rollup-config/node.js",
     "build:web": "rollup -c rollup-config/web.js",
     "build:es": "rollup -c rollup-config/es.js",
-    "prebuild": "cp semantic-ui/theme.config node_modules/semantic-ui-less/ && cp src/index.html dist/ && cp -r src/assets/icons dist/",
+    "build:assets": "cp semantic-ui/theme.config node_modules/semantic-ui-less/ && cp src/index.html dist/ && cp -r src/assets/icons dist/",
     "watch:widget": "webpack --config webpack-config/dev-widget.js --watch",
     "start": "webpack-dev-server --hot --disable-host-check --config webpack-config/dev-widget.js --open",
-    "build:widget": "npm run prebuild && webpack --config webpack-config/widget.js --mode production",
-    "build": "source ./.env && npm run build:widget && npm run build:node && npm run build:web",
-    "build:dev": "source ./.env.dev && webpack --config webpack-config/dev-widget.js && npm run build:node && npm run build:web"
+    "build:widget": "npm run build:assets && webpack --config webpack-config/widget.js --mode production",
+    "build": "source ./.env && npm run build:node && npm run build:web && npm run build:widget",
+    "build:dev": "source ./.env.dev && webpack --config webpack-config/dev-widget.js && npm run build:assets && npm run build:node && npm run build:web"
   },
   "files": [
     "dist"
