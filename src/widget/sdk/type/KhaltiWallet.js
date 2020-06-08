@@ -117,18 +117,15 @@ const KhaltiWallet = ({
     }
   };
   return (
-    <div className={styles.tabHeight}>
-      <div className="ui grid">
-        <div className="eight wide computer sixteen wide mobile column">
+    <div className={`${styles.tabHeight} ${styles.overflowHide}`}>
+      <div className="ui grid centered">
+        <div className="twelve wide computer sixteen wide mobile column">
           <div className="ui padded basic segment">
             <div
+              className={styles.bannerImage}
               style={{
                 backgroundImage:
-                  `url(${KHALTI_BANNER})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-                height: "100px",
-              }}
+                  `url(${KHALTI_BANNER})`}}
             ></div>
             <form className="ui form">
               {(!otp_code || token) && (

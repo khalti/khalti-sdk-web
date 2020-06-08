@@ -46,17 +46,15 @@ const ConnectIPS = ({
   };
   return (
     <div className={styles.tabHeight}>
-      <div className="ui grid">
-        <div className="eight wide computer sixteen wide mobile column">
+      <div className="ui grid centered">
+        <div className="twelve wide computer sixteen wide mobile column">
           <div className="ui padded basic segment">
             {" "}
             <div
+              className={styles.bannerImage}
               style={{
                 backgroundImage:
                   `url(${CONNECT_IPS_BANNER})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-                height: "160px",
               }}
             ></div>
             <form className="ui form">

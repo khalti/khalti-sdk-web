@@ -87,17 +87,11 @@ const EBanking = ({
     <div>
       {bank_selected && (
         <div className={styles.bankSelect}>
-          <div className="ui basic segment">
-            <div className="ui list">
-              <div className="item">
-                <img className="ui avatar image" src={bank_selected.logo} />
-                <div className="content">
-                  <div className="header" style={{ background: "#fff" }}>
-                    {bank_selected.name}
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="ui padded basic segment">
+          <h3>
+          <img className="ui avatar image" style={{marginRight: '10px'}} src={bank_selected.logo} />
+          {bank_selected.name}
+          </h3>
             <div className="ui grid">
               <div className="eight wide computer sixteen wide mobile column">
                 <form className="ui form ">
@@ -124,7 +118,7 @@ const EBanking = ({
                     </button>
                   )}
                   <button class="ui button" onClick={removeBankSelect}>
-                    Clear
+                    Cancel
                   </button>
                 </form>
               </div>
@@ -136,11 +130,11 @@ const EBanking = ({
         className={"ui basic segment " + styles.noborderbox + " pd-top-30"}
         style={{ padding: "20px" }}
       >
-        <div className="ui grid">
+        <div className="ui grid centered">
           <div className="four wide computer sixteen wide mobile column">
             <b>Select your Bank</b>
           </div>
-          <form className="ui form twelve wide computer sixteen wide mobile column">
+          <form className="ui form ten wide computer sixteen wide mobile column">
             <div className="field">
               <div
                 class="ui transparent icon input"
@@ -163,8 +157,9 @@ const EBanking = ({
         <div class={styles.fullheight}>
           <div className={"ui grid "}>
             {bank_list &&
-              bank_list.map((item) => (
+              bank_list.map((item, index) => (
                 <div
+                  key={index}
                   className="four wide computer eight wide mobile column"
                   onClick={() => bankSelect(item)}
                 >

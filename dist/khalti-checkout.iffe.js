@@ -267,7 +267,7 @@ var KhaltiCheckout = (function () {
 	  KHALTI: "KHALTI"
 	};
 
-	var CDN_HOST = "https://cdn.khalti.com/staging/manoj";
+	var CDN_HOST = "http://localhost:8888/dist";
 
 	var ZHTML = "<!DOCTYPE html> <html lang=\"en\"> <head> <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" /> <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\" /> <title>Khalti Checkout</title> </head> <body style=\"background: transparent;\"> <div id=\"index\"></div> <script type=\"text/javascript\" src=\"" + CDN_HOST + "/widget.js\"></script> </body> </html>";
 

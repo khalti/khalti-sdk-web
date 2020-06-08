@@ -16,6 +16,17 @@
   color: #000;
   text-align: center;
 }
+.overflowHide {
+  overflow: hidden !important;
+  margin: 0;
+  padding: 0;
+}
+.bannerImage {
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 160px;
+  background-position-x: center;
+}
 :global(.ui):global(.label).Cashback {
   font-size: 11px;
   background-color: #ebe5f0;
@@ -87,7 +98,7 @@
 
 @media only screen and (min-width: 768px) {
   .tabHeight {
-    margin-top: 8px;
+    /* margin-top: 8px; */
     height: 380px;
     overflow-x: hidden;
     overflow-y: auto;

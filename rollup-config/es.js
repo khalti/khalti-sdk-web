@@ -4,6 +4,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import replace from 'rollup-plugin-replace';
 
 const CDN_HOST = process.env.CDN_HOST
+console.log(CDN_HOST);
 
 if (!CDN_HOST) {
   console.error('No CDN_HOST provided');

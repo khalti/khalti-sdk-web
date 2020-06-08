@@ -45,16 +45,14 @@ const SCTCard = ({
   };
   return (
     <div className={styles.tabHeight}>
-      <div className="ui grid">
-        <div className="eight wide computer sixteen wide mobile column">
+      <div className="ui grid centered">
+        <div className="twelve wide computer sixteen wide mobile column">
           <div className="ui padded basic segment">
             <div
+              className={styles.bannerImage}
               style={{
                 backgroundImage:
-                  `url(${SCT_BANNER})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-                height: "160px",
+                  `url(${SCT_BANNER})`
               }}
             ></div>
             <form className="ui form">

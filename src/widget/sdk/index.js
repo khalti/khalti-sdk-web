@@ -72,12 +72,12 @@ const SDK = ({
                     fontSize: "20px",
                     textAlign: "center",
                     color: "#5d2e8e",
-                    margin: "22px 0px 0px 0px",
+                    marginTop: "25px",
                   }}
                 >
                   Choose your payment method
                 </div>
-                <div style={{ padding: " 20px" }}>
+                <div style={{ padding: '15px 15px 0 15px' }}>
                   <div className={styles.parentBar}>
                     <div
                       className={
@@ -97,6 +97,7 @@ const SDK = ({
                               paddingRight: "18px",
                             }}
                             data-tab={item}
+                            key={index}
                             onClick={() => getActiveTab({ tab: item })}
                           >
                             {item == KHALTI && (
