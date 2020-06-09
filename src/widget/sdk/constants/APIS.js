@@ -20,3 +20,27 @@ export const queryToString = (params) => {
     )
     .join("&");
 };
+
+export const validateMobile = (value) => {
+  if (!value) return;
+  value = value.toString().trim();
+  let format = new RegExp("^9[678]\\d{8}$");
+  if (value.length !== 10) return "Mobile number must be 10 digits long.";
+  if (!format.test(value)) return "Please enter a valid mobile number";
+}
+
+export const validatePin = (value) => {
+  if (!value) return;
+  value = value.toString().trim();
+  let format = /^\d{4}$/
+  if (value.length !== 4) return "Khalti PIN must be 4 digits long.";
+  if (!format.test(value)) return "Please enter a valid Khalti PIN";
+}
+
+export const validateConfermationCode = (value) => {
+  if (!value) return;
+  value = value.toString().trim();
+  let format = /^\d{6}$/
+  if (value.length !== 6) return "Confirmation Code must be 6 digits long.";
+  if (!format.test(value)) return "Please enter a valid Confirmation Code";
+}

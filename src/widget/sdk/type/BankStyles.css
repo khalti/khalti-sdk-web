@@ -7,6 +7,10 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+.khaltiError {
+  color: #f21c1c;
+  padding: 2px 0;
+}
 .ServiceImage {
   height: 75px !important;
   width: auto !important;

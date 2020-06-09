@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { initiation_api, confirmation_api } from "../constants/APIS";
+import { initiation_api, confirmation_api, validateMobile, validatePin, validateConfermationCode } from "../constants/APIS";
 import {KHALTI_BANNER} from '../../../assets/constants';
 
 import * as styles from "./BankStyles.css";
@@ -18,6 +18,7 @@ const KhaltiWallet = ({
   const [token, setToken] = useState(null);
   const [transaction_pin, setPin] = useState(null);
   const [errTranPin, setErrTranPin] = useState(false);
+  const [paymentError, setPaymentError] = useState(null);
 
   const [confirmation_code, setCode] = useState(null);
   const [errConCode, setErrConCode] = useState(false);
@@ -36,9 +37,16 @@ const KhaltiWallet = ({
 
   const sendOTPCode = async () => {
     event.preventDefault();
-    if (mobile && mobile.toString().length == 10 && transaction_pin) {
-      setErrTranPin(false);
-      setErrMobile("Please enter a valid mobile number.");
+    if (!mobile) {
+      setErrMobile('This field is required.')
+      return;
+    }
+    if (!transaction_pin) {
+      setErrTranPin('This field is required.')
+      return;
+    }
+    let isFormValid = (!errMobile) && (!errTranPin)
+    if (isFormValid) {
       try {
         const { data } = await axios.post(initiation_api, {
           public_key,
@@ -58,30 +66,32 @@ const KhaltiWallet = ({
         if (err.response) {
           let { data } = err.response;
           if (data) {
-            setErrMobile("Please enter valid mobile number and pin.");
+            const {mobile, amount, transaction_pin, public_key, detail} = data
+            mobile && setErrMobile(mobile.join(' '));
+            transaction_pin && setErrTranPin(transaction_pin.join(' '))
+            let formError = [];
+            if (amount) formError.push(amount.join(' '))
+            if (public_key) formError.push('public_key: ' + public_key.join(' '))
+            if (detail) formError.push(detail)
+
+            if (formError.length > 0) {
+              setPaymentError(formError)
+            }
           }
         }
       }
     } else {
-      if (!transaction_pin) {
-        setErrTranPin(true);
-      } else {
-        setErrTranPin(false);
-      }
-      if (!mobile) {
-        setErrMobile("Please enter a valid mobile number.");
-      } else {
-        if (mobile && mobile.toString().length != 10) {
-          setErrMobile("Please enter a valid mobile number.");
-        } else {
-          setErrMobile(null);
-        }
-      }
+      return;
     }
   };
   const confirmPayment = async () => {
     event.preventDefault();
-    if (confirmation_code) {
+    if (!confirmation_code) {
+      setErrConCode('This field is required');
+      return;
+    }
+
+    if (!errConCode) {
       setErrConCode(false);
       try {
         const { data } = await axios.post(confirmation_api, {
@@ -97,7 +107,6 @@ const KhaltiWallet = ({
             { realm: "walletPaymentVerification", payload: data },
             "*"
           );
-          setErrConCode(false);
         }
       } catch (err) {
         if (err.response) {
@@ -113,11 +122,23 @@ const KhaltiWallet = ({
         }
       }
     } else {
-      setErrConCode(true);
+      return;
     }
   };
+  const onMobileBlur = (e) => {
+    e.preventDefault()
+    setErrMobile(validateMobile(mobile))
+  }
+  const onPinBlur = (e) => {
+    e.preventDefault()
+    setErrTranPin(validatePin(transaction_pin))
+  }
+  const onConCodeBlur = (e) => {
+    e.preventDefault()
+    setErrTranPin(validateConfermationCode(confirmation_code))
+  }
   return (
-    <div className={`${styles.tabHeight} ${styles.overflowHide}`}>
+    <div className={`${styles.tabHeight}`}>
       <div className="ui grid centered">
         <div className="twelve wide computer sixteen wide mobile column">
           <div className="ui padded basic segment">
@@ -132,15 +153,14 @@ const KhaltiWallet = ({
                 <React.Fragment>
                   <div className="field">
                     <input
-                      type="number"
+                      type="text"
                       name="mobile"
                       placeholder="Khalti Mobile Number"
                       onChange={changeMobile}
+                      onBlur={onMobileBlur}
                     />
                     {errMobile && (
-                      <div class="ui negative message">
-                        <p>{errMobile}</p>
-                      </div>
+                      <p className={styles.khaltiError}>{errMobile}</p>
                     )}
                   </div>
                   <div className="field">
@@ -149,15 +169,21 @@ const KhaltiWallet = ({
                       name="transaction_pin"
                       placeholder="Khalti Pin"
                       onChange={changePin}
+                      onBlur={onPinBlur}
                     />
                     {errTranPin && (
-                      <div class="ui negative message">
-                        <p>Please enter your transaction pin.</p>
-                      </div>
+                      <p className={styles.khaltiError}>{errTranPin}</p>
                     )}
                   </div>
                 </React.Fragment>
               )}
+              {paymentError && <div class="ui negative message">
+                <ul className='list'>
+                  {paymentError.map(i => (
+                    <li>{i}</li>
+                  ))}
+                </ul>
+              </div>}
               {otp_code && (
                 <div className="ui icon message">
                   <i className="attention icon"></i>
@@ -176,11 +202,10 @@ const KhaltiWallet = ({
                     name="confirmation_code"
                     placeholder="Confirmation Code"
                     onChange={changeCode}
+                    onBlur={onConCodeBlur}
                   />
                   {errConCode && (
-                    <div class="ui negative message">
-                      <p>Please enter your correct confirmation code.</p>
-                    </div>
+                    <p className={styles.khaltiError}>{errConCode}</p>
                   )}
                 </div>
               )}
