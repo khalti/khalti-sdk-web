@@ -41,13 +41,14 @@ const KhaltiWallet = ({
       setErrMobile('This field is required.')
       return;
     }
-    if (!transaction_pin) {
-      setErrTranPin('This field is required.')
-      return;
-    }
+    // if (!transaction_pin) {
+    //   setErrTranPin('This field is required.')
+    //   return;
+    // }
     let isFormValid = (!errMobile) && (!errTranPin)
     if (isFormValid) {
       try {
+        setPaymentError(null);
         const { data } = await axios.post(initiation_api, {
           public_key,
           product_identity,
@@ -72,7 +73,7 @@ const KhaltiWallet = ({
             let formError = [];
             if (amount) formError.push(amount.join(' '))
             if (public_key) formError.push('public_key: ' + public_key.join(' '))
-            if (detail) formError.push(detail)
+            if (detail) formError.push(<div dangerouslySetInnerHTML={{__html: detail}} />)
 
             if (formError.length > 0) {
               setPaymentError(formError)
@@ -152,10 +153,11 @@ const KhaltiWallet = ({
               {(!otp_code || token) && (
                 <React.Fragment>
                   <div className="field">
+                    <label>Khalti Mobile Number</label>
                     <input
                       type="text"
                       name="mobile"
-                      placeholder="Khalti Mobile Number"
+                      placeholder="Enter khalti registered number"
                       onChange={changeMobile}
                       onBlur={onMobileBlur}
                     />
@@ -164,10 +166,11 @@ const KhaltiWallet = ({
                     )}
                   </div>
                   <div className="field">
+                    <label>Khalti PIN</label>
                     <input
-                      type="text"
+                      type="password"
                       name="transaction_pin"
-                      placeholder="Khalti Pin"
+                      placeholder="Enter Khalti Pin"
                       onChange={changePin}
                       onBlur={onPinBlur}
                     />
@@ -197,10 +200,11 @@ const KhaltiWallet = ({
               )}
               {otp_code && (
                 <div className="field">
+                  <label>Confirmation Code</label>
                   <input
                     type="text"
                     name="confirmation_code"
-                    placeholder="Confirmation Code"
+                    placeholder="Enter Confirmation Code (OTP)"
                     onChange={changeCode}
                     onBlur={onConCodeBlur}
                   />

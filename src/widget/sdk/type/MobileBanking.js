@@ -7,6 +7,7 @@ import {
   mobile_banking_list,
   queryToString,
   ebanking_initiation_api,
+  validateMobile
 } from "../constants/APIS";
 const MobileBanking = ({
   public_key,
@@ -57,7 +58,7 @@ const MobileBanking = ({
 
   const initiatePay = async () => {
     event.preventDefault();
-    if (mobile && mobile.toString().length == 10) {
+    if (mobile && !validateMobile(mobile)) {
       setErrMobile(false);
       if (bank_selected.idx) {
         try {
@@ -68,7 +69,7 @@ const MobileBanking = ({
               product_name,
               amount,
               payment_type: "mobile_checkout",
-              source: "web",
+              source: "checkout_v2",
               bank: bank_selected.idx,
               mobile,
               product_url,

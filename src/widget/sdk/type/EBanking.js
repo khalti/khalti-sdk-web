@@ -6,6 +6,7 @@ import {
   ebanking_initiation_api,
   queryToString,
   ebanking_list,
+  validateMobile,
 } from "../constants/APIS";
 
 const EBanking = ({
@@ -52,7 +53,7 @@ const EBanking = ({
 
   const initiatePay = async (event) => {
     event.preventDefault();
-    if (mobile && mobile.toString().length == 10) {
+    if (mobile && !validateMobile(mobile)) {
       setErrMobile(false);
       if (bank_selected.idx) {
         try {
@@ -62,7 +63,7 @@ const EBanking = ({
               product_identity,
               product_name,
               amount,
-              source: "web",
+              source: "checkout_v2",
               bank: bank_selected.idx,
               mobile,
               product_url,

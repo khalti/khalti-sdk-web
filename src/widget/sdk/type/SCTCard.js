@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { ebanking_initiation_api, queryToString } from "../constants/APIS";
+import { ebanking_initiation_api, queryToString, validateMobile } from "../constants/APIS";
 import {SCT_BANNER} from '../../../assets/constants';
 import * as styles from "./BankStyles.css";
 
@@ -19,8 +19,7 @@ const SCTCard = ({
   };
   const initiatePay = async () => {
     event.preventDefault();
-    0;
-    if (mobile && mobile.toString().length == 10) {
+    if (mobile && !validateMobile(mobile)) {
       setErrMobile(false);
       try {
         var myWindow = window.open(
@@ -30,7 +29,7 @@ const SCTCard = ({
             product_name,
             amount,
             payment_type: "sct",
-            source: "web",
+            source: "checkout_v2",
             bank: "npay",
             mobile,
             product_url,
@@ -57,10 +56,11 @@ const SCTCard = ({
             ></div>
             <form className="ui form">
               <div className="field">
+                <label>Mobile Number</label>
                 <input
                   type="number"
                   name="mobile"
-                  placeholder=" Mobile Number"
+                  placeholder="Enter Mobile Number"
                   onChange={changeMobile}
                 />
                 {errMobile && (

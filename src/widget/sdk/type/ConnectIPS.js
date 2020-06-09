@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ebanking_initiation_api, queryToString } from "../constants/APIS";
+import { ebanking_initiation_api, queryToString, validateMobile } from "../constants/APIS";
 import {CONNECT_IPS_BANNER} from '../../../assets/constants';
 
 import * as styles from "./BankStyles.css";
@@ -20,7 +20,7 @@ const ConnectIPS = ({
   const initiatePay = async () => {
     event.preventDefault();
     0;
-    if (mobile && mobile.toString().length == 10) {
+    if (mobile && !validateMobile(mobile)) {
       setErrMobile(false);
 
       try {
@@ -32,7 +32,7 @@ const ConnectIPS = ({
             amount,
             payment_type: "connectips",
             bank: "connectips",
-            source: "web",
+            source: "checkout_v2",
             mobile,
             product_url,
           })}`
@@ -59,10 +59,11 @@ const ConnectIPS = ({
             ></div>
             <form className="ui form">
               <div className="field">
+                <label>Mobile Number</label>
                 <input
                   type="text"
                   name="first-name"
-                  placeholder=" Mobile Number"
+                  placeholder="Enter Mobile Number"
                   onChange={changeMobile}
                 />
                 {errMobile && (
