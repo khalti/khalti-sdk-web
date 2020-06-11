@@ -67,11 +67,12 @@ const KhaltiWallet = ({
         if (err.response) {
           let { data } = err.response;
           if (data) {
-            const {mobile, amount, transaction_pin, public_key, detail} = data
+            const {mobile, amount, transaction_pin, public_key, detail, tries_remaining} = data
             mobile && setErrMobile(mobile.join(' '));
             transaction_pin && setErrTranPin(transaction_pin.join(' '))
             let formError = [];
             if (amount) formError.push(amount.join(' '))
+            if (tries_remaining) formError.push(`Attempts Remaining: ${tries_remaining}`)
             if (public_key) formError.push('public_key: ' + public_key.join(' '))
             if (detail) formError.push(<div dangerouslySetInnerHTML={{__html: detail}} />)
 
