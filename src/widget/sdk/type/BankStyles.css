@@ -28,7 +28,7 @@
 .bannerImage {
   background-repeat: no-repeat;
   background-size: contain;
-  height: 160px;
+  height: 90px;
   background-position-x: center;
 }
 :global(.ui):global(.label).Cashback {

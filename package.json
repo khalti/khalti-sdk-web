@@ -8,7 +8,7 @@
     "build:node": "rollup -c rollup-config/node.js",
     "build:web": "rollup -c rollup-config/web.js",
     "build:es": "rollup -c rollup-config/es.js",
-    "build:assets": "cp semantic-ui/theme.config node_modules/semantic-ui-less/ && cp src/index.html dist/ && cp -r src/assets/icons dist/",
+    "build:assets": "cp semantic-ui/theme.config node_modules/semantic-ui-less/ && cp src/payment_gateway_widget.html dist/ && cp -r src/assets/icons dist/",
     "watch:widget": "webpack --config webpack-config/dev-widget.js --watch",
     "start": "webpack-dev-server --hot --disable-host-check --config webpack-config/dev-widget.js --open",
     "build:widget": "npm run build:assets && webpack --config webpack-config/widget.js --mode production",
