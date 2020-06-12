@@ -176,7 +176,7 @@ export default class KhaltiCheckout {
     widget.width = "100%";
     widget.height = window.innerHeight + "px";
     widget.setAttribute("srcdoc", ZHTML);
-    //widget.setAttribute("srcdoc", ZHTML_src);
+    //widget.setAttribute("src", ZHTML_src);
     widget.style.zIndex = 999999999;
     widget.setAttribute("frameborder", 0);
     widget.setAttribute("allowtransparency", true);
