@@ -61,27 +61,19 @@
   height: 0;
   background: transparent; /* Optional: just make scrollbar invisible */
 }
-/* Optional: show position indicator in red */
 .onHoverBar {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE 10+ */
+  scrollbar-width: thin; /* Firefox */
+  -ms-overflow-style: thin; /* IE 10+ */
+  scrollbar-color: #5c2d91 #e2e2e2;
 }
 
-@media only screen and (min-width: 768px) {
-  .onHoverBar {
-    scrollbar-width: thin; /* Firefox */
-    -ms-overflow-style: thin; /* IE 10+ */
-    scrollbar-color: #5c2d91 #e2e2e2;
-  }
-
-  .onHoverBar::-webkit-scrollbar {
-    width: 0; /* Remove scrollbar space */
-    height: 5px;
-    background: #e2e2e2; /* Optional: just make scrollbar invisible */
-  }
-  ::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: inset 0 0 6px #5c2d91;
-  }
+.onHoverBar::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  height: 5px;
+  background: #e2e2e2; /* Optional: just make scrollbar invisible */
+}
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px #5c2d91;
 }
 
 /* Chrome, Safari, Edge, Opera */
