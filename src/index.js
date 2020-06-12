@@ -12,6 +12,7 @@ const paymentType = {
 const CDN_HOST = __CDN_HOST__;
 
 const ZHTML = `<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="content-type" content="text/html; charset=utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1" /> <meta http-equiv="X-UA-Compatible" content="ie=edge" /> <title>Khalti Checkout</title> </head> <body style="background: transparent;"> <div id="index"></div> <script type="text/javascript" src="${CDN_HOST}/widget.js"></script> </body> </html>`
+const ZHTML_src = "${CDN_HOST}/payment_gateway_widget.html"
 
 const filter = function (obj, predicate) {
   return Object.keys(obj)
@@ -175,6 +176,7 @@ export default class KhaltiCheckout {
     widget.width = "100%";
     widget.height = window.innerHeight + "px";
     widget.setAttribute("srcdoc", ZHTML);
+    //widget.setAttribute("srcdoc", ZHTML_src);
     widget.style.zIndex = 999999999;
     widget.setAttribute("frameborder", 0);
     widget.setAttribute("allowtransparency", true);
