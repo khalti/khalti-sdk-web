@@ -3,6 +3,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const projectRoot = path.dirname(__dirname);
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const CDN_HOST = process.env.CDN_HOST;
 const KHALTI_SERVER = process.env.KHALTI_SERVER;
@@ -70,6 +71,11 @@ module.exports = {
     new webpack.EnvironmentPlugin({
       CDN_HOST: CDN_HOST,
       KHALTI_SERVER: KHALTI_SERVER
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'payment_gateway_widget.html',
+      template: './src/payment_gateway_widget.html',
+      minify: false
     })
   ]
 };
