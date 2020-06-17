@@ -6,7 +6,10 @@
 
   <body>
     <button id="payment-button">Pay with Khalti</button>
-    <script type="text/javascript" src="http://localhost:8888/dist/khalti-checkout.iffe.js"></script>
+    <script
+      type="text/javascript"
+      src="http://localhost:8888/dist/khalti-checkout.iffe.js"
+    ></script>
     <script>
       let config = {
         // replace the publicKey with yours
@@ -26,12 +29,7 @@
             console.log("close called");
           },
         },
-        // paymentPreference: [
-        //   "MOBILE_BANKING",
-        //   "EBANKING",
-        //   "CONNECT_IPS",
-        //   "SCT",
-        // ],
+        // paymentPreference: ["MOBILE_BANKING", "EBANKING", "CONNECT_IPS", "SCT"],
       };
 
       var checkout = new KhaltiCheckout(config);

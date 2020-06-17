@@ -1,6 +1,10 @@
 import React, { useState } from "react";
-import { ebanking_initiation_api, queryToString, validateMobile } from "../constants/APIS";
-import {CONNECT_IPS_BANNER} from '../../../assets/constants';
+import {
+  ebanking_initiation_api,
+  queryToString,
+  validateMobile,
+} from "../constants/APIS";
+import { CONNECT_IPS_BANNER } from "../../../assets/constants";
 
 import * as styles from "./BankStyles.css";
 
@@ -53,8 +57,7 @@ const ConnectIPS = ({
             <div
               className={styles.bannerImage}
               style={{
-                backgroundImage:
-                  `url(${CONNECT_IPS_BANNER})`,
+                backgroundImage: `url(${CONNECT_IPS_BANNER})`,
               }}
             ></div>
             <form className="ui form">
@@ -73,13 +76,15 @@ const ConnectIPS = ({
                 )}
               </div>
               {amount && (
-                <button
-                  className="ui button primary"
-                  type="submit"
-                  onClick={initiatePay}
-                >
-                  Pay Rs. {amount / 100} /-
-                </button>
+                <div className={styles.mobileCenter}>
+                  <button
+                    className="ui button primary"
+                    type="submit"
+                    onClick={initiatePay}
+                  >
+                    Pay Rs. {amount / 100} /-
+                  </button>
+                </div>
               )}
             </form>
           </div>

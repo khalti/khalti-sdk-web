@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 
-import { ebanking_initiation_api, queryToString, validateMobile } from "../constants/APIS";
-import {SCT_BANNER} from '../../../assets/constants';
+import {
+  ebanking_initiation_api,
+  queryToString,
+  validateMobile,
+} from "../constants/APIS";
+import { SCT_BANNER } from "../../../assets/constants";
 import * as styles from "./BankStyles.css";
 
 const SCTCard = ({
@@ -50,8 +54,7 @@ const SCTCard = ({
             <div
               className={styles.bannerImage}
               style={{
-                backgroundImage:
-                  `url(${SCT_BANNER})`
+                backgroundImage: `url(${SCT_BANNER})`,
               }}
             ></div>
             <form className="ui form">
@@ -71,13 +74,15 @@ const SCTCard = ({
               </div>
 
               {amount && (
-                <button
-                  className="ui button primary"
-                  type="submit"
-                  onClick={initiatePay}
-                >
-                  Pay Rs. {amount / 100} /-
-                </button>
+                <div className={styles.mobileCenter}>
+                  <button
+                    className="ui button primary"
+                    type="submit"
+                    onClick={initiatePay}
+                  >
+                    Pay Rs. {amount / 100} /-
+                  </button>
+                </div>
               )}
             </form>
           </div>

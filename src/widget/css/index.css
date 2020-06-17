@@ -124,3 +124,42 @@ input[type="number"] {
 :global(.ui.secondary.pointing.menu) {
   border-bottom: none;
 }
+
+@media only screen and (min-width: 768px) {
+  .scrollTrigger {
+    display: none;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .scrollTrigger {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    display: block;
+    background-color: #000;
+    color: #fff;
+    color: #fff;
+  }
+
+  .Prev {
+    position: absolute;
+    display: block;
+    color: rgba(0, 0, 0, 0.25);
+    font-size: 32px;
+    left: 4px;
+    top: 10px;
+    z-index: 8;
+    padding: 4px;
+  }
+  .Next {
+    position: absolute;
+    top: 10px;
+    display: block;
+    color: rgba(0, 0, 0, 0.25);
+    font-size: 32px;
+    right: 4px;
+    z-index: 8;
+    padding: 4px;
+  }
+}

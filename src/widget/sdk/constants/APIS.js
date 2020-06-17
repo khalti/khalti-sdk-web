@@ -2,7 +2,7 @@ if (!process.env.DEBUG) {
   console.log = function () {};
 }
 
-const KHALTI_SERVER = process.env.KHALTI_SERVER;
+const KHALTI_SERVER = process.env.KHALTI_SERVER || "http://localhost:8000";
 
 export const host_ip_address = KHALTI_SERVER;
 export const initiation_api = KHALTI_SERVER + "/api/v2/payment/initiate/";

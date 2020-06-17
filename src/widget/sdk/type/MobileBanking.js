@@ -7,7 +7,7 @@ import {
   mobile_banking_list,
   queryToString,
   ebanking_initiation_api,
-  validateMobile
+  validateMobile,
 } from "../constants/APIS";
 const MobileBanking = ({
   public_key,
@@ -89,47 +89,49 @@ const MobileBanking = ({
   return (
     <div>
       {bank_selected && (
-        <div className={styles.bankSelect}>
-          <div className="ui basic segment">
-            <div className="ui list">
-              <div className="item">
-                <img className="ui avatar image" src={bank_selected.logo} />
-                <div className="content">
-                  <div className="header" style={{ background: "#fff" }}>
-                    {bank_selected.name}
+        <div className={styles.bankSelectOuterdiv}>
+          <div className={styles.bankSelect}>
+            <div className="ui basic segment">
+              <div className="ui list">
+                <div className="item">
+                  <img className="ui avatar image" src={bank_selected.logo} />
+                  <div className="content">
+                    <div className="header" style={{ background: "#fff" }}>
+                      {bank_selected.name}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="ui grid">
-              <div className="eight wide computer sixteen wide mobile column">
-                <form className="ui form ">
-                  <div className="field">
-                    <input
-                      type="number"
-                      name="mobile"
-                      placeholder="Mobile Number"
-                      onChange={changeMobile}
-                    />
-                    {errMobile && (
-                      <div class="ui negative message">
-                        <p>Please enter a valid mobile number.</p>
-                      </div>
+              <div className="ui grid">
+                <div className="eight wide computer sixteen wide mobile column">
+                  <form className="ui form ">
+                    <div className="field">
+                      <input
+                        type="number"
+                        name="mobile"
+                        placeholder="Mobile Number"
+                        onChange={changeMobile}
+                      />
+                      {errMobile && (
+                        <div class="ui negative message">
+                          <p>Please enter a valid mobile number.</p>
+                        </div>
+                      )}
+                    </div>
+                    {amount && (
+                      <button
+                        className="ui button primary"
+                        type="submit"
+                        onClick={initiatePay}
+                      >
+                        Pay Rs. {amount / 100} /-
+                      </button>
                     )}
-                  </div>
-                  {amount && (
-                    <button
-                      className="ui button primary"
-                      type="submit"
-                      onClick={initiatePay}
-                    >
-                      Pay Rs. {amount / 100} /-
+                    <button class="ui button" onClick={removeBankSelect}>
+                      Clear
                     </button>
-                  )}
-                  <button class="ui button" onClick={removeBankSelect}>
-                    Clear
-                  </button>
-                </form>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -139,10 +141,7 @@ const MobileBanking = ({
         className={"ui basic segment " + styles.noborderbox + " pd-top-30"}
         style={{ padding: "20px" }}
       >
-        <div className="ui grid centered">
-          <div className="three wide computer sixteen wide mobile column">
-            <b>Select your Bank</b>
-          </div>
+        <div className="ui grid centered" className={styles.searchBankBox}>
           <form className="ui form ten wide computer sixteen wide mobile column">
             <div className="field">
               <div
@@ -150,7 +149,7 @@ const MobileBanking = ({
                 onChange={handleSearch}
                 style={{
                   borderBottom: "1px solid #5d2e8e",
-                  paddingBottom: "5px",
+                  padding: "5px",
                   fontSize: "15px",
                 }}
               >
@@ -164,6 +163,11 @@ const MobileBanking = ({
           </form>
         </div>
         <div class={styles.fullheight}>
+          <div className="ui grid">
+            <div className="three wide computer sixteen wide mobile column">
+              <b>Select your Bank</b>
+            </div>
+          </div>
           <div className={"ui grid "}>
             {bank_list &&
               bank_list.map((item) => (

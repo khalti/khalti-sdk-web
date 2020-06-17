@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createRef } from "react";
 import KhaltiWallet from "./type/KhaltiWallet";
 import EBanking from "./type/EBanking";
 import MobileBanking from "./type/MobileBanking";
@@ -7,9 +7,13 @@ import SCTCard from "./type/SCTCard";
 
 import * as styles from "../css/index.css";
 import {
-  CLOSE_ICON, CONNECT_IPS_ICON, EBANKING_ICON,
-  MYWALLET_ICON, SCT_CARD_ICON, MBANKING_ICON
-} from '../../assets/constants'
+  CLOSE_ICON,
+  CONNECT_IPS_ICON,
+  EBANKING_ICON,
+  MYWALLET_ICON,
+  SCT_CARD_ICON,
+  MBANKING_ICON,
+} from "../../assets/constants";
 
 import {
   EBANKING,
@@ -43,6 +47,8 @@ const SDK = ({
   useEffect(() => {
     setLoading(false);
   }, []);
+
+  const scrollRef = createRef();
   return (
     <React.Fragment>
       {
@@ -67,22 +73,49 @@ const SDK = ({
                     TEST MODE
                   </span>
                 )}
-                <div
-                  style={{
-                    fontSize: "20px",
-                    textAlign: "center",
-                    color: "#5d2e8e",
-                    marginTop: "25px",
-                  }}
-                >
-                  Choose your payment method
-                </div>
-                <div style={{ padding: '15px 15px 0 15px' }}>
-                  <div className={styles.parentBar}>
+                {payment_preference && payment_preference.length > 1 && (
+                  <div
+                    style={{
+                      fontSize: "20px",
+                      textAlign: "center",
+                      color: "#5d2e8e",
+                      marginTop: "25px",
+                    }}
+                  >
+                    Choose your payment method
+                  </div>
+                )}
+                <div style={{ padding: "15px 15px 0 15px" }}>
+                  <div>
+                    <div className={styles.scrollTrigger}>
+                      <span
+                        className={" " + styles.Prev}
+                        onClick={() => {
+                          console.log("prev triggered");
+                        }}
+                      >
+                        {"<"}
+                      </span>
+                      <span
+                        className={" " + styles.Next}
+                        onClick={() => {
+                          const { current } = scrollRef;
+                          console.log(scrollRef);
+                          console.log(current.scrollWidth, current.clientWidth);
+                          scrollRef.current.scrollBy(-100, 0);
+                          // scrollRef.current.scrollBy({
+                          //   top: 0,
+                          //   left: current.clientWidth - current.scrollWidth,
+                          //   behavior: "smooth",
+                          // });
+                        }}
+                      >
+                        {">"}
+                      </span>
+                    </div>
                     <div
-                      className={
-                        "ui pointing secondary menu " + styles.onHoverBar
-                      }
+                      className={"ui pointing secondary menu "}
+                      ref={scrollRef}
                     >
                       {payment_preference.map((item, index) => {
                         return (
@@ -157,6 +190,7 @@ const SDK = ({
                     top: 0,
                     right: 0,
                     padding: "10px",
+
                     cursor: "pointer",
                   }}
                   onClick={hideModal}

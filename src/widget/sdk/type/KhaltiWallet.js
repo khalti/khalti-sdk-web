@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { initiation_api, confirmation_api, validateMobile, validatePin, validateConfermationCode } from "../constants/APIS";
-import {KHALTI_BANNER} from '../../../assets/constants';
+import {
+  initiation_api,
+  confirmation_api,
+  validateMobile,
+  validatePin,
+  validateConfermationCode,
+} from "../constants/APIS";
+import { KHALTI_BANNER } from "../../../assets/constants";
 
 import * as styles from "./BankStyles.css";
 const KhaltiWallet = ({
@@ -38,14 +44,14 @@ const KhaltiWallet = ({
   const sendOTPCode = async () => {
     event.preventDefault();
     if (!mobile) {
-      setErrMobile('This field is required.')
+      setErrMobile("This field is required.");
       return;
     }
     // if (!transaction_pin) {
     //   setErrTranPin('This field is required.')
     //   return;
     // }
-    let isFormValid = (!errMobile) && (!errTranPin)
+    let isFormValid = !errMobile && !errTranPin;
     if (isFormValid) {
       try {
         setPaymentError(null);
@@ -67,17 +73,29 @@ const KhaltiWallet = ({
         if (err.response) {
           let { data } = err.response;
           if (data) {
-            const {mobile, amount, transaction_pin, public_key, detail, tries_remaining} = data
-            mobile && setErrMobile(mobile.join(' '));
-            transaction_pin && setErrTranPin(transaction_pin.join(' '))
+            const {
+              mobile,
+              amount,
+              transaction_pin,
+              public_key,
+              detail,
+              tries_remaining,
+            } = data;
+            mobile && setErrMobile(mobile.join(" "));
+            transaction_pin && setErrTranPin(transaction_pin.join(" "));
             let formError = [];
-            if (amount) formError.push(amount.join(' '))
-            if (tries_remaining) formError.push(`Attempts Remaining: ${tries_remaining}`)
-            if (public_key) formError.push('public_key: ' + public_key.join(' '))
-            if (detail) formError.push(<div dangerouslySetInnerHTML={{__html: detail}} />)
+            if (amount) formError.push(amount.join(" "));
+            if (tries_remaining)
+              formError.push(`Attempts Remaining: ${tries_remaining}`);
+            if (public_key)
+              formError.push("public_key: " + public_key.join(" "));
+            if (detail)
+              formError.push(
+                <div dangerouslySetInnerHTML={{ __html: detail }} />
+              );
 
             if (formError.length > 0) {
-              setPaymentError(formError)
+              setPaymentError(formError);
             }
           }
         }
@@ -89,7 +107,7 @@ const KhaltiWallet = ({
   const confirmPayment = async () => {
     event.preventDefault();
     if (!confirmation_code) {
-      setErrConCode('This field is required');
+      setErrConCode("This field is required");
       return;
     }
 
@@ -128,17 +146,17 @@ const KhaltiWallet = ({
     }
   };
   const onMobileBlur = (e) => {
-    e.preventDefault()
-    setErrMobile(validateMobile(mobile))
-  }
+    e.preventDefault();
+    setErrMobile(validateMobile(mobile));
+  };
   const onPinBlur = (e) => {
-    e.preventDefault()
-    setErrTranPin(validatePin(transaction_pin))
-  }
+    e.preventDefault();
+    setErrTranPin(validatePin(transaction_pin));
+  };
   const onConCodeBlur = (e) => {
-    e.preventDefault()
-    setErrTranPin(validateConfermationCode(confirmation_code))
-  }
+    e.preventDefault();
+    setErrTranPin(validateConfermationCode(confirmation_code));
+  };
   return (
     <div className={`${styles.tabHeight}`}>
       <div className="ui grid centered">
@@ -147,8 +165,8 @@ const KhaltiWallet = ({
             <div
               className={styles.bannerImage}
               style={{
-                backgroundImage:
-                  `url(${KHALTI_BANNER})`}}
+                backgroundImage: `url(${KHALTI_BANNER})`,
+              }}
             ></div>
             <form className="ui form">
               {(!otp_code || token) && (
@@ -181,13 +199,15 @@ const KhaltiWallet = ({
                   </div>
                 </React.Fragment>
               )}
-              {paymentError && <div class="ui negative message">
-                <ul className='list'>
-                  {paymentError.map(i => (
-                    <li>{i}</li>
-                  ))}
-                </ul>
-              </div>}
+              {paymentError && (
+                <div class="ui negative message">
+                  <ul className="list">
+                    {paymentError.map((i) => (
+                      <li>{i}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               {otp_code && (
                 <div className="ui icon message">
                   <i className="attention icon"></i>
@@ -215,22 +235,26 @@ const KhaltiWallet = ({
                 </div>
               )}
               {!otp_code && (
-                <button
-                  className="ui button primary"
-                  type="submit"
-                  onClick={sendOTPCode}
-                >
-                  Next
-                </button>
+                <div className={styles.mobileCenter}>
+                  <button
+                    className="ui button primary"
+                    type="submit"
+                    onClick={sendOTPCode}
+                  >
+                    Pay Rs. {amount / 100}/-
+                  </button>
+                </div>
               )}
               {otp_code && amount && (
-                <button
-                  className="ui button primary"
-                  type="submit"
-                  onClick={confirmPayment}
-                >
-                  Pay Rs. {amount / 100}/-
-                </button>
+                <div className={styles.mobileCenter}>
+                  <button
+                    className="ui button primary"
+                    type="submit"
+                    onClick={confirmPayment}
+                  >
+                    Pay Rs. {amount / 100}/-
+                  </button>
+                </div>
               )}
             </form>
             <div

@@ -87,41 +87,47 @@ const EBanking = ({
   return (
     <div>
       {bank_selected && (
-        <div className={styles.bankSelect}>
-          <div className="ui padded basic segment">
-          <h3>
-          <img className="ui avatar image" style={{marginRight: '10px'}} src={bank_selected.logo} />
-          {bank_selected.name}
-          </h3>
-            <div className="ui grid">
-              <div className="eight wide computer sixteen wide mobile column">
-                <form className="ui form ">
-                  <div className="field">
-                    <input
-                      type="number"
-                      name="mobile"
-                      placeholder="Mobile Number"
-                      onChange={changeMobile}
-                    />
-                    {errMobile && (
-                      <div class="ui negative message">
-                        <p>Please enter a valid mobile number.</p>
-                      </div>
+        <div className={styles.bankSelectOuterdiv}>
+          <div className={styles.bankSelect}>
+            <div className="ui padded basic segment">
+              <h3>
+                <img
+                  className="ui avatar image"
+                  style={{ marginRight: "10px" }}
+                  src={bank_selected.logo}
+                />
+                {bank_selected.name}
+              </h3>
+              <div className="ui grid">
+                <div className="eight wide computer sixteen wide mobile column">
+                  <form className="ui form ">
+                    <div className="field">
+                      <input
+                        type="number"
+                        name="mobile"
+                        placeholder="Mobile Number"
+                        onChange={changeMobile}
+                      />
+                      {errMobile && (
+                        <div class="ui negative message">
+                          <p>Please enter a valid mobile number.</p>
+                        </div>
+                      )}
+                    </div>
+                    {amount && (
+                      <button
+                        className="ui button primary"
+                        type="submit"
+                        onClick={initiatePay}
+                      >
+                        Pay Rs. {amount / 100} /-
+                      </button>
                     )}
-                  </div>
-                  {amount && (
-                    <button
-                      className="ui button primary"
-                      type="submit"
-                      onClick={initiatePay}
-                    >
-                      Pay Rs. {amount / 100} /-
+                    <button class="ui button" onClick={removeBankSelect}>
+                      Cancel
                     </button>
-                  )}
-                  <button class="ui button" onClick={removeBankSelect}>
-                    Cancel
-                  </button>
-                </form>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -131,10 +137,7 @@ const EBanking = ({
         className={"ui basic segment " + styles.noborderbox + " pd-top-30"}
         style={{ padding: "20px" }}
       >
-        <div className="ui grid centered">
-          <div className="three wide computer sixteen wide mobile column">
-            <b>Select your Bank</b>
-          </div>
+        <div className="ui grid centered" className={styles.searchBankBox}>
           <form className="ui form ten wide computer sixteen wide mobile column">
             <div className="field">
               <div
@@ -156,6 +159,11 @@ const EBanking = ({
           </form>
         </div>
         <div class={styles.fullheight}>
+          <div className="ui grid">
+            <div className="three wide computer sixteen wide mobile column">
+              <b>Select your Bank</b>
+            </div>
+          </div>
           <div className={"ui grid "}>
             {bank_list &&
               bank_list.map((item, index) => (
