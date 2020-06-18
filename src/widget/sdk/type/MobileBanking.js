@@ -162,9 +162,6 @@ const MobileBanking = ({
                     <i class="search icon"></i>
                   </div>
                 </div>
-                {bank_list && bank_list.length == 0 && (
-                  <div> Sorry no bank could be found.</div>
-                )}
               </form>
             </div>
           </div>
@@ -194,6 +191,15 @@ const MobileBanking = ({
                   </div>
                 </div>
               ))}
+            {bank_list && bank_list.length == 0 && (
+              <div className="ui grid">
+                <div className="column">
+                  <div className="ui negative message">
+                    Sorry no bank could be found.
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
