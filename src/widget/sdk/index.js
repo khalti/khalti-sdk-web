@@ -42,31 +42,22 @@ const SDK = ({
 
   const [loading, setLoading] = useState(true);
   const [leftShow, setLeftShow] = useState(null);
-  const [rightShow, setRightShow] = useState(1);
+  const [rightShow, setRightShow] = useState(null);
   const getActiveTab = (obj) => {
     setActiveTab(obj);
   };
+  const scrollRef = React.createRef();
 
   useEffect(() => {
     setLoading(false);
   }, []);
-  const scrollRef = React.createRef();
+  useEffect(() => {
+    scrollRef.current && setRightShow(Boolean(scrollRef.current.scrollWidth - scrollRef.current.clientWidth - scrollRef.current.scrollLeft))
+  }, [scrollRef])
   const scrollLeft = () => {
-    console.log("left scroll");
-    if (rightShow < 2) {
-      setRightShow(leftShow + 1);
-    } else {
-      setLeftShow(null);
-    }
     sideScroll(scrollRef.current, "left", 10, 200, 10);
   };
   const scrollRight = () => {
-    console.log("Right scroll");
-    if (leftShow < 2) {
-      setLeftShow(leftShow + 1);
-    } else {
-      setRightShow(null);
-    }
     sideScroll(scrollRef.current, "right", 10, 200, 10);
   };
   const sideScroll = (ele, direction, speed, distance, step) => {
@@ -83,6 +74,10 @@ const SDK = ({
       }
     }, speed);
   };
+  const handleOnScroll = (e) => {
+    setLeftShow(Boolean(e.currentTarget.scrollLeft))
+    setRightShow(Boolean(e.currentTarget.scrollWidth - e.currentTarget.clientWidth - e.currentTarget.scrollLeft))
+  }
   return (
     <React.Fragment>
       {
@@ -119,19 +114,17 @@ const SDK = ({
                 </div>
                 <div style={{ padding: "15px 15px 0 15px" }}>
                   <div className={styles.scrollTrigger}>
-                    {leftShow && leftShow > 0 && (
-                      <span className={styles.Prev}>
+                    {leftShow && (<span className={styles.Prev}>
                         <i
                           onClick={scrollLeft}
-                          className="icon angle left large"
+                          className="icon angle left small"
                         />
                       </span>
                     )}
-                    {rightShow && rightShow > 0 && (
-                      <span className={styles.Next}>
+                    {rightShow && (<span className={styles.Next}>
                         <i
                           onClick={scrollRight}
-                          className="icon angle right large"
+                          className="icon angle right small"
                         />
                       </span>
                     )}
@@ -139,6 +132,7 @@ const SDK = ({
                   <div className={styles.parentBar}>
                     <div
                       ref={scrollRef}
+                      onScroll={handleOnScroll}
                       className={
                         "ui pointing secondary menu " + styles.onHoverBar
                       }
