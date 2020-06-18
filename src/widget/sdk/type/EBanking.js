@@ -137,33 +137,35 @@ const EBanking = ({
         className={"ui basic segment " + styles.noborderbox + " pd-top-30"}
         style={{ padding: "20px" }}
       >
-        <div className="ui grid centered" className={styles.searchBankBox}>
-          <form className="ui form ten wide computer sixteen wide mobile column">
-            <div className="field">
-              <div
-                class="ui transparent icon input"
-                onChange={handleSearch}
-                style={{
-                  borderBottom: "1px solid #5d2e8e",
-                  paddingBottom: "5px",
-                  fontSize: "15px",
-                }}
-              >
-                <input type="text" placeholder="Search Bank" />
-                <i class="search icon"></i>
-              </div>
-            </div>
-            {bank_list && bank_list.length == 0 && (
-              <div> Sorry no bank could be found.</div>
-            )}
-          </form>
-        </div>
-        <div class={styles.fullheight}>
-          <div className="ui grid">
-            <div className="three wide computer sixteen wide mobile column">
-              <b>Select your Bank</b>
+        <div className="ui grid">
+          <div className="three wide computer sixteen wide mobile column">
+            <b>Select your Bank</b>
+          </div>
+          <div className="thirteen wide computer sixteen wide mobile column">
+            <div className="ui grid centered" className={styles.searchBankBox}>
+              <form className="ui form ten wide computer sixteen wide mobile column">
+                <div className="field">
+                  <div
+                    class="ui transparent icon input"
+                    onChange={handleSearch}
+                    style={{
+                      borderBottom: "1px solid #efefef",
+                      paddingBottom: "5px",
+                      fontSize: "15px",
+                    }}
+                  >
+                    <input type="text" placeholder="Search Bank" />
+                    <i class="search icon"></i>
+                  </div>
+                </div>
+                {bank_list && bank_list.length == 0 && (
+                  <div> Sorry no bank could be found.</div>
+                )}
+              </form>
             </div>
           </div>
+        </div>
+        <div class={styles.fullheight}>
           <div className={"ui grid "}>
             {bank_list &&
               bank_list.map((item, index) => (
