@@ -148,6 +148,7 @@ const SDK = ({
                               paddingTop: "18px",
                               paddingBottom: "18px",
                               paddingRight: "18px",
+                              cursor: 'pointer'
                             }}
                             data-tab={item}
                             key={index}

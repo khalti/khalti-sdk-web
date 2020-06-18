@@ -164,52 +164,31 @@ const EBanking = ({
         </div>
         <div class={styles.fullheight}>
           <div className={"ui grid "}>
-            {bank_list &&
-              bank_list.map((item, index) => (
+          {bank_list &&
+            bank_list.map((item, index) => (
+              <div
+                key={index}
+                className="four wide computer eight wide mobile column"
+                onClick={() => bankSelect(item)}
+              >
                 <div
-                  key={index}
-                  className="four wide computer eight wide mobile column"
-                  onClick={() => bankSelect(item)}
+                  className={`${styles.IconContent}  ServiceListIcon pointer ${styles.fullWide}`}
+                  style={{ display: "block", justifyContent: 'center', aligItems: 'center', display: 'grid'}}
                 >
-                  <div
-                    className={`${styles.IconContent}  ServiceListIcon pointer ${styles.fullWide}`}
-                    style={{ display: "block" }}
-                  >
-                    <div
-                      style={{
-                        position: "relative",
-                        width: "100%",
-                        alignItems: "center",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundImage: "url(" + item.logo + ")",
-                          backgroundRepeat: "no-repeat",
-                          backgroundPosition: "center",
-                          backgroundSize: "contain",
-                          height: "38px",
-                          width: "38px",
-                          padding: "10px",
-                          margin: "auto",
-                          border: "1px solid #e3e3e3",
-                          borderRadius: "50%",
-                        }}
-                      ></div>
-                      <div className={styles.ServiceName}>
-                        {item.short_name}
-                      </div>
+                    <div className='ui raised circular segment' style={{boxShadow: 'none', height: '70px', width: '70px', padding: '0'}}>
+                      <img className='ui tiny centered image' style={{width: '50px', margin: '10px auto'}} src={item.logo} />
                     </div>
                   </div>
-                </div>
-              ))}
-            {bank_list && bank_list.length == 0 && (
-              <div className="ui grid">
-                <div className="column">
-                  <div className="ui error message">
-                    Sorry no bank could be found.
+                  <div className={styles.ServiceName}>
+                  {item.short_name}
                   </div>
                 </div>
+            ))}
+            {bank_list && bank_list.length == 0 && (
+                <div className="column">
+                  <div className="ui message">
+                    Sorry no bank could be found.
+                  </div>
               </div>
             )}
           </div>
