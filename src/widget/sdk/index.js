@@ -41,6 +41,8 @@ const SDK = ({
   const [activeTab, setActiveTab] = useState({ tab: payment_preference[0] });
 
   const [loading, setLoading] = useState(true);
+  const [leftShow, setLeftShow] = useState(null);
+  const [rightShow, setRightShow] = useState(1);
   const getActiveTab = (obj) => {
     setActiveTab(obj);
   };
@@ -51,10 +53,20 @@ const SDK = ({
   const scrollRef = React.createRef();
   const scrollLeft = () => {
     console.log("left scroll");
+    if (rightShow < 2) {
+      setRightShow(leftShow + 1);
+    } else {
+      setLeftShow(null);
+    }
     sideScroll(scrollRef.current, "left", 10, 200, 10);
   };
   const scrollRight = () => {
-    console.log("right scroll");
+    console.log("Right scroll");
+    if (leftShow < 2) {
+      setLeftShow(leftShow + 1);
+    } else {
+      setRightShow(null);
+    }
     sideScroll(scrollRef.current, "right", 10, 200, 10);
   };
   const sideScroll = (ele, direction, speed, distance, step) => {
@@ -107,18 +119,22 @@ const SDK = ({
                 </div>
                 <div style={{ padding: "15px 15px 0 15px" }}>
                   <div className={styles.scrollTrigger}>
-                    <span className={styles.Prev}>
-                      <i
-                        onClick={scrollLeft}
-                        className="icon angle left large"
-                      />
-                    </span>
-                    <span className={styles.Next}>
-                      <i
-                        onClick={scrollRight}
-                        className="icon angle right large"
-                      />
-                    </span>
+                    {leftShow && leftShow > 0 && (
+                      <span className={styles.Prev}>
+                        <i
+                          onClick={scrollLeft}
+                          className="icon angle left large"
+                        />
+                      </span>
+                    )}
+                    {rightShow && rightShow > 0 && (
+                      <span className={styles.Next}>
+                        <i
+                          onClick={scrollRight}
+                          className="icon angle right large"
+                        />
+                      </span>
+                    )}
                   </div>
                   <div className={styles.parentBar}>
                     <div

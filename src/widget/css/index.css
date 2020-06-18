@@ -147,10 +147,10 @@ input[type="number"] {
     display: block;
     color: rgba(0, 0, 0, 0.25);
     font-size: 32px;
-    left: 4px;
+    left: -14px;
     top: 0px;
     z-index: 8;
-    padding: 4px;
+    padding: 0px;
   }
   .Next {
     position: absolute;
@@ -158,9 +158,9 @@ input[type="number"] {
     display: block;
     color: rgba(0, 0, 0, 0.25);
     font-size: 32px;
-    right: 4px;
+    right: -14px;
     z-index: 8;
-    padding: 4px;
+    padding: 0px;
   }
 }
 

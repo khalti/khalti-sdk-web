@@ -174,7 +174,9 @@ const EBanking = ({
                 >
                   <div
                     className={`${styles.IconContent}  ServiceListIcon pointer ${styles.fullWide}`}
-                    style={{ display: "block" }}
+                    style={{
+                      display: "block",
+                    }}
                   >
                     <div
                       style={{
