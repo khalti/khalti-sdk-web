@@ -153,7 +153,7 @@ const MobileBanking = ({
                     class="ui transparent icon input"
                     onChange={handleSearch}
                     style={{
-                      borderBottom: "1px solid #efefef",
+                      borderBottom: "2px solid rgb(229, 229, 229)",
                       padding: "5px",
                       fontSize: "15px",
                     }}
@@ -180,14 +180,29 @@ const MobileBanking = ({
                   >
                     <div
                       style={{
-                        backgroundImage: "url(" + item.logo + ")",
-                        backgroundRepeat: "no-repeat",
-                        backgroundPosition: "center",
-                        backgroundSize: "contain",
-                        height: "38px",
+                        position: "relative",
+                        width: "100%",
+                        alignItems: "center",
                       }}
-                    ></div>
-                    <div className={styles.ServiceName}>{item.short_name}</div>
+                    >
+                      <div
+                        style={{
+                          backgroundImage: "url(" + item.logo + ")",
+                          backgroundRepeat: "no-repeat",
+                          backgroundPosition: "center",
+                          backgroundSize: "contain",
+                          height: "38px",
+                          width: "38px",
+                          padding: "10px",
+                          margin: "auto",
+                          border: "1px solid #e3e3e3",
+                          borderRadius: "50%",
+                        }}
+                      ></div>
+                      <div className={styles.ServiceName}>
+                        {item.short_name}
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}

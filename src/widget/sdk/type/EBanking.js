@@ -177,21 +177,36 @@ const EBanking = ({
                   >
                     <div
                       style={{
-                        backgroundImage: "url(" + item.logo + ")",
-                        backgroundRepeat: "no-repeat",
-                        backgroundPosition: "center",
-                        backgroundSize: "contain",
-                        height: "38px",
+                        position: "relative",
+                        width: "100%",
+                        alignItems: "center",
                       }}
-                    ></div>
-                    <div className={styles.ServiceName}>{item.short_name}</div>
+                    >
+                      <div
+                        style={{
+                          backgroundImage: "url(" + item.logo + ")",
+                          backgroundRepeat: "no-repeat",
+                          backgroundPosition: "center",
+                          backgroundSize: "contain",
+                          height: "38px",
+                          width: "38px",
+                          padding: "10px",
+                          margin: "auto",
+                          border: "1px solid #e3e3e3",
+                          borderRadius: "50%",
+                        }}
+                      ></div>
+                      <div className={styles.ServiceName}>
+                        {item.short_name}
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
             {bank_list && bank_list.length == 0 && (
               <div className="ui grid">
                 <div className="column">
-                  <div className="ui negative message">
+                  <div className="ui error message">
                     Sorry no bank could be found.
                   </div>
                 </div>
