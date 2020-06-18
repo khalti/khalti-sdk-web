@@ -149,7 +149,7 @@ const EBanking = ({
                     class="ui transparent icon input"
                     onChange={handleSearch}
                     style={{
-                      borderBottom: "1px solid #efefef",
+                      borderBottom: '2px solid rgb(229, 229, 229)',
                       paddingBottom: "5px",
                       fontSize: "15px",
                     }}
@@ -158,9 +158,6 @@ const EBanking = ({
                     <i class="search icon"></i>
                   </div>
                 </div>
-                {bank_list && bank_list.length == 0 && (
-                  <div> Sorry no bank could be found.</div>
-                )}
               </form>
             </div>
           </div>
@@ -191,6 +188,9 @@ const EBanking = ({
                   </div>
                 </div>
               ))}
+              {bank_list && bank_list.length == 0 && (
+                <div className='ui message'> Sorry no bank could be found.</div>
+              )}
           </div>
         </div>
       </div>
