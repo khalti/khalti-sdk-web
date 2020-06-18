@@ -1,6 +1,5 @@
 ## Before Deploy and Shipping
-- [ ] resolve cors issue from server
-- [ ] before deploy set env CDN_HOST and KHALTI_SERVER
+- [ ] update env
 - ```npm run build```
 - bump version
 - ```npm publish```
