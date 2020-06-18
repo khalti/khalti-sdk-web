@@ -148,13 +148,13 @@ input[type="number"] {
     color: rgba(0, 0, 0, 0.25);
     font-size: 32px;
     left: 4px;
-    top: 10px;
+    top: 0px;
     z-index: 8;
     padding: 4px;
   }
   .Next {
     position: absolute;
-    top: 10px;
+    top: 0px;
     display: block;
     color: rgba(0, 0, 0, 0.25);
     font-size: 32px;
@@ -162,4 +162,16 @@ input[type="number"] {
     z-index: 8;
     padding: 4px;
   }
+}
+
+.onHoverBar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  scrollbar-color: #5c2d91 #e2e2e2;
+}
+
+.onHoverBar::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  height: 0;
+  background: #e2e2e2; /* Optional: just make scrollbar invisible */
 }
