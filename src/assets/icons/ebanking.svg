@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>shipping-screen-android-hyperlocal</title>
+    <desc>Created with Sketch.</desc>
+    <g id="shipping-screen-android-hyperlocal" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(0.200000, 3.000000)" fill="#5C2D91">
+            <g id="ancient-building" fill-rule="nonzero">
+                <polygon id="Shape" points="12.7062707 0 0 5.9062439 0 8.26878049 25.4124938 8.26878049 25.4124938 5.9062439"></polygon>
+                <polygon id="Rectangle-path" points="2.31020936 9.45 4.62041872 9.45 4.62041872 22.4438049 2.31020936 22.4438049"></polygon>
+                <polygon id="Rectangle-path" points="6.93067578 9.45 9.24088514 9.45 9.24088514 22.4438049 6.93067578 22.4438049"></polygon>
+                <polygon id="Rectangle-path" points="11.5511422 9.45 13.8613516 9.45 13.8613516 22.4438049 11.5511422 22.4438049"></polygon>
+                <polygon id="Rectangle-path" points="16.1716086 9.45 18.481818 9.45 18.481818 22.4438049 16.1716086 22.4438049"></polygon>
+                <polygon id="Rectangle-path" points="20.7920273 9.45 23.1022367 9.45 23.1022367 22.4438049 20.7920273 22.4438049"></polygon>
+                <polygon id="Rectangle-path" points="0 23.6250732 25.4124938 23.6250732 25.4124938 25.987561 0 25.987561"></polygon>
+            </g>
+            <polygon id="arrow_forward---material" points="27.916274 11.2068966 31.7229589 15.0997241 27.916274 18.9925517 27.2438356 18.3048966 29.8993973 15.5775862 24.109589 15.5775862 24.109589 14.6218621 29.8993973 14.6218621 27.2438356 11.8945517"></polygon>
+        </g>
+    </g>
+</svg>

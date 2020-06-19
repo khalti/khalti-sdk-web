@@ -1,17 +1,23 @@
 {
-  "name": "khalti-web",
-  "version": "1.1.0",
+  "name": "khalti-checkout-web",
+  "version": "2.0.0",
   "description": "Khalti checkout loader for web.",
-  "main": "lib/index.js",
+  "main": "dist/khalti-checkout.cjs.js",
   "scripts": {
     "test": "mocha --compilers js:babel-register spec/*",
     "build:node": "rollup -c rollup-config/node.js",
     "build:web": "rollup -c rollup-config/web.js",
-    "build": "npm run build:node && npm run build:web",
-    "prepublish": "npm run build"
+    "build:es": "rollup -c rollup-config/es.js",
+    "build:assets": "cp semantic-ui/theme.config node_modules/semantic-ui-less/ && cp src/payment_gateway_widget.html dist/ && cp -r src/assets/icons dist/",
+    "watch:widget": "webpack --config webpack-config/dev-widget.js --watch",
+    "start": "webpack-dev-server --hot --disable-host-check --config webpack-config/dev-widget.js --open",
+    "build:widget": "npm run build:assets && webpack --config webpack-config/widget.js --mode production",
+    "build:prod": "source ./.env && npm run build:node && npm run build:web && npm run build:widget",
+    "build": "source ./.env.dev && webpack --config webpack-config/dev-widget.js && npm run build:assets && npm run build:node && npm run build:web",
+    "build:sample": " webpack --config webpack-config/dev-widget.js && npm run build:assets && npm run build:node && npm run build:web"
   },
   "files": [
-    "lib"
+    "dist"
   ],
   "repository": {
     "type": "git",
@@ -31,21 +37,37 @@
   },
   "homepage": "https://github.com/khalti/khalti-sdk-web",
   "dependencies": {
+    "axios": "^0.19.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "validatex": "^0.3.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.11.4",
-    "babel-core": "^6.11.4",
-    "babel-loader": "^6.2.4",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.11.5",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-register": "^6.11.5",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
     "chai": "^3.5.0",
+    "css-loader": "^3.5.3",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "less": "^3.11.1",
+    "less-loader": "^6.0.0",
     "mocha": "^2.5.3",
-    "rollup-plugin-babel": "^3.0.2",
-    "rollup-plugin-commonjs": "^8.2.0",
-    "rollup-plugin-node-resolve": "^3.0.0",
-    "rollup-plugin-replace": "^1.1.1",
-    "rollup-plugin-uglify": "^2.0.1"
+    "rollup": "^2.8.2",
+    "rollup-plugin-babel": "^3.0.7",
+    "rollup-plugin-commonjs": "^8.4.1",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-replace": "^1.2.1",
+    "rollup-plugin-uglify": "^2.0.1",
+    "semantic-ui-less": "^2.4.1",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   }
 }

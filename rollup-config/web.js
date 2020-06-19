@@ -4,12 +4,16 @@ import commonjs from 'rollup-plugin-commonjs';
 import replace from 'rollup-plugin-replace';
 import uglify from 'rollup-plugin-uglify';
 
-const WIDGET_URL = process.env.WIDGET_URL;
+const CDN_HOST = process.env.CDN_HOST
+
+if (!CDN_HOST) {
+  console.error('No CDN_HOST provided');
+}
 
 export default {
   input: 'src/index.js',
   output: {
-    file: 'dist/khalti-checkout.js',
+    file: 'dist/khalti-checkout.iffe.js',
     format: 'iife',
     name: 'KhaltiCheckout'
   },
@@ -18,7 +22,7 @@ export default {
     commonjs(),
     babel(),
     replace({
-      __WIDGET_URL__: JSON.stringify(WIDGET_URL)
+      __CDN_HOST__: JSON.stringify(CDN_HOST)
     }),
     uglify()
   ]

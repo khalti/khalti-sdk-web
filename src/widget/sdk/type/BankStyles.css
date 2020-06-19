@@ -1,0 +1,182 @@
+.productImage {
+  position: relative;
+  float: left;
+  width: 100%;
+  height: 100%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.khaltiError {
+  color: #f21c1c;
+  padding: 2px 0;
+}
+.ServiceImage {
+  height: 75px !important;
+  width: auto !important;
+}
+.ServiceName {
+  margin-top: 12px;
+  color: #000;
+  text-align: center;
+}
+.overflowHide {
+  overflow: hidden !important;
+  margin: 0;
+  padding: 0;
+}
+.bannerImage {
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 90px;
+  background-position-x: center;
+}
+:global(.ui):global(.label).Cashback {
+  font-size: 11px;
+  background-color: #ebe5f0;
+  font-weight: normal;
+  color: #5d2e8e;
+  margin-top: 2px;
+  border-radius: 100px;
+}
+.NoCashback {
+  font-size: 10px;
+  color: transparent;
+}
+
+@media only screen and (max-width: 767px) {
+  .ServiceImage {
+    height: 40px !important;
+    width: auto !important;
+  }
+  .Cashback {
+    font-size: 8px;
+  }
+}
+.fullWide {
+  width: 100% !important;
+}
+
+.BorderedItem {
+  border: 1px solid #000;
+}
+
+.IconWrapperLeft {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.contact {
+  padding-right: 20px;
+  color: #5d2e8e !important;
+}
+
+:global(.IconWrapper) .IconContent {
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin: 10px 5px;
+  /*box-shadow: 0px 0px 0px 1px #f2f2f2;*/
+}
+
+@media only screen and (min-width: 768px) {
+  .fullheight {
+    padding-top: 18px;
+    margin-top: 8px;
+    height: 320px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .fullheight {
+    padding-top: 18px;
+    margin-top: 8px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    z-index: 5;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .tabHeight {
+    /* margin-top: 8px; */
+    height: 380px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .tabHeight {
+    position: relative;
+    padding-bottom: 125px;
+  }
+}
+.bankSelect {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  background-color: #fff;
+  width: 100%;
+  box-shadow: inset 0 20px 20px -20px rgba(236, 236, 236, 0.8);
+}
+
+@media only screen and (min-width: 768px) {
+  .bankSelect {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    background-color: #fff;
+    width: 100%;
+    box-shadow: inset 0 20px 20px -20px rgba(236, 236, 236, 0.8);
+  }
+}
+@media only screen and (max-width: 768px) {
+  .bankSelectOuterdiv {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.25);
+    z-index: 19;
+    width: "100%";
+    height: "100%";
+  }
+  .bankSelect {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+    background-color: #fff;
+    width: 100%;
+    box-shadow: inset 0 20px 20px -20px rgba(236, 236, 236, 0.8);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .searchBankBox {
+    position: fixed;
+    z-index: 17;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 100%;
+    background-color: #fff;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    padding-right: 8px;
+    padding-left: 8px;
+    display: block;
+    box-shadow: inset 0 20px 20px -20px rgba(236, 236, 236, 0.8);
+  }
+}
+
+.mobileCenter {
+  text-align: center;
+}
