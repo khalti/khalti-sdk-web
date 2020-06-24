@@ -180,3 +180,16 @@
 .mobileCenter {
   text-align: center;
 }
+:global(.ui):global(.tiny):global(.image).bankImageItem {
+  width: 47px;
+  position: relative;
+  top: 10px;
+}
+
+:global(.ui):global(.circular):global(.segment).bankImageWrapper {
+  padding: 0;
+  cursor: pointer;
+  box-shadow: none;
+  height: 70px;
+  width: 70px;
+}

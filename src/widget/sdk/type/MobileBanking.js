@@ -17,24 +17,29 @@ const MobileBanking = ({
   product_url,
 }) => {
   const [bank_list, setBankList] = useState(null);
+  const [filtered_list, setFilteredList] = useState(null);
   const [bank_selected, setBankSelected] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const [mobile, setMobileNumber] = useState(null);
   const [errMobile, setErrMobile] = useState(false);
-  const changeMobile = () => {
-    setMobileNumber(event.target.value);
+  const changeMobile = (e) => {
+    e.preventDefault()
+    setMobileNumber(e.target.value);
   };
 
-  const handleSearch = (values) => {
-    let search = async () => {
-      const { data } = await axios.get(mobile_banking_list, {
-        params: { page_size: 30, search: event.target.value },
+  const handleSearch = (e) => {
+    let value = e.target.value;
+    if (value) {
+      value = value.toLowerCase();
+      let filtered = bank_list.filter(i => {
+        let bank = `${i.name} ${i.short_name}`.toLowerCase();
+        return bank.includes(value)
       });
-
-      setBankList([...data.records]);
-    };
-    search();
+      setFilteredList(filtered)
+    } else {
+      setFilteredList(bank_list);
+    }
   };
 
   useEffect(() => {
@@ -56,9 +61,13 @@ const MobileBanking = ({
     setBankSelected(item);
   };
 
-  const initiatePay = async () => {
-    event.preventDefault();
-    if (mobile && !validateMobile(mobile)) {
+  const initiatePay = async (e) => {
+    e.preventDefault();
+    if (!mobile) {
+      setErrMobile("This field is required.");
+      return;
+    }
+    if (!validateMobile(mobile)) {
       setErrMobile(false);
       if (bank_selected.idx) {
         try {
@@ -68,7 +77,7 @@ const MobileBanking = ({
               product_identity,
               product_name,
               amount,
-              payment_type: "mobile_checkout",
+              payment_type: "mobilecheckout",
               source: "checkout_v2",
               bank: bank_selected.idx,
               mobile,
@@ -76,61 +85,63 @@ const MobileBanking = ({
             })}`
           );
         } catch (err) {
-          console.log(err, "--err");
+          console.error(err, "--err");
         }
       }
     } else {
       setErrMobile(true);
     }
   };
-  const removeBankSelect = (item) => {
+  const removeBankSelect = (e) => {
+    e.preventDefault()
     setBankSelected(null);
+  };
+  const onMobileBlur = (e) => {
+    e.preventDefault();
+    setErrMobile(validateMobile(mobile));
   };
   return (
     <div>
       {bank_selected && (
         <div className={styles.bankSelectOuterdiv}>
           <div className={styles.bankSelect}>
-            <div className="ui basic segment">
-              <div className="ui list">
-                <div className="item">
-                  <img className="ui avatar image" src={bank_selected.logo} />
-                  <div className="content">
-                    <div className="header" style={{ background: "#fff" }}>
-                      {bank_selected.name}
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="ui padded basic segment">
+            <h3>
+              <img
+                className="ui avatar image"
+                style={{ marginRight: "10px" }}
+                src={bank_selected.logo}
+              />
+              {bank_selected.name}
+            </h3>
               <div className="ui grid">
                 <div className="eight wide computer sixteen wide mobile column">
-                  <form className="ui form ">
+                  <div className="ui form ">
                     <div className="field">
                       <input
-                        type="number"
                         name="mobile"
                         placeholder="Mobile Number"
                         onChange={changeMobile}
+                        onBlur={onMobileBlur}
                       />
                       {errMobile && (
-                        <div class="ui negative message">
-                          <p>Please enter a valid mobile number.</p>
+                        <div className="ui negative message">
+                          <p>{errMobile}</p>
                         </div>
                       )}
                     </div>
                     {amount && (
-                      <button
+                      <div
                         className="ui button primary"
-                        type="submit"
                         onClick={initiatePay}
                       >
                         Pay Rs. {amount / 100} /-
-                      </button>
+                      </div>
                     )}
-                    <button class="ui button" onClick={removeBankSelect}>
-                      Clear
-                    </button>
-                  </form>
+                    <div className="ui button" onClick={removeBankSelect}>
+                      Cancel
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -147,10 +158,10 @@ const MobileBanking = ({
           </div>
           <div className="thirteen wide computer sixteen wide mobile column">
             <div className="ui grid centered" className={styles.searchBankBox}>
-              <form className="ui form ten wide computer sixteen wide mobile column">
+              <div className="ui form ten wide computer sixteen wide mobile column">
                 <div className="field">
                   <div
-                    class="ui transparent icon input"
+                    className="ui transparent icon input"
                     onChange={handleSearch}
                     style={{
                       borderBottom: "2px solid rgb(229, 229, 229)",
@@ -159,14 +170,15 @@ const MobileBanking = ({
                     }}
                   >
                     <input type="text" placeholder="Search Bank" />
-                    <i class="search icon"></i>
+                    <i className="search icon"></i>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
-        <div class={styles.fullheight}>
+        <div className={styles.fullheight}>
+          {loading && <div className='ui loading basic segment'></div>}
           <div className={"ui grid "}>
             {bank_list &&
               bank_list.map((item, index) => (
@@ -179,8 +191,8 @@ const MobileBanking = ({
                     className={`${styles.IconContent}  ServiceListIcon pointer ${styles.fullWide}`}
                     style={{ display: "block", justifyContent: 'center', aligItems: 'center', display: 'grid'}}
                   >
-                      <div className='ui raised circular segment' style={{boxShadow: 'none', height: '70px', width: '70px', padding: '0'}}>
-                        <img className='ui tiny centered image' style={{width: '50px', margin: '10px auto'}} src={item.logo} />
+                      <div className={`ui raised circular segment ${styles.bankImageWrapper}`}>
+                        <img className={`ui tiny centered image ${styles.bankImageItem}`} src={item.logo} />
                       </div>
                     </div>
                     <div className={styles.ServiceName}>
@@ -188,15 +200,13 @@ const MobileBanking = ({
                     </div>
                   </div>
               ))}
-            {bank_list && bank_list.length == 0 && (
-              <div className="ui grid">
-                <div className="column">
-                  <div className="ui negative message">
-                    Sorry no bank could be found.
-                  </div>
+              {bank_list && bank_list.length == 0 && (
+                  <div className="column">
+                    <div className="ui message">
+                      Sorry no bank could be found. Please try again.
+                    </div>
                 </div>
-              </div>
-            )}
+              )}
           </div>
         </div>
       </div>

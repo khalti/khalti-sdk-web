@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 import * as styles from "./BankStyles.css";
@@ -17,23 +17,29 @@ const EBanking = ({
   product_url,
 }) => {
   const [bank_list, setBankList] = useState();
+  const [filtered_list, setFilteredList] = useState(null);
   const [bank_selected, setBankSelected] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const [mobile, setMobileNumber] = useState(null);
-  const [errMobile, setErrMobile] = useState(false);
-  const changeMobile = () => {
-    setMobileNumber(event.target.value);
+  const [errMobile, setErrMobile] = useState(null);
+  const changeMobile = (e) => {
+    e.preventDefault()
+    setMobileNumber(e.target.value);
   };
 
-  const handleSearch = (values) => {
-    let search = async () => {
-      const { data } = await axios.get(ebanking_list, {
-        params: { page_size: 30, search: event.target.value },
+  const handleSearch = (e) => {
+    let value = e.target.value;
+    if (value) {
+      value = value.toLowerCase();
+      let filtered = bank_list.filter(i => {
+        let bank = `${i.name} ${i.short_name}`.toLowerCase();
+        return bank.includes(value)
       });
-      setBankList([...data.records]);
-    };
-    search();
+      setFilteredList(filtered)
+    } else {
+      setFilteredList(bank_list);
+    }
   };
 
   useEffect(() => {
@@ -42,6 +48,7 @@ const EBanking = ({
       try {
         const { data } = await axios.get(ebanking_list);
         setBankList([...data.records]);
+        setFilteredList([...data.records]);
       } catch (err) {
         console.log(err, "error");
       } finally {
@@ -51,10 +58,13 @@ const EBanking = ({
     getBanks();
   }, []);
 
-  const initiatePay = async (event) => {
-    event.preventDefault();
-    if (mobile && !validateMobile(mobile)) {
-      setErrMobile(false);
+  const initiatePay = useCallback((e) => {
+    e.preventDefault();
+    if (!mobile) {
+      setErrMobile("This field is required.");
+      return;
+    }
+    if (!validateMobile(mobile)) {
       if (bank_selected.idx) {
         try {
           var myWindow = window.open(
@@ -70,22 +80,26 @@ const EBanking = ({
             })}`
           );
         } catch (err) {
-          console.log(err, "--err");
+          console.error(err, "--err");
         }
       }
-    } else {
-      setErrMobile(true);
     }
-  };
+  })
 
   const bankSelect = (item) => {
     setBankSelected(item);
   };
-  const removeBankSelect = (item) => {
+  const removeBankSelect = useCallback((e) => {
+    e.preventDefault();
+    console.log('remove called');
     setBankSelected(null);
+  })
+  const onMobileBlur = (e) => {
+    e.preventDefault();
+    setErrMobile(validateMobile(mobile));
   };
   return (
-    <div>
+    <React.Fragment>
       {bank_selected && (
         <div className={styles.bankSelectOuterdiv}>
           <div className={styles.bankSelect}>
@@ -100,33 +114,32 @@ const EBanking = ({
               </h3>
               <div className="ui grid">
                 <div className="eight wide computer sixteen wide mobile column">
-                  <form className="ui form ">
+                  <div className="ui form ">
                     <div className="field">
                       <input
-                        type="number"
                         name="mobile"
                         placeholder="Mobile Number"
                         onChange={changeMobile}
+                        onBlur={onMobileBlur}
                       />
                       {errMobile && (
-                        <div class="ui negative message">
-                          <p>Please enter a valid mobile number.</p>
+                        <div className="ui negative message">
+                          <p>{errMobile}</p>
                         </div>
                       )}
                     </div>
                     {amount && (
-                      <button
+                      <div
                         className="ui button primary"
-                        type="submit"
                         onClick={initiatePay}
                       >
                         Pay Rs. {amount / 100} /-
-                      </button>
+                      </div>
                     )}
-                    <button class="ui button" onClick={removeBankSelect}>
+                    <div className="ui button" onClick={removeBankSelect}>
                       Cancel
-                    </button>
-                  </form>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -143,10 +156,10 @@ const EBanking = ({
           </div>
           <div className="thirteen wide computer sixteen wide mobile column">
             <div className="ui grid centered" className={styles.searchBankBox}>
-              <form className="ui form ten wide computer sixteen wide mobile column">
+              <div className="ui form ten wide computer sixteen wide mobile column">
                 <div className="field">
                   <div
-                    class="ui transparent icon input"
+                    className="ui transparent icon input"
                     onChange={handleSearch}
                     style={{
                       borderBottom: "2px solid rgb(229, 229, 229)",
@@ -155,17 +168,18 @@ const EBanking = ({
                     }}
                   >
                     <input type="text" placeholder="Search Bank" />
-                    <i class="search icon"></i>
+                    <i className="search icon"></i>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
-        <div class={styles.fullheight}>
+        <div className={styles.fullheight}>
+          {loading && <div className='ui loading basic segment'></div>}
           <div className={"ui grid "}>
-          {bank_list &&
-            bank_list.map((item, index) => (
+          {filtered_list &&
+            filtered_list.map((item, index) => (
               <div
                 key={index}
                 className="four wide computer eight wide mobile column"
@@ -175,26 +189,26 @@ const EBanking = ({
                   className={`${styles.IconContent}  ServiceListIcon pointer ${styles.fullWide}`}
                   style={{ display: "block", justifyContent: 'center', aligItems: 'center', display: 'grid'}}
                 >
-                    <div className='ui raised circular segment' style={{boxShadow: 'none', height: '70px', width: '70px', padding: '0'}}>
-                      <img className='ui tiny centered image' style={{width: '50px', margin: '10px auto'}} src={item.logo} />
-                    </div>
+                <div className={`ui raised circular segment ${styles.bankImageWrapper}`}>
+                  <img className={`ui tiny centered image ${styles.bankImageItem}`} src={item.logo} />
+                </div>
                   </div>
                   <div className={styles.ServiceName}>
                   {item.short_name}
                   </div>
                 </div>
             ))}
-            {bank_list && bank_list.length == 0 && (
+            {filtered_list && filtered_list.length == 0 && (
                 <div className="column">
                   <div className="ui message">
-                    Sorry no bank could be found.
+                    Sorry no bank could be found. Please try again.
                   </div>
               </div>
             )}
           </div>
         </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

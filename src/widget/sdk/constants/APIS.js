@@ -10,9 +10,9 @@ export const confirmation_api = KHALTI_SERVER + "/api/v2/payment/confirm/";
 export const verification_api = KHALTI_SERVER + "/api/v2/payment/verify/";
 export const ebanking_initiation_api = KHALTI_SERVER + "/ebanking/initiate/";
 export const mobile_banking_list =
-  KHALTI_SERVER + "/api/v2/bank/?payment_type=mobilecheckout";
+  KHALTI_SERVER + "/api/v2/bank/?payment_type=mobilecheckout&page_size=100";
 export const ebanking_list =
-  KHALTI_SERVER + "/api/v2/bank/?payment_type=sdkebanking";
+  KHALTI_SERVER + "/api/v2/bank/?payment_type=sdkebanking&page_size=100";
 
 export const queryToString = (params) => {
   return Object.keys(params)
