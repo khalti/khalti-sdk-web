@@ -1,12 +1,12 @@
 ## Introduction
-Khalti checkout beta loader for browser. <strong>UNSTABLE BETA</strong>
+Khalti checkout loader for browser.
 
 ## Installation
 ### Yarn
-`yarn add khalti-web`
+`yarn add khalti-checkout-web`
 
 ### npm
-`npm install --save khalti-web`
+`npm install --save khalti-checkout-web`
 
 
 ## Usage
