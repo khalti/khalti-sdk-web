@@ -93,7 +93,7 @@ const SDK = ({
               <div className="ui ">
                 {public_key && public_key.includes("test") && (
                   <span
-                    class="ui orange ribbon label"
+                    className="ui orange ribbon label"
                     style={{
                       position: "absolute",
                       left: "-16px",
@@ -147,7 +147,7 @@ const SDK = ({
                               paddingLeft: "0px",
                               paddingTop: "18px",
                               paddingBottom: "18px",
-                              paddingRight: "18px",
+                              paddingRight: "12px",
                               cursor: 'pointer'
                             }}
                             data-tab={item}

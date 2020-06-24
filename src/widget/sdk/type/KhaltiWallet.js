@@ -28,21 +28,27 @@ const KhaltiWallet = ({
 
   const [confirmation_code, setCode] = useState(null);
   const [errConCode, setErrConCode] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const changeMobile = () => {
-    setMobileNumber(event.target.value);
+  const changeMobile = (e) => {
+    if (paymentError) setPaymentError(null)
+    setMobileNumber(e.target.value);
   };
 
-  const changePin = () => {
-    setPin(event.target.value);
+  const changePin = (e) => {
+    if (paymentError) setPaymentError(null)
+    if (errTranPin) setErrTranPin(null)
+    setPin(e.target.value);
   };
 
-  const changeCode = () => {
-    setCode(event.target.value);
+  const changeCode = (e) => {
+    if (errConCode) setErrConCode(null)
+    if (paymentError) setPaymentError(null)
+    setCode(e.target.value);
   };
 
-  const sendOTPCode = async () => {
-    event.preventDefault();
+  const sendOTPCode = async (e) => {
+    e.preventDefault();
     if (!mobile) {
       setErrMobile("This field is required.");
       return;
@@ -55,6 +61,7 @@ const KhaltiWallet = ({
     if (isFormValid) {
       try {
         setPaymentError(null);
+        setLoading(true);
         const { data } = await axios.post(initiation_api, {
           public_key,
           product_identity,
@@ -99,21 +106,23 @@ const KhaltiWallet = ({
             }
           }
         }
+      } finally {
+        setLoading(false)
       }
     } else {
       return;
     }
   };
-  const confirmPayment = async () => {
-    event.preventDefault();
+  const confirmPayment = async (e) => {
+    e.preventDefault();
     if (!confirmation_code) {
       setErrConCode("This field is required");
       return;
     }
 
     if (!errConCode) {
-      setErrConCode(false);
       try {
+        setLoading(true)
         const { data } = await axios.post(confirmation_api, {
           public_key,
           transaction_pin,
@@ -131,15 +140,26 @@ const KhaltiWallet = ({
       } catch (err) {
         if (err.response) {
           let { data } = err.response;
-          if (data.confirmation_code || data.detail) {
-            setErrConCode(true);
-          } else {
+          if (data.confirmation_code) {
+            setErrConCode(data.confirmation_code.join(' '))
+          } else if (data.detail) {
+            let formError = [];
+              formError.push(
+                <div dangerouslySetInnerHTML={{ __html: data.detail }} />
+              );
+            if (formError.length > 0) {
+              setPaymentError(formError);
+            }
+          }
+           else {
             window.parent.postMessage(
               { realm: "widgetError", payload: data },
               "*"
             );
           }
         }
+      } finally {
+        setLoading(false)
       }
     } else {
       return;
@@ -155,7 +175,7 @@ const KhaltiWallet = ({
   };
   const onConCodeBlur = (e) => {
     e.preventDefault();
-    setErrTranPin(validateConfermationCode(confirmation_code));
+    setErrConCode(validateConfermationCode(confirmation_code));
   };
   return (
     <div className={`${styles.tabHeight}`}>
@@ -199,22 +219,13 @@ const KhaltiWallet = ({
                   </div>
                 </React.Fragment>
               )}
-              {paymentError && (
-                <div class="ui negative message">
-                  <ul className="list">
-                    {paymentError.map((i) => (
-                      <li>{i}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
               {otp_code && (
                 <div className="ui icon message">
                   <i className="attention icon"></i>
                   <div className="content">
                     <p>
                       Khalti has sent a confirmation code in your Khalti
-                      registered number.Enter the confirmation code below.
+                      registered number. Enter the confirmation code below.
                     </p>
                   </div>
                 </div>
@@ -234,12 +245,21 @@ const KhaltiWallet = ({
                   )}
                 </div>
               )}
+              {paymentError && (
+                <div className="ui negative message">
+                  <ul className="list">
+                    {paymentError.map((i, index) => (
+                      <li key={index}>{i}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               {!otp_code && (
                 <div className={styles.mobileCenter}>
                   <button
-                    className="ui button primary"
-                    type="submit"
+                    className={`ui button primary ${loading ? 'loading': ''}`}
                     onClick={sendOTPCode}
+                    type='button'
                   >
                     Pay Rs. {amount / 100}/-
                   </button>
@@ -248,9 +268,9 @@ const KhaltiWallet = ({
               {otp_code && amount && (
                 <div className={styles.mobileCenter}>
                   <button
-                    className="ui button primary"
-                    type="submit"
+                    className={`ui button primary ${loading ? 'loading': ''}`}
                     onClick={confirmPayment}
+                    type='button'
                   >
                     Pay Rs. {amount / 100}/-
                   </button>
