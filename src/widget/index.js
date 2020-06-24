@@ -18,15 +18,16 @@ const Widget = () => {
   const hideModal = () => {
     window.parent.postMessage({ realm: "hide" }, "*");
   };
-  const receiveMessage = (event) => {
+  const receiveMessage = (eve) => {
+
     if (
-      event &&
-      event.data &&
-      event.data.payload &&
-      event.data.payload.amount &&
-      event.data.payload.productIdentity
+      eve &&
+      eve.data &&
+      eve.data.payload &&
+      eve.data.payload.amount &&
+      eve.data.payload.productIdentity
     ) {
-      const data = event.data.payload;
+      const data = eve.data.payload;
       setProps({
         public_key: data.publicKey,
         product_identity: data.productIdentity,
@@ -43,8 +44,8 @@ const Widget = () => {
       });
     }
 
-    if (event.origin !== host_ip_address) return;
-    let data = JSON.parse(event.data);
+    if (eve.origin !== host_ip_address) return;
+    let data = JSON.parse(eve.data);
     if (data && data.idx) {
       window.parent.postMessage(
         { realm: "walletPaymentVerification", payload: data },

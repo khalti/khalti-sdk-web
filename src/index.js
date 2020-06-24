@@ -86,10 +86,11 @@ export default class KhaltiCheckout {
           e.data.payload.widget_id !== this._widgetId
         ) {
           return;
-        } else {
-          let handler = `handle_msg_${e.data.realm}`;
-          this[handler](e.data.payload);
         }
+        //  else {
+        //   let handler = `handle_msg_${e.data.realm}`;
+        //   this[handler](e.data.payload);
+        // }
       },
       false
     );
@@ -175,7 +176,7 @@ export default class KhaltiCheckout {
     widget.width = "100%";
     widget.height = window.innerHeight + "px";
     widget.setAttribute("src", ZHTML_src);
-    widget.style.zIndex = 999999999;
+    widget.style.zIndex = 99999;
     widget.setAttribute("frameborder", 0);
     widget.setAttribute("allowtransparency", true);
 
