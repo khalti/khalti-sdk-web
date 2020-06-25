@@ -58,8 +58,8 @@ const Widget = () => {
 
   useEffect(() => {
     window.addEventListener("message", receiveMessage, false);
-    () => {
-      window.removeEventListenter("message");
+    return () => {
+      window.removeEventListener("message", receiveMessage);
     };
   }, []);
 
@@ -73,5 +73,3 @@ const Widget = () => {
 };
 
 ReactDOM.render(<Widget />, document.getElementById("index"));
-//9860802349
-//0000
