@@ -102,7 +102,7 @@ const SDK = ({
                     TEST MODE
                   </span>
                 )}
-                <div
+                {payment_preference && payment_preference.length > 1 && <div
                   style={{
                     fontSize: "20px",
                     textAlign: "center",
@@ -111,7 +111,7 @@ const SDK = ({
                   }}
                 >
                   Choose your payment method
-                </div>
+                </div>}
                 <div style={{ padding: "15px 15px 0 15px" }}>
                   <div className={styles.scrollTrigger}>
                     {leftShow && (<span className={styles.Prev}>
@@ -138,18 +138,20 @@ const SDK = ({
                       }
                     >
                       {payment_preference.map((item, index) => {
+                        let activeStyle = {
+                          paddingLeft: "0px",
+                          paddingTop: "18px",
+                          paddingBottom: "18px",
+                          paddingRight: "12px",
+                          cursor: 'pointer',
+                        };
+                        if (payment_preference.length === 1) activeStyle.margin = 'auto'
                         return (
                           <a
                             className={
                               activeTab.tab == item ? "item active " : "item"
                             }
-                            style={{
-                              paddingLeft: "0px",
-                              paddingTop: "18px",
-                              paddingBottom: "18px",
-                              paddingRight: "12px",
-                              cursor: 'pointer'
-                            }}
+                            style={activeStyle}
                             data-tab={item}
                             key={index}
                             onClick={() => getActiveTab({ tab: item })}
