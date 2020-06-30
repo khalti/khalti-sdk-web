@@ -1,5 +1,6 @@
 "use strict";
 const webpack = require("webpack");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 let base = require("./widget.js");
 
 let updates = {
@@ -13,7 +14,11 @@ let updates = {
       CDN_HOST: process.env.CDN_HOST,
       KHALTI_SERVER: process.env.KHALTI_SERVER,
       DEBUG: true
-    })
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css",
+    }),
   ]
 };
 
