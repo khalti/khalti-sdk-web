@@ -92,15 +92,18 @@ const SDK = ({
             <div className={styles.modalScreen}>
               <div className="ui ">
                 {public_key && public_key.includes("test") && (
-                  <span
+                  <div
                     className="ui orange ribbon label"
                     style={{
                       position: "absolute",
-                      left: "-16px",
+                      top: "8px",
+                      color: '#fff',
+                      background: 'orange',
+                      padding: '2px'
                     }}
                   >
                     TEST MODE
-                  </span>
+                  </div>
                 )}
                 {payment_preference && payment_preference.length > 1 && <div
                   style={{

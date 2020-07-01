@@ -3,7 +3,10 @@
 const path = require("path");
 const webpack = require("webpack");
 const projectRoot = path.dirname(__dirname);
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
 
 const CDN_HOST = process.env.CDN_HOST;
 const KHALTI_SERVER = process.env.KHALTI_SERVER;
@@ -30,9 +33,10 @@ module.exports = {
       {
         test: /\.(less)$/,
         use: [
-          {
-            loader: "style-loader", // creates style nodes from JS strings
-          },
+          MiniCssExtractPlugin.loader,
+          // {
+          //   loader: "style-loader", // creates style nodes from JS strings
+          // },
           {
             loader: "css-loader", // translates CSS into CommonJS
           },
@@ -72,10 +76,12 @@ module.exports = {
       CDN_HOST: CDN_HOST,
       KHALTI_SERVER: KHALTI_SERVER
     }),
-    new HtmlWebpackPlugin({
-      filename: 'payment_gateway_widget.html',
-      template: './src/payment_gateway_widget.html',
-      minify: false
-    })
-  ]
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css",
+    }),
+  ],
+  optimization: {
+    minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin({})],
+  },
 };

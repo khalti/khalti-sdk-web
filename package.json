@@ -37,6 +37,7 @@
   "homepage": "https://github.com/khalti/khalti-sdk-web",
   "dependencies": {
     "axios": "^0.19.2",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "validatex": "^0.3.1"
@@ -53,9 +54,9 @@
     "chai": "^3.5.0",
     "css-loader": "^3.5.3",
     "file-loader": "^6.0.0",
-    "html-webpack-plugin": "^4.3.0",
     "less": "^3.11.1",
     "less-loader": "^6.0.0",
+    "mini-css-extract-plugin": "^0.9.0",
     "mocha": "^2.5.3",
     "rollup": "^2.17.1",
     "rollup-plugin-babel": "^3.0.7",
@@ -65,6 +66,7 @@
     "rollup-plugin-uglify": "^2.0.1",
     "semantic-ui-less": "^2.4.1",
     "style-loader": "^1.2.1",
+    "terser-webpack-plugin": "^3.0.6",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
