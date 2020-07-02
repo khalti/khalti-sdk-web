@@ -87,10 +87,10 @@ export default class KhaltiCheckout {
         ) {
           return;
         }
-        //  else {
-        //   let handler = `handle_msg_${e.data.realm}`;
-        //   this[handler](e.data.payload);
-        // }
+         else {
+          let handler = `handle_msg_${e.data.realm}`;
+          this[handler](e.data.payload);
+        }
       },
       false
     );
