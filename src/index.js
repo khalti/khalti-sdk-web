@@ -5,13 +5,12 @@ const paymentType = {
   MOBILE_BANKING: "MOBILE_BANKING",
   CONNECT_IPS: "CONNECT_IPS",
   SCT: "SCT",
-  KHALTI: "KHALTI"
-}
-
+  KHALTI: "KHALTI",
+};
 
 const CDN_HOST = __CDN_HOST__;
 
-const ZHTML_src = `${CDN_HOST}/payment_gateway_widget.html`
+const ZHTML_src = `${CDN_HOST}/payment_gateway_widget.html`;
 
 const filter = function (obj, predicate) {
   return Object.keys(obj)

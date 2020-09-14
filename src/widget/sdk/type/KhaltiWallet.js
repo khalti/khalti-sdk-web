@@ -41,7 +41,11 @@ const KhaltiWallet = ({
     setCode(event.target.value);
   };
 
+  const [btn_clicked, set_btn_clicked] = useState(false);
   const sendOTPCode = async () => {
+    if (!btn_clicked) {
+      set_btn_clicked(true);
+    }
     event.preventDefault();
     if (!mobile) {
       setErrMobile("This field is required.");
@@ -237,7 +241,11 @@ const KhaltiWallet = ({
               {!otp_code && (
                 <div className={styles.mobileCenter}>
                   <button
-                    className="ui button primary"
+                    className={
+                      !btn_clicked
+                        ? "ui button primary"
+                        : "ui disabled button primary"
+                    }
                     type="submit"
                     onClick={sendOTPCode}
                   >
