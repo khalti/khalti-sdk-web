@@ -50,7 +50,7 @@ const EBanking = ({
         setBankList([...data.records]);
         setFilteredList([...data.records]);
       } catch (err) {
-        console.log(err, "error");
+        console.error(err, "error");
       } finally {
         setLoading(false);
       }
@@ -91,7 +91,6 @@ const EBanking = ({
   };
   const removeBankSelect = useCallback((e) => {
     e.preventDefault();
-    console.log('remove called');
     setBankSelected(null);
   })
   const onMobileBlur = (e) => {

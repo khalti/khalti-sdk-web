@@ -15,44 +15,34 @@ import {
 
 const Widget = () => {
   const [passed_props, setProps] = useState(null);
+  // const [activeWidgetId, setActiveWidgetId] = useState(null);
   const hideModal = () => {
-    window.parent.postMessage({ realm: "hide" }, "*");
+    const activeId = localStorage.getItem('activeWidgetId');
+    const data = {widget_id: activeId};
+    window.parent.postMessage({ realm: "hide", payload: data}, "*");
   };
-  const receiveMessage = (eve) => {
-
-    if (
-      eve &&
-      eve.data &&
-      eve.data.payload &&
-      eve.data.payload.amount &&
-      eve.data.payload.productIdentity
-    ) {
-      const data = eve.data.payload;
-      setProps({
-        public_key: data.publicKey,
-        product_identity: data.productIdentity,
-        product_name: data.productName,
-        amount: data.amount,
-        product_url: data.productUrl,
-        payment_preference: data.paymentPreference || [
-          KHALTI,
-          EBANKING,
-          MOBILE_BANKING,
-          CONNECT_IPS,
-          SCT,
-        ],
-      });
+  const receiveMessage = ({data, origin}) => {
+    // mesage from sdk cdn
+    if (data && data.payload) {
+      let payload = JSON.parse(JSON.stringify(data.payload));
+      localStorage.setItem('activeWidgetId', data.payload.widgetId);
+      setProps(payload);
     }
-
-    if (eve.origin !== host_ip_address) return;
-    let data = JSON.parse(eve.data);
-    if (data && data.idx) {
+    if (origin !== host_ip_address) return;
+    // message from khalti server
+    const activeId = localStorage.getItem('activeWidgetId');
+    let _data = data;
+    if (typeof data === 'string') {
+      _data = JSON.parse(data)
+    }
+    _data.widget_id = activeId;
+    if (_data && _data.idx) {
       window.parent.postMessage(
-        { realm: "walletPaymentVerification", payload: data },
+        { realm: "walletPaymentVerification", payload: _data },
         "*"
       );
     } else {
-      window.parent.postMessage({ realm: "widgetError", payload: data }, "*");
+      window.parent.postMessage({ realm: "widgetError", payload: _data }, "*");
     }
   };
 
@@ -60,9 +50,9 @@ const Widget = () => {
     window.addEventListener("message", receiveMessage, false);
     return () => {
       window.removeEventListener("message", receiveMessage);
+      localStorage.clear();
     };
   }, []);
-
   return (
     <React.Fragment>
       {passed_props && Object.keys(passed_props).length && (

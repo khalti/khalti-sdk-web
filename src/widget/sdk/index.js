@@ -30,14 +30,20 @@ import {
 } from "./constants/literal";
 
 const SDK = ({
-  public_key,
-  product_identity,
-  product_name,
+  publicKey,
+  productIdentity,
+  productName,
   amount,
-  product_url,
-  hideModal,
-  payment_preference,
-}) => {
+  productUrl,
+  paymentPreference,
+  hideModal, ...moreConfig}) => {
+  let payment_preference = paymentPreference || [
+    KHALTI,
+    EBANKING,
+    MOBILE_BANKING,
+    CONNECT_IPS,
+    SCT,
+  ];
   const [activeTab, setActiveTab] = useState({ tab: payment_preference[0] });
 
   const [loading, setLoading] = useState(true);
@@ -91,7 +97,7 @@ const SDK = ({
           {!loading && (
             <div className={styles.modalScreen}>
               <div className="ui ">
-                {public_key && public_key.includes("test") && (
+                {publicKey && publicKey.includes("test") && (
                   <div
                     className="ui orange ribbon label"
                     style={{
@@ -232,11 +238,12 @@ const SDK = ({
                       >
                         {
                           <KhaltiWallet
-                            public_key={public_key}
-                            product_identity={product_identity}
-                            product_name={product_name}
+                            public_key={publicKey}
+                            product_identity={productIdentity}
+                            product_name={productName}
                             amount={amount}
-                            product_url={product_url}
+                            product_url={productUrl}
+                            {...moreConfig}
                           />
                         }
                       </div>
@@ -247,11 +254,12 @@ const SDK = ({
                       >
                         {
                           <EBanking
-                            public_key={public_key}
-                            product_identity={product_identity}
-                            product_name={product_name}
+                            public_key={publicKey}
+                            product_identity={productIdentity}
+                            product_name={productName}
                             amount={amount}
-                            product_url={product_url}
+                            product_url={productUrl}
+                            {...moreConfig}
                           />
                         }
                       </div>
@@ -264,11 +272,12 @@ const SDK = ({
                       >
                         {
                           <MobileBanking
-                            public_key={public_key}
-                            product_identity={product_identity}
-                            product_name={product_name}
+                            public_key={publicKey}
+                            product_identity={productIdentity}
+                            product_name={productName}
                             amount={amount}
-                            product_url={product_url}
+                            product_url={productUrl}
+                            {...moreConfig}
                           />
                         }
                       </div>
@@ -281,11 +290,12 @@ const SDK = ({
                       >
                         {
                           <ConnectIPS
-                            public_key={public_key}
-                            product_identity={product_identity}
-                            product_name={product_name}
+                            public_key={publicKey}
+                            product_identity={productIdentity}
+                            product_name={productName}
                             amount={amount}
-                            product_url={product_url}
+                            product_url={productUrl}
+                            {...moreConfig}
                           />
                         }
                       </div>
@@ -296,11 +306,12 @@ const SDK = ({
                       >
                         {
                           <SCTCard
-                            public_key={public_key}
-                            product_identity={product_identity}
-                            product_name={product_name}
+                            public_key={publicKey}
+                            product_identity={productIdentity}
+                            product_name={productName}
                             amount={amount}
-                            product_url={product_url}
+                            product_url={productUrl}
+                            {...moreConfig}
                           />
                         }
                       </div>
