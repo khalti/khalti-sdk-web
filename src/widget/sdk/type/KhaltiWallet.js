@@ -132,8 +132,7 @@ const KhaltiWallet = ({
         if (data && data.idx) {
           setToken(null);
           setOTPCode(false);
-          const activeId = localStorage.getItem('activeWidgetId');
-          data.widget_id = activeId
+          data.widget_id = window.activeWidget
           window.parent.postMessage(
             { realm: "walletPaymentVerification", payload: data },
             "*"
