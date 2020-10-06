@@ -43,7 +43,6 @@ const Widget = () => {
   };
 
   useEffect(() => {
-    // document.cookie = "promo_shown=1; Max-Age=2600000; Secure"
     window.addEventListener("message", receiveMessage, false);
     return () => {
       window.removeEventListener("message", receiveMessage);
