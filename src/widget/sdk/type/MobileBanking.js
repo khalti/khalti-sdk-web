@@ -48,6 +48,7 @@ const MobileBanking = ({
       try {
         const { data } = await axios.get(mobile_banking_list);
         setBankList([...data.records]);
+        setFilteredList([...data.records]);
       } catch (err) {
         console.log(err, "error");
       } finally {
@@ -180,8 +181,8 @@ const MobileBanking = ({
         <div className={styles.fullheight}>
           {loading && <div className='ui loading basic segment'></div>}
           <div className={"ui grid "}>
-            {bank_list &&
-              bank_list.map((item, index) => (
+            {filtered_list &&
+              filtered_list.map((item, index) => (
                 <div
                   key={index}
                   className="four wide computer eight wide mobile column"
@@ -200,7 +201,7 @@ const MobileBanking = ({
                     </div>
                   </div>
               ))}
-              {bank_list && bank_list.length == 0 && (
+              {filtered_list && filtered_list.length == 0 && (
                   <div className="column">
                     <div className="ui message">
                       Sorry no bank could be found. Please try again.

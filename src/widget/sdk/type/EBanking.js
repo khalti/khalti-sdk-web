@@ -50,7 +50,7 @@ const EBanking = ({
         setBankList([...data.records]);
         setFilteredList([...data.records]);
       } catch (err) {
-        console.log(err, "error");
+        console.error(err, "error");
       } finally {
         setLoading(false);
       }
@@ -91,7 +91,6 @@ const EBanking = ({
   };
   const removeBankSelect = useCallback((e) => {
     e.preventDefault();
-    console.log('remove called');
     setBankSelected(null);
   })
   const onMobileBlur = (e) => {
@@ -177,7 +176,7 @@ const EBanking = ({
         </div>
         <div className={styles.fullheight}>
           {loading && <div className='ui loading basic segment'></div>}
-          <div className={"ui grid "}>
+          <div className={"ui grid "} style={{marginBottom: '110px'}}>
           {filtered_list &&
             filtered_list.map((item, index) => (
               <div

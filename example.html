@@ -6,6 +6,7 @@
 
   <body>
     <button id="payment-button">Pay with Khalti</button>
+    <button id="payment-button2">Pay with Khalti</button>
     <script
       type="text/javascript"
       src="http://192.168.100.3:9090/dist/khalti-checkout.iffe.js"
@@ -20,13 +21,13 @@
         eventHandler: {
           onSuccess(payload) {
             // hit merchant api for initiating verfication
-            console.log(payload);
+            console.log(payload, 'event handle succ');
           },
           onError(error) {
-            console.log(error);
+            console.log(error, 'event handle error');
           },
           onClose() {
-            console.log("close called");
+            console.log("event handle close");
           },
         },
         // paymentPreference: ["KHALTI", "CONNECT_IPS", "SCT"],
@@ -36,6 +37,12 @@
       var btn = document.getElementById("payment-button");
       btn.onclick = function () {
         checkout.show({ amount: 1000 });
+      };
+
+      var checkout2 = new KhaltiCheckout(config);
+      var btn2 = document.getElementById("payment-button2");
+      btn2.onclick = function () {
+        checkout2.show({ amount: 2000 });
       };
     </script>
   </body>

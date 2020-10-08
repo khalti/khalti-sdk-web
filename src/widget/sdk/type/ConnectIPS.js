@@ -23,7 +23,6 @@ const ConnectIPS = ({
   };
   const initiatePay = async () => {
     event.preventDefault();
-    0;
     if (mobile && !validateMobile(mobile)) {
       setErrMobile(false);
 

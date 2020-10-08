@@ -72,25 +72,16 @@ export default class KhaltiCheckout {
         if (!e.data.realm) return;
         if (e.data.realm === "widgetInit") {
           this.widgetInit(e.data.payload);
-        } else if (e.data.realm === "walletPaymentVerification") {
-          let handler = `handle_msg_${e.data.realm}`;
-          this[handler](e.data.payload);
-        } else if (e.data.realm === "widgetError") {
-          let handler = `handle_msg_${e.data.realm}`;
-          this[handler](e.data.payload);
-        } else if (e.data.realm === "hide") {
-          this.hide();
-          return;
         } else if (
           !e.data.payload ||
           e.data.payload.widget_id !== this._widgetId
         ) {
           return;
         }
-        //  else {
-        //   let handler = `handle_msg_${e.data.realm}`;
-        //   this[handler](e.data.payload);
-        // }
+         else {
+          let handler = `handle_msg_${e.data.realm}`;
+          this[handler](e.data.payload);
+        }
       },
       false
     );
@@ -99,6 +90,7 @@ export default class KhaltiCheckout {
   msgWidget(realm, payload) {
     payload = clone(payload);
     payload.widgetId = this._widgetId;
+    payload.source = "checkout_v2";
     this._widget.contentWindow.postMessage({ realm, payload }, "*");
   }
 
@@ -145,13 +137,10 @@ export default class KhaltiCheckout {
   }
 
   show(updates) {
-    this._config.source = "web";
-    // this._widget.setAttribute("src", WIDGET_URL);
     Object.assign(this._config, updates);
     this.validateConfig();
     this.disableParentScrollbar();
     this._widget.style.display = "block";
-    this._widget.contentWindow.postMessage("testing", "*");
     this.widgetInit();
   }
 
