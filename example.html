@@ -9,7 +9,11 @@
     <button id="payment-button2">Pay with Khalti</button>
     <script
       type="text/javascript"
+<<<<<<< Updated upstream
       src="http://192.168.100.3:9090/dist/khalti-checkout.iffe.js"
+=======
+      src="http://192.168.254.3:8888/dist/khalti-checkout.iffe.js"
+>>>>>>> Stashed changes
     ></script>
     <script>
       let config = {
@@ -33,14 +37,14 @@
         // paymentPreference: ["KHALTI", "CONNECT_IPS", "SCT"],
       };
 
-      var checkout = new KhaltiCheckout(config);
       var btn = document.getElementById("payment-button");
+      var checkout = new KhaltiCheckout(config);
       btn.onclick = function () {
         checkout.show({ amount: 1000 });
       };
 
-      var checkout2 = new KhaltiCheckout(config);
       var btn2 = document.getElementById("payment-button2");
+      var checkout2 = new KhaltiCheckout(config);
       btn2.onclick = function () {
         checkout2.show({ amount: 2000 });
       };
