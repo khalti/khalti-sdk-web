@@ -25,9 +25,12 @@ const Widget = () => {
       window.activeWidget = data.payload.widgetId
       setProps(payload);
     }
+
     if (origin !== host_ip_address) return;
 
     let _data = data;
+
+    if (_data && _data.realm && _data.realm === 'paymentInfo') return;
     if (typeof data === 'string') {
       _data = JSON.parse(data)
     }
