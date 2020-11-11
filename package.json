@@ -1,6 +1,6 @@
 {
   "name": "khalti-checkout-web",
-  "version": "2.0.8",
+  "version": "2.1.2",
   "description": "Khalti checkout loader for web.",
   "main": "dist/khalti-checkout.cjs.js",
   "scripts": {

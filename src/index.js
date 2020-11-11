@@ -137,7 +137,6 @@ export default class KhaltiCheckout {
   }
 
   show(updates) {
-    if (this._widget.contentDocument.readyState === 'loading') return;
     Object.assign(this._config, updates);
     this.validateConfig();
     this.disableParentScrollbar();
