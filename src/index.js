@@ -11,7 +11,8 @@ const paymentType = {
 
 const CDN_HOST = __CDN_HOST__;
 
-const ZHTML_src = `${CDN_HOST}/payment_gateway_widget.html`
+const ZHTML_src = `${CDN_HOST}/payment_gateway_widget.html`;
+const INFINITY_LOADER = `${CDN_HOST}/icons/infinity-loader.svg`;
 
 const filter = function (obj, predicate) {
   return Object.keys(obj)
@@ -63,6 +64,7 @@ export default class KhaltiCheckout {
     this._widget = this.attachWidget();
     this.listenToWidget();
     this.paymentType = paymentType;
+
   }
 
   listenToWidget() {
@@ -104,6 +106,17 @@ export default class KhaltiCheckout {
     this.msgWidget("paymentInfo", paymentInfo);
   }
 
+  diplayLoader() {
+    console.log('loading');
+    let loader = window.document.getElementById('loader' + this._widgetId);
+    loader.style.display = 'block';
+  }
+
+  hideLoader() {
+    let loader = window.document.getElementById('loader' + this._widgetId);
+    loader.style.display = 'none';
+  }
+
   validateConfig() {
     let errors = validate(this._config, configSchema);
     if (errors) {
@@ -137,12 +150,24 @@ export default class KhaltiCheckout {
   }
 
   show(updates) {
-    if (this._widget.contentDocument.readyState === 'loading') return;
+    // if widget is not cached: loading started
+    if (this._widget.contentDocument.readyState === 'loading') {
+      this.diplayLoader();
+    } else {
+      // widget is cched
+      this.widgetInit();
+    };
     Object.assign(this._config, updates);
     this.validateConfig();
     this.disableParentScrollbar();
     this._widget.style.display = "block";
-    this.widgetInit();
+    this._widget.contentDocument.onreadystatechange = (e) => {
+      // if widget is not cached: loading finished
+      if (e.target.readyState === 'interactive') {
+        this.hideLoader();
+        this.widgetInit();
+      }
+    }
   }
 
   handle_msg_hide() {
@@ -170,6 +195,22 @@ export default class KhaltiCheckout {
     widget.setAttribute("frameborder", 0);
     widget.setAttribute("allowtransparency", true);
 
+    let loader = window.document.createElement('div');
+    loader.setAttribute("id", 'loader' + this._widgetId);
+
+    loader.style.width = '100%'
+    loader.style.height = '100%';
+    loader.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+    loader.style.top = '0px';
+    loader.style.left = '0px';
+    loader.style.position = 'absolute';
+    loader.style.display = 'none';
+    loader.innerHTML = `<img style="position:relative;left:50%;top:50%;transform:translate(-50%, -50%);z-index: 99999;" src=${INFINITY_LOADER}></img>`
+    
+    if (!window.document.body.contains(loader)) {
+      window.document.body.appendChild(loader);
+    }
+    
     window.document.body.appendChild(widget);
 
     return widget;
