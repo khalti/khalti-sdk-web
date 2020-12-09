@@ -16,6 +16,7 @@ const MobileBanking = ({
   amount,
   product_url,
   source,
+  ...others
 }) => {
   const [bank_list, setBankList] = useState(null);
   const [filtered_list, setFilteredList] = useState(null);
@@ -84,6 +85,7 @@ const MobileBanking = ({
               bank: bank_selected.idx,
               mobile,
               product_url,
+              ...others
             })}`
           );
         } catch (err) {

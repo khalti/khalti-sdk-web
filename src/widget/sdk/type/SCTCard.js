@@ -15,6 +15,7 @@ const SCTCard = ({
   amount,
   source,
   product_url,
+  ...others
 }) => {
   const [mobile, setMobileNumber] = useState(null);
   const [errMobile, setErrMobile] = useState(false);
@@ -38,6 +39,7 @@ const SCTCard = ({
             bank: "npay",
             mobile,
             product_url,
+            ...others
           })}`
         );
       } catch (err) {

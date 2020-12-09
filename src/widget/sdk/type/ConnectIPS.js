@@ -15,6 +15,7 @@ const ConnectIPS = ({
   amount,
   product_url,
   source,
+  ...others
 }) => {
   const [mobile, setMobileNumber] = useState(null);
   const [errMobile, setErrMobile] = useState(false);
@@ -39,6 +40,7 @@ const ConnectIPS = ({
             source,
             mobile,
             product_url,
+            ...others
           })}`
         );
       } catch (err) {

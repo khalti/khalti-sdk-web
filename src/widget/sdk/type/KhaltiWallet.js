@@ -17,6 +17,7 @@ const KhaltiWallet = ({
   amount,
   product_url,
   hideSDK,
+  ...others
 }) => {
   const [otp_code, setOTPCode] = useState(false);
   const [mobile, setMobileNumber] = useState(null);
@@ -70,6 +71,7 @@ const KhaltiWallet = ({
           transaction_pin,
           mobile,
           product_url,
+          ...others
         });
         if (data && data.token) {
           setToken(data.token);

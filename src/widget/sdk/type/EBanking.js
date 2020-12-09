@@ -16,7 +16,8 @@ const EBanking = ({
   amount,
   product_url,
   source,
-  return_url
+  return_url,
+  ...others
 }) => {
   const [bank_list, setBankList] = useState();
   const [filtered_list, setFilteredList] = useState(null);
@@ -79,7 +80,8 @@ const EBanking = ({
               bank: bank_selected.idx,
               mobile,
               product_url,
-              return_url
+              return_url,
+              ...others
             })}`
           );
         } catch (err) {
