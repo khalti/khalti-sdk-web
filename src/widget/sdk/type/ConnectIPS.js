@@ -14,6 +14,8 @@ const ConnectIPS = ({
   product_name,
   amount,
   product_url,
+  source,
+  ...others
 }) => {
   const [mobile, setMobileNumber] = useState(null);
   const [errMobile, setErrMobile] = useState(false);
@@ -35,9 +37,10 @@ const ConnectIPS = ({
             amount,
             payment_type: "connectips",
             bank: "connectips",
-            source: "checkout_v2",
+            source,
             mobile,
             product_url,
+            ...others
           })}`
         );
       } catch (err) {

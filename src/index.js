@@ -11,7 +11,8 @@ const paymentType = {
 
 const CDN_HOST = __CDN_HOST__;
 
-const ZHTML_src = `${CDN_HOST}/payment_gateway_widget.html`
+const ZHTML_src = `${CDN_HOST}/payment_gateway_widget.html`;
+const INFINITY_LOADER = `${CDN_HOST}/icons/infinity-loader.svg`;
 
 const filter = function (obj, predicate) {
   return Object.keys(obj)
@@ -63,6 +64,8 @@ export default class KhaltiCheckout {
     this._widget = this.attachWidget();
     this.listenToWidget();
     this.paymentType = paymentType;
+    this.widgetLoaded = false;
+
   }
 
   listenToWidget() {
@@ -72,7 +75,15 @@ export default class KhaltiCheckout {
         if (!e.data.realm) return;
         if (e.data.realm === "widgetInit") {
           this.widgetInit(e.data.payload);
-        } else if (
+        }
+        else if (e.data.realm === 'widgetLoad' && !this.widgetLoaded) {
+          if (e.data.payload.loaded) {
+            this.hideLoader();
+            this.widgetInit();
+            this.widgetLoaded = e.data.payload.loaded;
+          }
+        }
+         else if (
           !e.data.payload ||
           e.data.payload.widget_id !== this._widgetId
         ) {
@@ -90,7 +101,7 @@ export default class KhaltiCheckout {
   msgWidget(realm, payload) {
     payload = clone(payload);
     payload.widgetId = this._widgetId;
-    payload.source = "checkout_v2";
+    payload.source = "checkout_v2.1";
     this._widget.contentWindow.postMessage({ realm, payload }, "*");
   }
 
@@ -98,10 +109,20 @@ export default class KhaltiCheckout {
     this.widgetInit();
   }
 
-  widgetInit() {
+  widgetInit(data) {
     let paymentInfo = clone(this._config);
     delete paymentInfo.eventHandler;
     this.msgWidget("paymentInfo", paymentInfo);
+  }
+
+  diplayLoader() {
+    let loader = window.document.getElementById('loader' + this._widgetId);
+    loader.style.display = 'block';
+  }
+
+  hideLoader() {
+    let loader = window.document.getElementById('loader' + this._widgetId);
+    loader.style.display = 'none';
   }
 
   validateConfig() {
@@ -137,11 +158,16 @@ export default class KhaltiCheckout {
   }
 
   show(updates) {
+
     Object.assign(this._config, updates);
     this.validateConfig();
     this.disableParentScrollbar();
     this._widget.style.display = "block";
-    this.widgetInit();
+    if (this.widgetLoaded) {
+      this.widgetInit();
+    } else {
+      this.diplayLoader();
+    }
   }
 
   handle_msg_hide() {
@@ -169,6 +195,22 @@ export default class KhaltiCheckout {
     widget.setAttribute("frameborder", 0);
     widget.setAttribute("allowtransparency", true);
 
+    let loader = window.document.createElement('div');
+    loader.setAttribute("id", 'loader' + this._widgetId);
+
+    loader.style.width = '100%'
+    loader.style.height = '100%';
+    loader.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+    loader.style.top = '0px';
+    loader.style.left = '0px';
+    loader.style.position = 'absolute';
+    loader.style.display = 'none';
+    loader.innerHTML = `<img style="position:relative;left:50%;top:50%;transform:translate(-50%, -50%);z-index: 99999;" src=${INFINITY_LOADER}></img>`
+    
+    if (!window.document.body.contains(loader)) {
+      window.document.body.appendChild(loader);
+    }
+    
     window.document.body.appendChild(widget);
 
     return widget;

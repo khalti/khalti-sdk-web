@@ -13,7 +13,9 @@ const SCTCard = ({
   product_identity,
   product_name,
   amount,
+  source,
   product_url,
+  ...others
 }) => {
   const [mobile, setMobileNumber] = useState(null);
   const [errMobile, setErrMobile] = useState(false);
@@ -33,10 +35,11 @@ const SCTCard = ({
             product_name,
             amount,
             payment_type: "sct",
-            source: "checkout_v2",
+            source,
             bank: "npay",
             mobile,
             product_url,
+            ...others
           })}`
         );
       } catch (err) {
