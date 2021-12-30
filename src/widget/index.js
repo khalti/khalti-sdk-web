@@ -31,7 +31,7 @@ const Widget = () => {
         public_key: data.publicKey,
         product_identity: data.productIdentity,
         product_name: data.productName,
-        amount: data.amount,
+        amount: parseInt( data.amount),
         product_url: data.productUrl,
         payment_preference: data.paymentPreference || [
           KHALTI,
